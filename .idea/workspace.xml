@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88c8f20c-b2a2-4f7b-8ef1-2fff0b406ce3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gears/JsonLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gears/JsonLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gears/JsonLoader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +125,7 @@
       <workItem from="1710505642314" duration="2898000" />
       <workItem from="1710509748669" duration="4470000" />
       <workItem from="1710514235101" duration="152000" />
-      <workItem from="1710514416300" duration="37000" />
+      <workItem from="1710514416300" duration="574000" />
     </task>
     <servers />
   </component>
