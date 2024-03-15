@@ -2,6 +2,10 @@ package support;
 
 import java.util.List;
 
+/**
+ * Class for program constants.
+ * @author Emil Jönsson
+ */
 public final class Constants {
 
     // String identifiers.
