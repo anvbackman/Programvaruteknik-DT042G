@@ -1,5 +1,10 @@
 package gears;
 
+/**
+ * Gear class that represents a piece of gear in the game
+ * Including Weapons, Armor and Consumables
+ * @author Andreas Backman
+ */
 public class Gear {
     private String type;
     private String gearCategory;

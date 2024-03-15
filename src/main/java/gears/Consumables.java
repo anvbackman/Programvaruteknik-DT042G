@@ -1,5 +1,10 @@
 package gears;
 
+/**
+ * Consumables class that extends Gear
+ * Represents a consumable in the game
+ * @author Andreas Backman
+ */
 public class Consumables extends Gear {
     /**
      * Constructor for Consumables
