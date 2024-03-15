@@ -1,14 +1,12 @@
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import support.Constants;
 
 /**
- * Tests class for the CharacterCreator class.
+ * Tests the character creator class.
  * @author Emil Jönsson
  */
 public class TestCharacterCreator {
-
-    private static final int VALUE_MAX_STAT_REROLLS = 3;
-    private static final int CLASSES = 10;
 
     private CharacterCreator characterCreator = new CharacterCreator();
 
@@ -17,7 +15,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testValidClassSelect() {
-        for (int i = 1; i <= CLASSES; i++) {
+        for (int i = 1; i <= Constants.CLASSES.size(); i++) {
             Assertions.assertTrue(characterCreator.selectClass(i));
         }
     }
@@ -27,7 +25,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testInValidClassSelect() {
-        Assertions.assertFalse(characterCreator.selectClass(CLASSES + 1));
+        Assertions.assertFalse(characterCreator.selectClass(Constants.CLASSES.size() + 1));
     }
 
     /**
@@ -89,7 +87,7 @@ public class TestCharacterCreator {
     @Test
     public void testStatRollsValidAmount() {
         characterCreator = new CharacterCreator();
-        for (int i = 0; i < VALUE_MAX_STAT_REROLLS; i++) {
+        for (int i = 0; i < Constants.VALUE_MAX_STAT_REROLLS; i++) {
             characterCreator.reRollStatSheet(1);
         }
         Assertions.assertEquals(0, characterCreator.getReRollAmount());
@@ -101,7 +99,7 @@ public class TestCharacterCreator {
     @Test
     public void testStatRollsInvalidAmount() {
         characterCreator = new CharacterCreator();
-        for (int i = 0; i < VALUE_MAX_STAT_REROLLS + 1; i++) {
+        for (int i = 0; i < Constants.VALUE_MAX_STAT_REROLLS + 1; i++) {
             characterCreator.reRollStatSheet(1);
         }
         Assertions.assertEquals(0, characterCreator.getReRollAmount());
