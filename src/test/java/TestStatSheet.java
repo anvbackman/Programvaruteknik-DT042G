@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+/**
+ * Tests the StatSheet class.
+ * @author Emil Jönsson
+ */
 public class TestStatSheet {
 
     public static final int ReRollAmount = 3;
