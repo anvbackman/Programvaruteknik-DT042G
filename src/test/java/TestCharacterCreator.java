@@ -1,8 +1,10 @@
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.io.ByteArrayInputStream;
-
+/**
+ * Tests class for the CharacterCreator class.
+ * @author Emil Jönsson
+ */
 public class TestCharacterCreator {
 
     private static final int VALUE_MAX_STAT_REROLLS = 3;
