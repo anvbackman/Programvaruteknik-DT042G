@@ -39,7 +39,7 @@ public class JsonLoader {
 
     /**
      * Get the categories from the JSON file
-     * @return A set of categories
+     * @return A keyset of categories
      */
     public Set<String> getCategories() {
         return jsonObject.keySet();
@@ -48,7 +48,7 @@ public class JsonLoader {
     /**
      * Get the types from a specific category
      * @param category The category to get the types from
-     * @return A set of types
+     * @return A keyset of types
      */
     public Set<String> getTypes(String category) {
         JSONObject typeObject = (JSONObject) jsonObject.get(category);
