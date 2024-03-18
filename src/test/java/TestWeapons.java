@@ -4,6 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class is used to test the Weapons class
+ * @author Andreas Backman
+ */
 public class TestWeapons {
     private Weapons weapons;
 
