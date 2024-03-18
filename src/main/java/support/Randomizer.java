@@ -108,10 +108,24 @@ public class Randomizer {
         return rollStat(false);
     }
 
-    public static int rollMissionLength(final int baseLength) {
+    /**
+     * Randomly varies the length of a mission.
+     * @param baseLength the selected base length of the mission.
+     * @return the length of the mission.
+     */
+    public static int rollMissionLength(int baseLength) {
+        if (baseLength < 1) {
+            System.out.printf("%sChosen length is too short, setting to 1.%s\n",
+                    Constants.COLOR_RED, Constants.COLOR_RESET);
+            baseLength = 1;
+        }
         return baseLength + (int) (Math.random() * Constants.VALUE_MISSION_LENGTH_VARIANCE);
     }
 
+    /**
+     * Rolls a random amount of mission forks.
+     * @return the amount of mission forks.
+     */
     public static int rollMissionForkAmount() {
         return Constants.VALUE_MISSION_FORK_AMOUNT_MIN + (int) (Math.random() *
                 (Constants.VALUE_MISSION_FORK_AMOUNT_MAX - Constants.VALUE_MISSION_FORK_AMOUNT_MIN + 1));

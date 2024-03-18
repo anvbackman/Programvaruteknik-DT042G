@@ -3,16 +3,26 @@ import support.Validation;
 
 import java.util.Scanner;
 
+/**
+ * The game engine class. Contains methods that ensures the game can progress.
+ * @author Emil Jönsson
+ */
 public class GameEngine {
 
     private final Scanner scanner;
     private Mission mission;
     private Character character;
 
+    /**
+     * Constructor for the game engine class.
+     */
     public GameEngine() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Initializes the game engine.
+     */
     public void init() {
         System.out.println("Game Engine initialized.");
         CharacterCreator characterCreator = new CharacterCreator();
@@ -62,6 +72,9 @@ public class GameEngine {
         this.mission.generateMission();
     }
 
+    /**
+     * Prompts the user to continue, preventing the game from progressing too fast.
+     */
     private void promptContinue() {
         System.out.print("Press enter to continue...");
         scanner.nextLine();

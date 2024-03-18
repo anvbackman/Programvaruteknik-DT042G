@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The mission class acts as a generator and container for mission data.
+ * @author Emil Jönsson
+ */
 public class Mission {
 
     private int currentFork;
