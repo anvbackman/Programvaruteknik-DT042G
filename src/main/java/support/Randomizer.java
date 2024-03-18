@@ -1,25 +1,119 @@
 package support;
 
+import java.util.Arrays;
+
 /**
- * Class for program randomizer methods.
+ * The randomizer class.
+ * Contains methods for rolling dice and generating random values.
  * @author Emil Jönsson
  */
 public class Randomizer {
 
     /**
-     * Rolls a stat and returns new value.
-     * @return new value of stat.
+     * Rolls a 6-sided die n times and returns the sum of the rolls.
+     * @param n the number of times to roll the die.
+     * @return the sum of the rolls.
      */
-    public static int rollStat() {
-        return 0;
+    public static int rollD6(int n) {
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result += (int) (Math.random() * 6) + 1;
+        }
+        return result;
     }
 
     /**
-     * Rolls a stat and returns new value.
-     * @param log boolean value, enables logging if true.
-     * @return new value of stat.
+     * Rolls a 6-sided die once and returns the result. Optional parameter for multiple rolls.
+     * @return the result of the roll.
      */
-    public static int rollStat(boolean log) {
-        return 0;
+    public static int rollD6() {
+        return rollD6(1);
+    }
+
+    /**
+     * Rolls a 10-sided die n times and returns the sum of the rolls.
+     * @param n the number of times to roll the die.
+     * @return the sum of the rolls.
+     */
+    public static int rollD10(int n) {
+        int result = 0;
+        for (int i = 0; i <= n; i++) {
+            result += (int) (Math.random() * 10) + 1;
+        }
+        return result;
+    }
+
+    /**
+     * Rolls a 10-sided die once and returns the result. Optional parameter for multiple rolls.
+     * @return the result of the roll.
+     */
+    public static int rollD10() {
+        return rollD10(1);
+    }
+
+    /**
+     * Rolls a 20-sided die n times and returns the sum of the rolls.
+     * @param n the number of times to roll the die.
+     * @return the sum of the rolls.
+     */
+    public static int rollD20(int n) {
+        int result = 0;
+        for (int i = 0; i <= n; i++) {
+            result += (int) (Math.random() * 20) + 1;
+        }
+        return result;
+    }
+
+    /**
+     * Rolls a 20-sided die once and returns the result. Optional parameter for multiple rolls.
+     * @return the result of the roll.
+     */
+    public static int rollD20() {
+        return rollD20(1);
+    }
+
+    /**
+     * Rolls value for a stat base value, with logging.
+     * @return the value for a stat base value.
+     */
+    public static int rollStat(boolean shouldLog) {
+        int[] rolls = new int[Constants.VALUE_BASE_STAT_DICE_ROLLS];
+        int temp;
+        for (int i = 0; i < Constants.VALUE_BASE_STAT_DICE_ROLLS ; i++) {
+            temp = rollD6();
+            rolls[i] = temp;
+
+            if (shouldLog) {
+                System.out.printf("%s\tRolled a %d%s\n",
+                        Constants.COLOR_PURPLE, temp, Constants.COLOR_RESET);
+            }
+        }
+        Arrays.sort(rolls);
+        temp = Arrays.stream(rolls).sum() - rolls[0];
+
+        if (shouldLog) {
+            System.out.printf("%s\tDropping lowest roll: %d%s\n",
+                    Constants.COLOR_PURPLE, rolls[0], Constants.COLOR_RESET);
+            System.out.printf("%s\tTotal: %d%s\n",
+                    Constants.COLOR_PURPLE, temp, Constants.COLOR_RESET);
+        }
+        return temp;
+    }
+
+    /**
+     * Rolls value for a stat base value.
+     * @return the value for a stat base value.
+     */
+    public static int rollStat() {
+        return rollStat(false);
+    }
+
+    public static int rollMissionLength(final int baseLength) {
+        return baseLength + (int) (Math.random() * Constants.VALUE_MISSION_LENGTH_VARIANCE);
+    }
+
+    public static int rollMissionForkAmount() {
+        return Constants.VALUE_MISSION_FORK_AMOUNT_MIN + (int) (Math.random() *
+                (Constants.VALUE_MISSION_FORK_AMOUNT_MAX - Constants.VALUE_MISSION_FORK_AMOUNT_MIN + 1));
     }
 }
