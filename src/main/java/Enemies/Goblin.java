@@ -5,6 +5,7 @@ package Enemies;
  * This class will be used to create a Goblin enemy with the ability to call for reinforcements
  * and use a special ability, which is implemented in the EnemySpecial class
  * since Enemies is abstract this will use the template pattern
+ * @author Martin Roos Eriksson
  */
 public class Goblin extends Enemies{
 

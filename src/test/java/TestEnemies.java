@@ -7,6 +7,12 @@ import Enemies.Enemies;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for the Enemies package
+ * This class will be used to test the different methods in the Enemies package
+ * will be further expanded after ability implementation
+ * @author Martin Roos Eriksson
+ */
 public class TestEnemies {
 
 

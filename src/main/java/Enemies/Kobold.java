@@ -4,6 +4,7 @@ package Enemies;
  * Kobold class is a subclass of the Enemies class
  * It contains the attributes and methods specific to the Kobold enemy
  * It also contains the ability to perform special abilities.
+ * @author Martin Roos Eriksson
  */
 public class Kobold extends Enemies {
 

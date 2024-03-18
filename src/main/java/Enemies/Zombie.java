@@ -7,6 +7,7 @@ import java.util.Random;
  * Zombie class is a subclass of the Enemies class
  * It contains the attributes and methods specific to the Zombie enemy
  * It also contains the ability to perform special abilities.
+ * @author Martin Roos Eriksson
  */
 public class Zombie extends Enemies {
 

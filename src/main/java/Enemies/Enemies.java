@@ -4,6 +4,7 @@ package Enemies;
  * Enemies class is the parent class for all enemies in the game
  * It contains the basic attributes and methods that all enemies will have
  * It also contains the ability to perform special abilities.
+ * @author Martin Roos Eriksson
  */
 public abstract class Enemies {
 
