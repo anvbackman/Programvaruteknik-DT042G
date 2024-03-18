@@ -15,9 +15,8 @@ public class Goblin extends Enemies{
 
     /**
      * Goblin constructor that takes in an EnemyAbility object
-     * @param ability EnemyAbility object that will be used to give the Goblin a special ability
      */
-    public Goblin(EnemyAbility ability){
+    public Goblin(){
         super("Goblin", 10, 4, 1); // will use dice in the future
         this.ability = new EnemySpecial();
     }
@@ -35,7 +34,7 @@ public class Goblin extends Enemies{
      */
     protected void reinforce() {
         System.out.println("Goblin has called for reinforcements");
-        new Goblin(ability);
+        new Goblin();
     }
 
     /**
@@ -124,6 +123,7 @@ public class Goblin extends Enemies{
     public void attack(int dmg) {
         System.out.println(type + " is Attacking");
         damage = dmg;
+        System.out.println("total damage: " + damage);
     }
 
 
