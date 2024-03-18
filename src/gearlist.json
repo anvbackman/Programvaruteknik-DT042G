@@ -1,0 +1,22 @@
+{
+  "weapons": {
+    "Scrappy Sword": 5,
+    "Iron Sword": 10,
+    "Steel Sword": 25,
+    "The Sword from that one movie": 50
+  },
+
+  "armor": {
+    "Leather Armor": 5,
+    "Chainmail Armor": 10,
+    "Iron Armor": 15,
+    "Mythic Armor": 50
+  },
+
+  "consumables": {
+    "Health Potion": 25,
+    "Greater Health Potion": 50,
+    "Mana Potion": 25,
+    "Greater Mana Potion": 50
+  }
+}

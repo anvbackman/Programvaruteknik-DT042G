@@ -4,6 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class is used to test the Armor class
+ * @author Andreas Backman
+ */
 public class TestArmor {
     private Armor armor;
 

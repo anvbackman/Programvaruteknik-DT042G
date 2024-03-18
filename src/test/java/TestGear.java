@@ -3,6 +3,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class is used to test the Gear class
+ * @author Andreas Backman
+ */
 public class TestGear {
 
     private Gear gear;
