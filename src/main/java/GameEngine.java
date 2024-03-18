@@ -36,7 +36,7 @@ public class GameEngine {
                         Constants.COLOR_RED, Constants.COLOR_RESET);
             }
         }
-
+        promptContinue();
         proceed = false;
         while (!proceed) {
             System.out.println("Choose a mission length:");
@@ -60,5 +60,10 @@ public class GameEngine {
             }
         }
         this.mission.generateMission();
+    }
+
+    private void promptContinue() {
+        System.out.print("Press enter to continue...");
+        scanner.nextLine();
     }
 }
