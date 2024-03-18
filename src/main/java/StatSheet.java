@@ -1,16 +1,68 @@
+import support.Constants;
+import support.Randomizer;
+
+import java.util.HashMap;
+
 /**
- * A class to represent a character's stat sheet.
+ * The stat sheet class.
+ * Contains all the stats for a character.
  * @author Emil Jönsson
  */
 public class StatSheet {
+
+
+    private int reRollAmount;
+    private final HashMap<String, Integer> stats;
+
+    /**
+     * Constructor for the stat sheet class.
+     */
+    public StatSheet() {
+        reRollAmount = Constants.VALUE_MAX_STAT_REROLLS;
+        stats = new HashMap<>();
+        stats.put(Constants.STAT_STRENGTH, Randomizer.rollStat());
+        stats.put(Constants.STAT_DEXTERITY, Randomizer.rollStat());
+        stats.put(Constants.STAT_CONSTITUTION, Randomizer.rollStat());
+        stats.put(Constants.STAT_INTELLIGENCE, Randomizer.rollStat());
+        stats.put(Constants.STAT_WISDOM, Randomizer.rollStat());
+    }
 
     /**
      * Re-rolls a selected stat.
      * @param stat the stat to re-roll.
      * @return true if the stat is valid, false if not.
      */
-    public boolean reRollSelected(String stat) {
-        return false;
+    public boolean reRollSelected(final String stat) {
+        int oldValue;
+        try {
+            oldValue = stats.get(stat);
+        } catch (NullPointerException e) {
+            System.out.printf("%sInvalid stat.%s\n", Constants.COLOR_RED, Constants.COLOR_RESET);
+            return false;
+        }
+        int newValue = Randomizer.rollStat(true);
+        String colorCode;
+        String operator;
+        reRollAmount--;
+        stats.put(stat, newValue);
+
+        if (oldValue < newValue) {
+            // If value has increased.
+            colorCode = Constants.COLOR_GREEN;
+            operator = "+";
+        } else if (oldValue == newValue) {
+            // If value has not changed.
+            colorCode = Constants.COLOR_BLUE;
+            operator = "+";
+        } else {
+            // If value has decreased.
+            colorCode = Constants.COLOR_RED;
+            operator = "";
+        }
+
+        System.out.printf(colorCode + "Re-rolled %s: %d (%s%d)" + Constants.COLOR_RESET + "\n",
+                stat, newValue, operator, (newValue - oldValue));
+        return true;
     }
 
     /**
@@ -18,7 +70,7 @@ public class StatSheet {
      * @return the amount of re-rolls left as integer value.
      */
     public int getReRollAmount() {
-        return 0;
+        return reRollAmount;
     }
 
     /**
@@ -26,8 +78,13 @@ public class StatSheet {
      * @param stat the stat name to get the value of.
      * @return the value of the stat as integer value or -1 if the stat is unassigned.
      */
-    public int getStat(String stat) {
-        return 0;
+    public int getStat(final String stat) {
+        try {
+            return stats.get(stat);
+        } catch (NullPointerException e) {
+            System.out.printf("%sInvalid stat.%s\n", Constants.COLOR_RED, Constants.COLOR_RESET);
+            return -1;
+        }
     }
 
     /**
@@ -36,7 +93,23 @@ public class StatSheet {
      * @param value the value to set the stat to.
      * @return true if the stat is valid, false if not.
      */
-    public boolean setStat(String stat, int value) {
-        return false;
+    public boolean setStat(final String stat, final int value) {
+        if (Constants.STATS.contains(stat)) {
+            stats.put(stat, value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the stat sheet as a formatted string.
+     * @return stat sheet as a string.
+     */
+    @Override
+    public String toString() {
+        StringBuilder statsString = new StringBuilder();
+        stats.forEach((key, value) -> statsString.append(key).append(": ").append(value).append("\n"));
+        return statsString.toString();
     }
 }
