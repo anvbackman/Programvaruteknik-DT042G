@@ -25,6 +25,9 @@ public final class Constants {
     // Value constants.
     public final static int VALUE_BASE_STAT_DICE_ROLLS = 4;
     public final static int VALUE_MAX_STAT_REROLLS = 3;
+    public final static int VALUE_MISSION_LENGTH_VARIANCE = 3;
+    public final static int VALUE_MISSION_FORK_AMOUNT_MIN = 1;
+    public final static int VALUE_MISSION_FORK_AMOUNT_MAX = 3;
 
     // Color codes.
     public final static String COLOR_RED = "\u001B[31m";
