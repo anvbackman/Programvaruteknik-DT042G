@@ -1,3 +1,7 @@
+package creator;
+
+import character.Character;
+import character.StatSheet;
 import support.Constants;
 import support.Validation;
 

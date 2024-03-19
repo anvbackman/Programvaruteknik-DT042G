@@ -17,6 +17,14 @@ public final class Constants {
             STAT_INTELLIGENCE,
             STAT_WISDOM
     );
+    public final static String DIFFICULTY_EASY = "Easy";
+    public final static String DIFFICULTY_MEDIUM = "Medium";
+    public final static String DIFFICULTY_HARD = "Hard";
+    public final static List<String> DIFFICULTIES = List.of(
+            DIFFICULTY_EASY,
+            DIFFICULTY_MEDIUM,
+            DIFFICULTY_HARD
+    );
 
     // Value constants.
     public final static int VALUE_BASE_STAT_DICE_ROLLS = 4;
@@ -63,7 +71,7 @@ public final class Constants {
             CLASS_WARLOCK
     );
 
-    // Mission types.
+    // creator.Mission types.
     public final static String MISSION_TYPE_COMBAT = "Combat";
     public final static String MISSION_TYPE_SOCIAL = "Social";
     public final static String MISSION_TYPE_REST = "Rest";

@@ -1,3 +1,6 @@
+import character.Character;
+import creator.CharacterCreator;
+import creator.Mission;
 import support.Constants;
 import support.Validation;
 
@@ -59,9 +62,9 @@ public class GameEngine {
             proceed = true;
 
             switch (input) {
-                case 1 -> this.mission = new Mission(1, Constants.VALUE_MISSION_LENGTH_SHORT);
-                case 2 -> this.mission = new Mission(2, Constants.VALUE_MISSION_LENGTH_MEDIUM);
-                case 3 -> this.mission = new Mission(3, Constants.VALUE_MISSION_LENGTH_LONG);
+                case 1 -> this.mission = new Mission(Constants.DIFFICULTY_EASY, Constants.VALUE_MISSION_LENGTH_SHORT);
+                case 2 -> this.mission = new Mission(Constants.DIFFICULTY_EASY, Constants.VALUE_MISSION_LENGTH_MEDIUM);
+                case 3 -> this.mission = new Mission(Constants.DIFFICULTY_EASY, Constants.VALUE_MISSION_LENGTH_LONG);
                 default -> {
                     System.out.printf("%sInvalid choice.%s\n",
                             Constants.COLOR_RED, Constants.COLOR_RESET);
