@@ -1,6 +1,6 @@
 package creator;
 
-import character.Character;
+import character.Hero;
 import character.StatSheet;
 import support.Constants;
 import support.Validation;
@@ -30,7 +30,7 @@ public class CharacterCreator {
      * Prompts the user with all the steps to create a character.
      * @return the created character.
      */
-    public final Character createCharacter() {
+    public final Hero createCharacter() {
         boolean proceed = false;
 
         // Loops until a valid class is selected
@@ -55,11 +55,11 @@ public class CharacterCreator {
 
         // Creates the character and prints the result.
         System.out.printf("%sCharacter created!%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
-        Character character = new Character(statSheet, name);
-        System.out.println(character.getName() + " the " + classChoice);
-        System.out.println(character.getStats());
+        Hero hero = new Hero(statSheet, name);
+        System.out.println(hero.getName() + " the " + classChoice);
+        System.out.println(hero.getStats());
 
-        return character;
+        return hero;
     }
 
     /**

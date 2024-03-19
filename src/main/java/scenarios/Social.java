@@ -1,4 +1,4 @@
-package Scenarios;
+package scenarios;
 
 import support.Constants;
 import support.Randomizer;

@@ -1,4 +1,4 @@
-package Scenarios;
+package scenarios;
 
 /**
  * Interface for the encounters in the game.

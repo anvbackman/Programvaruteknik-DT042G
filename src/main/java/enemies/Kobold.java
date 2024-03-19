@@ -1,4 +1,4 @@
-package Enemies;
+package enemies;
 
 /**
  * Kobold class is a subclass of the Enemies class

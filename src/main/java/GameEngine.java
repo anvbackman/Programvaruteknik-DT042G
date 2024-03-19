@@ -1,4 +1,4 @@
-import character.Character;
+import character.Hero;
 import creator.CharacterCreator;
 import creator.Mission;
 import support.Constants;
@@ -17,7 +17,7 @@ public class GameEngine {
 
     private final Scanner scanner;
     private Mission mission;
-    private Character character;
+    private Hero hero;
 
     /**
      * Constructor for the game engine class.
@@ -42,7 +42,7 @@ public class GameEngine {
             input = Validation.validateInput(scanner.nextLine());
             switch (input) {
                 case 1 -> {
-                    this.character = characterCreator.createCharacter();
+                    this.hero = characterCreator.createCharacter();
                     proceed = true;
                 }
                 case 2 -> {
@@ -103,23 +103,20 @@ public class GameEngine {
         proceed = false;
         while (!proceed) {
             System.out.println("Choose a mission difficulty:");
-            System.out.println("1. Easy");
-            System.out.println("2. Medium");
-            System.out.println("3. Hard");
+            for (int i = 1; i < Constants.DIFFICULTIES.size() + 1; i++) {
+                System.out.printf("%d. %s\n", i, Constants.DIFFICULTIES.get(i - 1));
+            }
             System.out.printf("%sEnter a number: %s", Constants.COLOR_YELLOW, Constants.COLOR_RESET);
 
             input = Validation.validateInput(scanner.nextLine());
             proceed = true;
 
-            switch (input) {
-                case 1 -> missionDifficulty = Constants.DIFFICULTY_EASY;
-                case 2 -> missionDifficulty = Constants.DIFFICULTY_MEDIUM;
-                case 3 -> missionDifficulty = Constants.DIFFICULTY_HARD;
-                default -> {
-                    System.out.printf("%sInvalid choice.%s\n",
-                            Constants.COLOR_RED, Constants.COLOR_RESET);
-                    proceed = false;
-                }
+            if (input < 1 || input > Constants.DIFFICULTIES.size()) {
+                System.out.printf("%sInvalid choice.%s\n",
+                        Constants.COLOR_RED, Constants.COLOR_RESET);
+                proceed = false;
+            } else {
+                missionDifficulty = Constants.DIFFICULTIES.get(input - 1);
             }
         }
         this.mission = new Mission(missionDifficulty, missionLength);
@@ -165,8 +162,7 @@ public class GameEngine {
             }
         }
         if (Objects.equals(encounterType, Constants.MISSION_TYPE_MYSTERY)) {
-            System.out.printf("%sMystery encounter is %s.%s\n",
-                    Constants.COLOR_GREEN, Randomizer.getMysteryEncounter(), Constants.COLOR_RESET);
+            encounterType = Randomizer.getMysteryEncounter();
         }
         // TODO Implement encounter logic here
         System.out.printf("%sDoing encounter stuff...%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
