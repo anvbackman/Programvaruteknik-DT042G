@@ -1,3 +1,5 @@
+package character;
+
 import support.Constants;
 import support.Randomizer;
 

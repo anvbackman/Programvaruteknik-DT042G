@@ -1,3 +1,5 @@
+package character;
+
 /**
  * A class to represent a character in the game.
  * @author Emil Jönsson
