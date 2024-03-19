@@ -22,11 +22,7 @@ public class StatSheet {
     public StatSheet() {
         reRollAmount = Constants.VALUE_MAX_STAT_REROLLS;
         stats = new HashMap<>();
-        stats.put(Constants.STAT_STRENGTH, Randomizer.rollStat());
-        stats.put(Constants.STAT_DEXTERITY, Randomizer.rollStat());
-        stats.put(Constants.STAT_CONSTITUTION, Randomizer.rollStat());
-        stats.put(Constants.STAT_INTELLIGENCE, Randomizer.rollStat());
-        stats.put(Constants.STAT_WISDOM, Randomizer.rollStat());
+        Constants.STATS.forEach(stat -> stats.put(stat, Randomizer.rollStat()));
     }
 
     /**

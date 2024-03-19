@@ -1,6 +1,9 @@
 package support;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The randomizer class.
@@ -129,5 +132,15 @@ public class Randomizer {
     public static int rollMissionForkAmount() {
         return Constants.VALUE_MISSION_FORK_AMOUNT_MIN + (int) (Math.random() *
                 (Constants.VALUE_MISSION_FORK_AMOUNT_MAX - Constants.VALUE_MISSION_FORK_AMOUNT_MIN + 1));
+    }
+
+    /**
+     * Generates a random encounter type for a mystery encounter.
+     * @return the type of encounter as string value.
+     */
+    public static String getMysteryEncounter() {
+        List<String> options = new ArrayList<>(Constants.MISSION_TYPES_ALL);
+        Collections.shuffle(options);
+        return options.get(0);
     }
 }
