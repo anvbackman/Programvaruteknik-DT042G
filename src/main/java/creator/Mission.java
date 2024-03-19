@@ -39,7 +39,7 @@ public class Mission {
         for (int i = 1; i <= length; i++) {
             mission.put(i, generateFork(i));
         }
-        mission.forEach((key, value) -> System.out.println("Fork " + key + ": " + value));
+        showMission();
     }
 
     /**
@@ -93,5 +93,12 @@ public class Mission {
         }
         currentFork++;
         return fork;
+    }
+
+    /**
+     * Shows the mission in the console.
+     */
+    public final void showMission() {
+        mission.forEach((key, value) -> System.out.println("Fork " + key + ": " + value));
     }
 }
