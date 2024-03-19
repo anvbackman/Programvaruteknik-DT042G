@@ -76,6 +76,27 @@ public class Randomizer {
     }
 
     /**
+     * Rolls a 4-sided die n times and returns the sum of the rolls.
+     * @param n the number of times to roll the die.
+     * @return the sum of the rolls.
+     */
+    public static int rollD4(int n) {
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result += (int) (Math.random() * 4) + 1;
+        }
+        return result;
+    }
+
+    /**
+     * Rolls a 4-sided die once and returns the result. Optional parameter for multiple rolls.
+     * @return the result of the roll.
+     */
+    public static int rollD4() {
+        return rollD4(1);
+    }
+
+    /**
      * Rolls value for a stat base value, with logging.
      * @return the value for a stat base value.
      */
