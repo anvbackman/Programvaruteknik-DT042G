@@ -2,8 +2,11 @@ import character.Character;
 import creator.CharacterCreator;
 import creator.Mission;
 import support.Constants;
+import support.Randomizer;
 import support.Validation;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -50,7 +53,31 @@ public class GameEngine {
             }
         }
         promptContinue();
-        proceed = false;
+        promptMissionCreation();
+        while (!promptMissionSelect()) {
+            // Do nothing
+        }
+        // TODO Implement mission complete logic here
+    }
+
+    /**
+     * Prompts the user to continue, preventing the game from progressing too fast.
+     */
+    private void promptContinue() {
+        System.out.print("Press enter to continue...");
+        scanner.nextLine();
+    }
+
+    /**
+     * Prompts the user to select mission length and difficulty.
+     */
+    private void promptMissionCreation() {
+        int input;
+        boolean proceed = false;
+
+        int missionLength = 0;
+        String missionDifficulty = "";
+
         while (!proceed) {
             System.out.println("Choose a mission length:");
             System.out.println("1. Short");
@@ -62,9 +89,9 @@ public class GameEngine {
             proceed = true;
 
             switch (input) {
-                case 1 -> this.mission = new Mission(Constants.DIFFICULTY_EASY, Constants.VALUE_MISSION_LENGTH_SHORT);
-                case 2 -> this.mission = new Mission(Constants.DIFFICULTY_EASY, Constants.VALUE_MISSION_LENGTH_MEDIUM);
-                case 3 -> this.mission = new Mission(Constants.DIFFICULTY_EASY, Constants.VALUE_MISSION_LENGTH_LONG);
+                case 1 -> missionLength = Constants.VALUE_MISSION_LENGTH_SHORT;
+                case 2 -> missionLength = Constants.VALUE_MISSION_LENGTH_MEDIUM;
+                case 3 -> missionLength = Constants.VALUE_MISSION_LENGTH_LONG;
                 default -> {
                     System.out.printf("%sInvalid choice.%s\n",
                             Constants.COLOR_RED, Constants.COLOR_RESET);
@@ -72,14 +99,77 @@ public class GameEngine {
                 }
             }
         }
+
+        proceed = false;
+        while (!proceed) {
+            System.out.println("Choose a mission difficulty:");
+            System.out.println("1. Easy");
+            System.out.println("2. Medium");
+            System.out.println("3. Hard");
+            System.out.printf("%sEnter a number: %s", Constants.COLOR_YELLOW, Constants.COLOR_RESET);
+
+            input = Validation.validateInput(scanner.nextLine());
+            proceed = true;
+
+            switch (input) {
+                case 1 -> missionDifficulty = Constants.DIFFICULTY_EASY;
+                case 2 -> missionDifficulty = Constants.DIFFICULTY_MEDIUM;
+                case 3 -> missionDifficulty = Constants.DIFFICULTY_HARD;
+                default -> {
+                    System.out.printf("%sInvalid choice.%s\n",
+                            Constants.COLOR_RED, Constants.COLOR_RESET);
+                    proceed = false;
+                }
+            }
+        }
+        this.mission = new Mission(missionDifficulty, missionLength);
         this.mission.generateMission();
     }
 
     /**
-     * Prompts the user to continue, preventing the game from progressing too fast.
+     * Prompts the user to select an encounter or proceed if there is only one option.
+     * @return true if the mission is complete, false if not.
      */
-    private void promptContinue() {
-        System.out.print("Press enter to continue...");
-        scanner.nextLine();
+    private boolean promptMissionSelect() {
+        int input;
+        String encounterType = "";
+        boolean proceed = false;
+        List<String> fork = this.mission.getNextFork();
+        // TODO Add option to return to town/shop, maybe show stats, inventory, map, etc.
+
+        if (fork.isEmpty()) {
+            System.out.printf("%sMission complete!%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
+            return true;
+        } else if (fork.size() == 1) {
+            encounterType = fork.get(0);
+            System.out.printf("\n%sYour next mission is %s.%s\n",
+                    Constants.COLOR_GREEN, encounterType, Constants.COLOR_RESET);
+            promptContinue();
+        } else {
+            while (!proceed) {
+                System.out.println("\nChoose an encounter...");
+                for (int i = 0; i < fork.size(); i++) {
+                    System.out.printf("%d. %s\n", i + 1, fork.get(i));
+                }
+                System.out.printf("%sEnter a number: %s", Constants.COLOR_YELLOW, Constants.COLOR_RESET);
+                input = Validation.validateInput(scanner.nextLine());
+                if (input < 1 || input > fork.size()) {
+                    System.out.printf("%sInvalid choice.%s\n",
+                            Constants.COLOR_RED, Constants.COLOR_RESET);
+                } else {
+                    encounterType = fork.get(input - 1);
+                    System.out.printf("%sYou chose %s.%s\n",
+                            Constants.COLOR_GREEN, encounterType, Constants.COLOR_RESET);
+                    proceed = true;
+                }
+            }
+        }
+        if (Objects.equals(encounterType, Constants.MISSION_TYPE_MYSTERY)) {
+            System.out.printf("%sMystery encounter is %s.%s\n",
+                    Constants.COLOR_GREEN, Randomizer.getMysteryEncounter(), Constants.COLOR_RESET);
+        }
+        // TODO Implement encounter logic here
+        System.out.printf("%sDoing encounter stuff...%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
+        return false;
     }
 }

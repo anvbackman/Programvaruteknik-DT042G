@@ -27,7 +27,7 @@ public class Mission {
     public Mission(final String difficulty, final int missionLength) {
         this.length = Randomizer.rollMissionLength(missionLength);
         this.difficulty = difficulty;
-        this.currentFork = 0;
+        this.currentFork = 1;
     }
 
     /**
