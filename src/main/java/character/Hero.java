@@ -4,7 +4,7 @@ package character;
  * A class to represent a character in the game.
  * @author Emil Jönsson
  */
-public class Character {
+public class Hero {
 
     private final String name;
     private final StatSheet stats;
@@ -14,9 +14,10 @@ public class Character {
      * @param statSheet the stat sheet for the character.
      * @param name the name of the character.
      */
-    public Character(final StatSheet statSheet, final String name) {
+    public Hero(final StatSheet statSheet, final String name) {
         this.name = name;
         this.stats = statSheet;
+        //TODO implement inventory and equipped items.
     }
 
     /**

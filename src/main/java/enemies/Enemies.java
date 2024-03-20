@@ -1,4 +1,4 @@
-package Enemies;
+package enemies;
 
 /**
  * Enemies class is the parent class for all enemies in the game

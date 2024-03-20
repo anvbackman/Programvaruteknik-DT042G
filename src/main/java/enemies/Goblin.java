@@ -1,4 +1,4 @@
-package Enemies;
+package enemies;
 
 /**
  * Goblin class that extends the Enemies class and implements the EnemyAbility interface

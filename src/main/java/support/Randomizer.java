@@ -97,8 +97,9 @@ public class Randomizer {
     }
 
     /**
-     * Rolls value for a stat base value, with logging.
-     * @return the value for a stat base value.
+     * Rolls value for a stat base value, with logging. Rolls a six sided die 4 times.
+     * Discards the lowest roll and returns the sum of the remaining rolls.
+     * @return stat base value as integer.
      */
     public static int rollStat(boolean shouldLog) {
         int[] rolls = new int[Constants.VALUE_BASE_STAT_DICE_ROLLS];
@@ -125,7 +126,7 @@ public class Randomizer {
     }
 
     /**
-     * Rolls value for a stat base value.
+     * Rolls value for a stat base value without logging.
      * @return the value for a stat base value.
      */
     public static int rollStat() {
@@ -133,7 +134,7 @@ public class Randomizer {
     }
 
     /**
-     * Randomly varies the length of a mission.
+     * Randomly varies the length of a mission, defaults to 1 if input is value too small.
      * @param baseLength the selected base length of the mission.
      * @return the length of the mission.
      */
@@ -147,7 +148,8 @@ public class Randomizer {
     }
 
     /**
-     * Rolls a random amount of mission forks.
+     * Rolls the amount of options that will be available at a fork in a mission.
+     * Upper and lower bounds dictated by the Constants class.
      * @return the amount of mission forks.
      */
     public static int rollMissionForkAmount() {
@@ -156,12 +158,15 @@ public class Randomizer {
     }
 
     /**
-     * Generates a random encounter type for a mystery encounter.
+     * Generates a random encounter type for a mystery encounter from the Constants class.
      * @return the type of encounter as string value.
      */
     public static String getMysteryEncounter() {
-        List<String> options = new ArrayList<>(Constants.MISSION_TYPES_ALL);
+        List<String> options = new ArrayList<>(Constants.MISSION_TYPES_AVAILABLE_AS_MYSTERY);
         Collections.shuffle(options);
-        return options.get(0);
+        String result = options.get(0);
+        System.out.printf("\t%sMystery encounter is %s.%s\n",
+                Constants.COLOR_PURPLE, result, Constants.COLOR_RESET);
+        return result;
     }
 }

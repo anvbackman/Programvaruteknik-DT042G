@@ -110,4 +110,6 @@ public class StatSheet {
         stats.forEach((key, value) -> statsString.append(key).append(": ").append(value).append("\n"));
         return statsString.toString();
     }
+
+    // TODO implement stat modifiers.
 }

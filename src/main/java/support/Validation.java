@@ -7,15 +7,15 @@ package support;
 public class Validation {
 
     /**
-     * Validates the input from the user.
+     * Validates input from the user, input of a number value is expected. Other input is rejected.
      * @param input the input to validate.
-     * @return the input as an integer or -1 if the input is invalid.
+     * @return the input as an integer, -1 if the input is invalid or empty.
      */
     public static int validateInput(String input) {
-        int index = -1;
+        int result = -1;
         if (!input.isEmpty()) {
             try {
-                index = Integer.parseInt(input);
+                result = Integer.parseInt(input);
             } catch (NumberFormatException e) {
                 System.out.printf("%sPlease enter a number.%s\n",
                         Constants.COLOR_RED, Constants.COLOR_RESET);
@@ -25,6 +25,6 @@ public class Validation {
             System.out.printf("%sPlease enter a number.%s\n",
                     Constants.COLOR_RED, Constants.COLOR_RESET);
         }
-        return index;
+        return result;
     }
 }

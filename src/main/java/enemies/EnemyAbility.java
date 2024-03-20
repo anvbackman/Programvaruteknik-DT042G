@@ -1,4 +1,4 @@
-package Enemies;
+package enemies;
 
 /**
  * EnemyAbility interface that will be used to create special abilities for the enemies

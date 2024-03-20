@@ -1,4 +1,4 @@
-package Enemies;
+package enemies;
 
 /**
  * EnemySpecial class that implements the EnemyAbility interface

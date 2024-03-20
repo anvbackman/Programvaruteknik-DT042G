@@ -1,9 +1,8 @@
-import Enemies.Goblin;
-import Enemies.Kobold;
-import Enemies.Zombie;
+import enemies.Goblin;
+import enemies.Kobold;
+import enemies.Zombie;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import Enemies.Enemies;
+import enemies.Enemies;
 
 import static org.junit.Assert.assertEquals;
 
