@@ -27,7 +27,7 @@ public class Mission {
     public Mission(final String difficulty, final int missionLength) {
         this.length = Randomizer.rollMissionLength(missionLength);
         this.difficulty = difficulty;
-        this.currentFork = 1;
+        this.currentFork = 0;
     }
 
     /**
@@ -87,18 +87,49 @@ public class Mission {
      * @return the next fork in the mission as a list of mission types.
      */
     public final List<String> getNextFork() {
+        currentFork++;
         List <String> fork = new ArrayList<>();
-        if (currentFork < length) {
+        if (currentFork <= length) {
             fork = mission.get(currentFork);
         }
-        currentFork++;
         return fork;
     }
 
     /**
-     * Shows the mission in the console.
+     * Shows the current state of the mission map in the console.
      */
     public final void showMission() {
-        mission.forEach((key, value) -> System.out.println("Fork " + key + ": " + value));
+        mission.forEach((key, value) -> {
+            String colorModifier = Constants.COLOR_RESET;
+            // Grey out forks that have already been passed.
+            if (key < currentFork) {
+                System.out.print(Constants.COLOR_GRAY);
+
+                System.out.printf("\nFork " + key + ": ");
+                value.forEach(type -> System.out.printf("[%s] ",type));
+
+                System.out.print(Constants.COLOR_RESET);
+                return;
+            } else if (key == currentFork) {
+                // Highlight the current fork.
+                colorModifier = Constants.COLOR_YELLOW;
+            }
+
+            System.out.print(colorModifier);
+            System.out.printf("\nFork " + key + ": ");
+
+            for (String type : value) {
+                // Highlight special mission types.
+                String typeColor = colorModifier;
+                if (type.equals(Constants.MISSION_TYPE_BOSS) || type.equals(Constants.MISSION_TYPE_MINI_BOSS)) {
+                    typeColor = Constants.COLOR_RED;
+                } else if (type.equals(Constants.MISSION_TYPE_MYSTERY)) {
+                    typeColor = Constants.COLOR_PURPLE;
+                }
+                System.out.printf("%s[%s]%s ", typeColor, type, colorModifier);
+            }
+            System.out.print(Constants.COLOR_RESET);
+        });
+        System.out.println();
     }
 }

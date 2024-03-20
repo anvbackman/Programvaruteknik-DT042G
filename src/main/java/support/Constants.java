@@ -50,6 +50,7 @@ public final class Constants {
     public final static String COLOR_BLUE = "\u001B[34m";
     public final static String COLOR_PURPLE = "\u001B[35m";
     public final static String COLOR_YELLOW = "\u001B[33m";
+    public final static String COLOR_GRAY = "\u001B[37m";
 
     // -- Character classes --
     public final static String CLASS_BARBARIAN = "Barbarian";
