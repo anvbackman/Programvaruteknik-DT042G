@@ -3,17 +3,17 @@ package abilities;
 import support.Randomizer;
 
 /**
- * Brutalize ability for the Barbarian class, this ability is used to deal damage to a single target.
- * The damage is calculated by rolling a d10 for every level the character has - will be changed later.
+ * SneakAttack ability for the Rogue class, this ability is used to deal damage to a single target.
+ * The damage is calculated by rolling a d10 for every level the character has - will be changed later.'
  * @author Martin Roos Eriksson
  */
-public class Brutalize extends BaseAbility {
+public class SneakAttack extends BaseAbility{
 
     /**
-     * Constructor for the Brutalize class.
+     * Constructor for the SneakAttack class.
      */
-    public Brutalize() {
-        super("Brutalize");
+    public SneakAttack() {
+        super("SneakAttack");
     }
 
     /**
@@ -25,13 +25,14 @@ public class Brutalize extends BaseAbility {
 
         int result = Randomizer.rollD10(CharLevel);
         return result;
+
     }
 
     /**
      * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    private int getTargets() {
+    private int getTargets(){
         return 1;
     }
 
@@ -44,7 +45,5 @@ public class Brutalize extends BaseAbility {
         int targets = getTargets();
         int damage = damageCalc(charLevel);
     }
-
-
 
 }
