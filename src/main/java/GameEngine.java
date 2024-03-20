@@ -51,14 +51,15 @@ public class GameEngine {
                 default -> Output.printInvalidChoiceMessage();
             }
         }
+        // Waits for user to press enter before continuing.
         promptContinue();
         promptMissionCreation();
-
         Output.printSuccessMessage("Your mission begins...");
 
+        // Loops until the mission is complete.
         proceed = false;
         while (!proceed) {
-            proceed = promptMissionSelect();
+            proceed = promptEncounterSelect();
         }
         // TODO Implement mission complete logic here
     }
@@ -81,6 +82,7 @@ public class GameEngine {
         int missionLength = 0;
         String missionDifficulty = "";
 
+        // Prompt the user to select mission length.
         while (!proceed) {
             Output.printPromptHeader("Choose a mission length:");
             System.out.println("1. Short");
@@ -102,6 +104,7 @@ public class GameEngine {
             }
         }
 
+        // Prompt the user to select mission difficulty.
         proceed = false;
         while (!proceed) {
             Output.printPromptHeader("Choose a mission difficulty:");
@@ -128,7 +131,7 @@ public class GameEngine {
      * Prompts the user to select an encounter or proceed if there is only one option.
      * @return true if the mission is complete, false if not.
      */
-    private boolean promptMissionSelect() {
+    private boolean promptEncounterSelect() {
         int input;
         String encounterType = "";
         boolean proceed = false;
