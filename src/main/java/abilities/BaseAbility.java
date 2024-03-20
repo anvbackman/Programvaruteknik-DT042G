@@ -6,28 +6,19 @@ package abilities;
  */
 public abstract class BaseAbility {
 
-    /**
-     * The name of the ability.
-     */
+
+    /** The name of the ability. */
     private final String name;
 
     /**
-     * The description of the ability.
-     */
-    private final String description;
-
-    /**
      * Constructor for the BaseAbility class.
-     * @param name the name of the ability.
-     * @param description the description of the ability.
      */
-    public BaseAbility(String name, String description) {
+    public BaseAbility(String name) {
         this.name = name;
-        this.description = description;
     }
 
     /**
-     * Method that will return the name of the ability.
+     * Method that returns the name of the ability
      * @return the name of the ability.
      */
     public String getName() {
@@ -35,16 +26,7 @@ public abstract class BaseAbility {
     }
 
     /**
-     * Method that will return the description of the ability.
-     * @return the description of the ability.
+     * Method that executes the ability.
      */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Method that will execute the ability.
-     */
-    public abstract void execute();
-
+    public abstract void execute(int target, int charLevel);
 }
