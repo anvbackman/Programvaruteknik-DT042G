@@ -3,16 +3,21 @@ package abilities;
 import support.Randomizer;
 
 /**
- * WarCry ability for the Barbarian class, this ability is used to deal damage to a single target.
- * The damage is calculated by rolling a d10 for every level the character has - will be changed later..
+ * WildBolt ability for the Sorcerer class, this ability is used to deal damage to a single target.
+ * The damage is calculated by rolling a d10 for every level the character has.
  */
-public class WarCry extends BaseAbility {
+public class WildBolt extends BaseAbility{
 
     /**
-     * Constructor for the WarCry class.
+     * Array of elements that the ability can generate.
      */
-    public WarCry() {
-        super("WarCry");
+    private static final String[] ELEMENTS = {"Fire", "Wind", "Water", "Lightning"};
+
+    /**
+     * Constructor for the WildBolt class.
+     */
+    public WildBolt() {
+        super("WildBolt");
     }
 
     /**
@@ -36,6 +41,16 @@ public class WarCry extends BaseAbility {
     }
 
     /**
+     * Method that generates an element for the ability.
+     * @return the element generated.
+     */
+    private String generateElement() {
+        // Choose a random element from the ELEMENTS array
+        int index = Randomizer.rollD4(1);
+        return ELEMENTS[index];
+    }
+
+    /**
      * Method that executes the ability.
      * @param target the target of the ability.
      * @param charLevel the level of the character using the ability.
@@ -43,6 +58,7 @@ public class WarCry extends BaseAbility {
     public void execute(int target, int charLevel) {
         int targets = getTargets();
         int damage = damageCalc(charLevel);
+        String element = generateElement();
     }
-}
 
+}
