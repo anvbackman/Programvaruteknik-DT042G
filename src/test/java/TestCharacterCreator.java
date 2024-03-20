@@ -7,7 +7,7 @@ import support.Constants;
  * Tests the character creator class.
  * @author Emil Jönsson
  */
-public class TestHeroCreator {
+public class TestCharacterCreator {
 
     private CharacterCreator characterCreator = new CharacterCreator();
 
