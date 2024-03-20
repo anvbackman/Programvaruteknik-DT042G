@@ -5,6 +5,7 @@ import support.Randomizer;
 /**
  * Smite ability for the Paladin class, this ability is used to deal damage to a single target.
  * The damage is calculated by rolling a d10 for every level the character has.
+ * @author Martin Roos Eriksson
  */
 public class Smite extends BaseAbility{
 

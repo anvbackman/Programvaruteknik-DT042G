@@ -4,7 +4,8 @@ import support.Randomizer;
 
 /**
  * WarCry ability for the Barbarian class, this ability is used to deal damage to a single target.
- * The damage is calculated by rolling a d10 for every level the character has - will be changed later..
+ * The damage is calculated by rolling a d10 for every level the character has - will be changed later..'
+ * @author Martin Roos Eriksson
  */
 public class WarCry extends BaseAbility {
 

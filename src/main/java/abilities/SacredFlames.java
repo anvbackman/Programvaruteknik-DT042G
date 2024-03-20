@@ -4,6 +4,7 @@ import support.Randomizer;
 
 /**
  * SacredFlames class is a subclass of BaseAbility and will be used to create the SacredFlames ability in the game
+ * @author Martin Roos Eriksson
  */
 public class SacredFlames extends BaseAbility {
 

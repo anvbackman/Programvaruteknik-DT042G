@@ -3,17 +3,17 @@ package abilities;
 import support.Randomizer;
 
 /**
- * SilverTounge ability for the Bard class, this ability is used to deal damage to a single target.
- * The damage is calculated by rolling a d10 for every level the character has. - will be changed later..
+ * Wildshape ability for the Druid class, this ability is used to deal damage to a single target.
+ * The damage is calculated by rolling a d10 for every level the character has.
  * @author Martin Roos Eriksson
  */
-public class SilverTounge extends BaseAbility {
+public class Wildshape extends BaseAbility{
 
     /**
-     * Constructor for the SilverTounge class.
+     * Constructor for the Wildshape class.
      */
-    public SilverTounge() {
-        super("SilverTounge");
+    public Wildshape() {
+        super("Wildshape");
     }
 
     /**
@@ -25,24 +25,22 @@ public class SilverTounge extends BaseAbility {
 
         int result = Randomizer.rollD10(CharLevel);
         return result;
-
     }
 
     /**
      * Method that returns the number of targets the ability can hit.
-     * @return
+     * @return the number of targets the ability can hit.
      */
     private int getTargets(){
         return 1;
     }
 
     /**
-     * Method that executes the ability.
+     *  Method that executes the ability.
      * @param target the target of the ability.
      * @param charLevel the level of the character using the ability.
      */
     public void execute(int target, int charLevel) {
         int targets = getTargets();
-        int damage = damageCalc(charLevel);
     }
 }
