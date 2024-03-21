@@ -141,4 +141,11 @@ public abstract class Enemies {
         System.out.println(type + " has died");
     }
 
+    /**
+     * Placeholder, will be used to confirm an enemy is defeated.
+     * @return true if the enemy is dead, false if the enemy is still alive
+     */
+    public boolean isDead() {
+        return true;
+    }
 }
