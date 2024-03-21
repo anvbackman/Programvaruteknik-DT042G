@@ -65,4 +65,9 @@ public class TestGear {
         gear.setType("Steel Sword");
         assertEquals("Steel Sword", gear.getType());
     }
+
+    @Test
+    public void testGetCost() {
+        assertEquals(20, gear.getCost());
+    }
 }

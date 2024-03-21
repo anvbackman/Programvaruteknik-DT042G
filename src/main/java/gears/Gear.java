@@ -63,4 +63,14 @@ public class Gear {
     public void setValue(int value) {
         this.value = value;
     }
+
+    /**
+     * Method to get the cost of gear
+     * @return the cost of gear
+     */
+    public int getCost() {
+        return jsonLoader.getCost(gearCategory, type);
+    }
+
+
 }
