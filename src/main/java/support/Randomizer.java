@@ -1,8 +1,12 @@
 package support;
 
+import gears.Armor;
+import gears.Gear;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -170,7 +174,21 @@ public class Randomizer {
         return result;
     }
 
+    /**
+     * Rolls the size of the shop inventory.
+     * @return the size of the shop inventory.
+     */
     public static int rollShopSize() {
         return Constants.VALUE_SHOP_INITIAL_SIZE + (int) (Math.random() * Constants.VALUE_SHOP_SIZE_VARIANCE);
+    }
+
+    /**
+     * Creates a random gear of selected type and generates stat values.
+     * @param gearTypes a hashmap with gear types and their price values.
+     * @return the generated gear.
+     */
+    public static Gear createRandomGear(HashMap<String, Integer> gearTypes) {
+        // TODO implement random gear generation when gear is fully implemented.
+        return new Armor("Test");
     }
 }

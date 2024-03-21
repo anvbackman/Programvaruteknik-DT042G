@@ -46,11 +46,10 @@ public final class Constants {
     public final static int VALUE_MISSION_FORK_AMOUNT_MIN = 1;
     public final static int VALUE_MISSION_FORK_AMOUNT_MAX = 3;
     public final static int VALUE_MINI_BOSS_ENCOUNTER_CHANCE = 8;
-    public final static int VALUE_SHOP_INITIAL_SIZE = 5;
+    public final static int VALUE_SHOP_INITIAL_SIZE = 3;
     public final static int VALUE_SHOP_SIZE_VARIANCE = 3;
-    public final static int VALUE_SHOP_BASE_PRICE_MODIFIER = 1;
-    public final static double VALUE_SHOP_DIFFICULTY_MODIFIER = 0.25;
-    public final static int VALUE_SHOP_ARTIFACT_INVENTORY_SIZE = 3;
+    public final static int VALUE_SHOP_PRICE_BASE_MODIFIER = 1;
+    public final static double VALUE_SHOP_PRICE_DIFFICULTY_MODIFIER = 0.25;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";
