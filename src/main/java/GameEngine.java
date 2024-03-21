@@ -35,8 +35,6 @@ public class GameEngine {
     public void init() {
         CharacterCreator characterCreator = new CharacterCreator();
         this.shop = new Shop(Constants.DIFFICULTY_MEDIUM, scanner);
-        shop.generateShop();
-        shop.execute();
 
         int input;
         boolean proceed = false;
