@@ -1,6 +1,7 @@
 import character.Hero;
 import creator.CharacterCreator;
 import creator.Mission;
+import scenarios.Shop;
 import support.Constants;
 import support.Output;
 import support.Randomizer;
@@ -19,6 +20,7 @@ public class GameEngine {
     private final Scanner scanner;
     private Mission mission;
     private Hero hero;
+    private Shop shop;
 
     /**
      * Constructor for the game engine class.
@@ -32,6 +34,7 @@ public class GameEngine {
      */
     public void init() {
         CharacterCreator characterCreator = new CharacterCreator();
+        this.shop = new Shop(Constants.DIFFICULTY_MEDIUM, scanner);
 
         int input;
         boolean proceed = false;
@@ -137,6 +140,9 @@ public class GameEngine {
         boolean proceed = false;
         List<String> fork = this.mission.getNextFork();
 
+        // Generates new shop inventory after each encounter.
+        this.shop.generateShop();
+
         // Checks if the mission has ended.
         if (fork.isEmpty()) {
             Output.printSuccessMessage("Mission complete!");
@@ -200,6 +206,7 @@ public class GameEngine {
             case 1 -> {
                 // Return to town.
                 Output.printSuccessMessage("Returning to town...");
+                this.shop.execute();
                 return false;
             }
             case 2 -> {
