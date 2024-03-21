@@ -66,6 +66,9 @@ public class TestGear {
         assertEquals("Steel Sword", gear.getType());
     }
 
+    /**
+     * Test to get the cost of the gear
+     */
     @Test
     public void testGetCost() {
         assertEquals(20, gear.getCost());

@@ -62,21 +62,18 @@ public class JsonLoader {
     }
 
     /**
-     * Get the value of a specific type and category
+     * Get the value of a specific category and name
      * @param category The category to get the value from
-     * @param name The name of the type
+     * @param name The name of the gear
      * @return The value of the type
      */
     public int getValue(String category, String name) {
         JSONObject typeObject = (JSONObject) jsonObject.get(category); // Get the category
-        System.out.println("Type object: " + typeObject);
         if (typeObject != null) {
             JSONObject itemObject = (JSONObject) typeObject.get(name); // Get the item object
-            System.out.println("Item object: " + itemObject);
             if (itemObject != null) {
                 Long value = (Long) itemObject.get("value"); // Get the value of the item
                 if (value != null) {
-                    System.out.println("Value: " + value.intValue());
                     return value.intValue(); // Return the value
                 }
             }
@@ -85,9 +82,9 @@ public class JsonLoader {
     }
 
     /**
-     * Get the cost of a specific type and category
+     * Get the cost of a specific category and name
      * @param category The category to get the cost from
-     * @param name The name of the type
+     * @param name The name of the gear
      * @return The cost of the type
      */
     public int getCost(String category, String name) {
@@ -97,7 +94,6 @@ public class JsonLoader {
             if (itemObject != null) {
                 Long cost = (Long) itemObject.get("cost"); // Get the cost of the item
                 if (cost != null) {
-                    System.out.println("Cost: " + cost.intValue());
                     return cost.intValue(); // Return the cost
                 }
             }

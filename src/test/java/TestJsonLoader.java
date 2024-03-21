@@ -50,4 +50,12 @@ public class TestJsonLoader {
     public void testGetCategories() {
         assertTrue(load.getCategories().contains("weapons"));
     }
+
+    /**
+     * Test to get the cost of a specific gear
+     */
+    @Test
+    public void testGetCost() {
+        assertEquals(10, load.getCost("weapons", "Scrappy Sword"));
+    }
 }
