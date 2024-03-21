@@ -50,6 +50,7 @@ public final class Constants {
     public final static int VALUE_SHOP_SIZE_VARIANCE = 3;
     public final static int VALUE_SHOP_PRICE_BASE_MODIFIER = 1;
     public final static double VALUE_SHOP_PRICE_DIFFICULTY_MODIFIER = 0.25;
+    public final static double VALUE_SHOP_SELL_BASE_MODIFIER = 0.5;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";
