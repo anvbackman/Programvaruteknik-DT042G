@@ -2,7 +2,9 @@ package gears;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -76,5 +78,24 @@ public class JsonLoader {
             }
         }
         return 0;
+    }
+
+    /**
+     * Get both name and value from a specific category.
+     * @param category The category to get the objects from.
+     * @return A hashmap with the name and value of the objects.
+     */
+    public HashMap<String, Integer> getObject(String category) {
+        JSONObject typeObject = (JSONObject) jsonObject.get(category);
+        if (typeObject != null) {
+            HashMap<String, Integer> object = new HashMap<>();
+            for (Object key : typeObject.keySet()) {
+                String keyString = (String) key;
+                Long value = (Long) typeObject.get(keyString);
+                object.put(keyString, value.intValue());
+            }
+            return object;
+        }
+        return null;
     }
 }
