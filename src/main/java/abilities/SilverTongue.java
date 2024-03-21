@@ -7,12 +7,12 @@ import support.Randomizer;
  * The damage is calculated by rolling a d10 for every level the character has. - will be changed later..
  * @author Martin Roos Eriksson
  */
-public class SilverTounge extends BaseAbility {
+public class SilverTongue extends BaseAbility {
 
     /**
      * Constructor for the SilverTounge class.
      */
-    public SilverTounge() {
+    public SilverTongue() {
         super("SilverTounge");
     }
 
