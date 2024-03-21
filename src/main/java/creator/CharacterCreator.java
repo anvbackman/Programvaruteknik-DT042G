@@ -3,6 +3,7 @@ package creator;
 import character.Hero;
 import character.StatSheet;
 import support.Constants;
+import support.Output;
 import support.Validation;
 
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class CharacterCreator {
         }
 
         // Creates the character and prints the result.
-        System.out.printf("%sCharacter created!%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
+        Output.printSuccessMessage("Character created!.");
         Hero hero = new Hero(statSheet, name);
         System.out.println(hero.getName() + " the " + classChoice);
         System.out.println(hero.getStats());
@@ -66,11 +67,11 @@ public class CharacterCreator {
      * Prompts the user to select a class.
      */
     private void promptClassSelect() {
-        System.out.println("Select a class:");
+        Output.printPromptHeader("Select a class:");
         for (int i = 1; i < Constants.CLASSES.size() + 1; i++) {
             System.out.printf("%d. %s\n", i, Constants.CLASSES.get(i - 1));
         }
-        System.out.printf("%sEnter a number: %s", Constants.COLOR_YELLOW, Constants.COLOR_RESET);
+        Output.printEnterNumberMessage();
     }
 
     /**
@@ -81,8 +82,7 @@ public class CharacterCreator {
     public boolean selectClass(final int input) {
 
         if (input < 1 || input > Constants.CLASSES.size()) {
-            System.out.printf("%sInvalid choice.%s\n",
-                    Constants.COLOR_RED, Constants.COLOR_RESET);
+            Output.printInvalidChoiceMessage();
             return false;
         } else {
             classChoice = Constants.CLASSES.get(input - 1);
@@ -107,7 +107,7 @@ public class CharacterCreator {
                 System.out.printf("%d. %s (%d)\n", i, Constants.STATS.get(i - 1), statSheet.getStat(Constants.STATS.get(i - 1)));
             }
             System.out.printf("%d. Proceed\n", Constants.STATS.size() + 1);
-            System.out.printf("%sEnter a number: %s", Constants.COLOR_YELLOW, Constants.COLOR_RESET);
+            Output.printEnterNumberMessage();
         }
     }
 
@@ -127,8 +127,7 @@ public class CharacterCreator {
         // Checks if input is not a valid stat choice.
         if (input < 1 || input > Constants.STATS.size()) {
             if (input != Constants.STATS.size() + 1) {
-                System.out.printf("%sInvalid choice.%s\n",
-                        Constants.COLOR_RED, Constants.COLOR_RESET);
+                Output.printInvalidChoiceMessage();
                 return false;
             } else {
                 return true;
@@ -143,7 +142,7 @@ public class CharacterCreator {
      * Prompts the user to select a name.
      */
     private void promptNameSelect() {
-        System.out.print("Enter a name for your character: ");
+        Output.printPromptHeader("Enter a name for your Hero:");
     }
 
     /**
