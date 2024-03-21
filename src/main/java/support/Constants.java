@@ -31,6 +31,10 @@ public final class Constants {
             DIFFICULTY_MEDIUM,
             DIFFICULTY_HARD
     );
+    public final static String GEAR_TYPE_WEAPON = "weapons";
+    public final static String GEAR_TYPE_ARMOR = "armor";
+    public final static String GEAR_TYPE_CONSUMABLE = "consumables";
+    public final static String GEAR_TYPE_ARTIFACT = "artifact";
 
     // -- Value constants --
     public final static int VALUE_BASE_STAT_DICE_ROLLS = 4;
@@ -42,6 +46,11 @@ public final class Constants {
     public final static int VALUE_MISSION_FORK_AMOUNT_MIN = 1;
     public final static int VALUE_MISSION_FORK_AMOUNT_MAX = 3;
     public final static int VALUE_MINI_BOSS_ENCOUNTER_CHANCE = 8;
+    public final static int VALUE_SHOP_INITIAL_SIZE = 5;
+    public final static int VALUE_SHOP_SIZE_VARIANCE = 3;
+    public final static int VALUE_SHOP_BASE_PRICE_MODIFIER = 1;
+    public final static double VALUE_SHOP_DIFFICULTY_MODIFIER = 0.25;
+    public final static int VALUE_SHOP_ARTIFACT_INVENTORY_SIZE = 3;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";

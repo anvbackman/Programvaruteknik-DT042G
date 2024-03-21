@@ -169,4 +169,8 @@ public class Randomizer {
                 Constants.COLOR_PURPLE, result, Constants.COLOR_RESET);
         return result;
     }
+
+    public static int rollShopSize() {
+        return Constants.VALUE_SHOP_INITIAL_SIZE + (int) (Math.random() * Constants.VALUE_SHOP_SIZE_VARIANCE);
+    }
 }
