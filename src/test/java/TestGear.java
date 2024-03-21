@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestGear {
 
     private Gear gear;
+    private Gear gear2;
 
     /**
      * Initialize the gear before each test
@@ -17,6 +18,7 @@ public class TestGear {
     @BeforeEach
     public void setUp() {
         gear = new Gear("Iron Sword", "weapons");
+        gear2 = new Gear("Leather Armor", "armor");
     }
 
     /**
@@ -25,6 +27,7 @@ public class TestGear {
     @Test
     public void testGearType() {
         assertEquals("Iron Sword", gear.getType());
+        assertEquals("Leather Armor", gear2.getType());
     }
 
     /**
@@ -33,6 +36,7 @@ public class TestGear {
     @Test
     public void testGearCategory() {
         assertEquals("weapons", gear.getGearCategory());
+        assertEquals("armor", gear2.getGearCategory());
     }
 
     /**
@@ -41,6 +45,7 @@ public class TestGear {
     @Test
     public void testGearValue() {
         assertEquals(10, gear.getValue());
+        assertEquals(5, gear2.getValue());
     }
 
     /**
