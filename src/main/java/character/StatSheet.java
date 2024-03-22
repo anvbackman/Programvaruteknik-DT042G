@@ -112,4 +112,11 @@ public class StatSheet {
     }
 
     // TODO implement stat modifiers.
+
+    public void levelUp() {
+        stats.replaceAll((stat, value) -> value + 1);
+        reRollAmount += Constants.VALUE_MAX_STAT_REROLLS;
+        System.out.println("Leveled up! Your stats are now: " + this.toString());
+        // TODO find out when to call
+    }
 }
