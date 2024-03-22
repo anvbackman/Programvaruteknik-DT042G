@@ -2,7 +2,9 @@ package gears;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -62,19 +64,61 @@ public class JsonLoader {
     }
 
     /**
-     * Get the value of a specific type and category
+     * Get the value of a specific category and name
      * @param category The category to get the value from
-     * @param name The name of the type
+     * @param name The name of the gear
      * @return The value of the type
      */
     public int getValue(String category, String name) {
         JSONObject typeObject = (JSONObject) jsonObject.get(category); // Get the category
         if (typeObject != null) {
-            Long value = (Long) typeObject.get(name); // Get the value of the type
-            if (value != null) {
-                return value.intValue(); // Return the value
+            JSONObject itemObject = (JSONObject) typeObject.get(name); // Get the item object
+            if (itemObject != null) {
+                Long value = (Long) itemObject.get("value"); // Get the value of the item
+                if (value != null) {
+                    return value.intValue(); // Return the value
+                }
             }
         }
         return 0;
+    }
+
+    /**
+     * Get the cost of a specific category and name
+     * @param category The category to get the cost from
+     * @param name The name of the gear
+     * @return The cost of the type
+     */
+    public int getCost(String category, String name) {
+        JSONObject typeObject = (JSONObject) jsonObject.get(category); // Get the category
+        if (typeObject != null) {
+            JSONObject itemObject = (JSONObject) typeObject.get(name); // Get the item object
+            if (itemObject != null) {
+                Long cost = (Long) itemObject.get("cost"); // Get the cost of the item
+                if (cost != null) {
+                    return cost.intValue(); // Return the cost
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Get both name and value from a specific category.
+     * @param category The category to get the objects from.
+     * @return A hashmap with the name and value of the objects.
+     */
+    public HashMap<String, Integer> getObject(String category) {
+        JSONObject typeObject = (JSONObject) jsonObject.get(category);
+        if (typeObject != null) {
+            HashMap<String, Integer> object = new HashMap<>();
+            for (Object key : typeObject.keySet()) {
+                String keyString = (String) key;
+                Long value = (Long) typeObject.get(keyString);
+                object.put(keyString, value.intValue());
+            }
+            return object;
+        }
+        return null;
     }
 }

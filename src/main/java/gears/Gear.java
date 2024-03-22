@@ -9,6 +9,7 @@ public class Gear {
     private String type;
     private String gearCategory;
     private int value;
+    private JsonLoader jsonLoader;
 
     /**
      * Constructor for Gear
@@ -16,8 +17,10 @@ public class Gear {
      * @param gearCategory the category of gear
      */
     public Gear(String type, String gearCategory) {
+        jsonLoader = new JsonLoader("src/gearlist.json");
         this.type = type;
         this.gearCategory = gearCategory;
+        this.value = jsonLoader.getValue(gearCategory, type);
     }
 
     /**
@@ -41,6 +44,7 @@ public class Gear {
      * @return the value of gear
      */
     public int getValue() {
+        System.out.println("Gear value: " + value);
         return value;
     }
 
@@ -59,4 +63,14 @@ public class Gear {
     public void setValue(int value) {
         this.value = value;
     }
+
+    /**
+     * Method to get the cost of gear
+     * @return the cost of gear
+     */
+    public int getCost() {
+        return jsonLoader.getCost(gearCategory, type);
+    }
+
+
 }
