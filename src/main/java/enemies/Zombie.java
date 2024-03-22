@@ -1,7 +1,6 @@
 package enemies;
 
-import java.util.Random;
-
+import support.Randomizer;
 
 /**
  * Zombie class is a subclass of the Enemies class
@@ -14,40 +13,54 @@ public class Zombie extends Enemies {
     int deathcount = 0; //int to keep track of how many times the zombie has died
     boolean willRevive = false; //boolean to check if the zombie will revive
 
+    private Boolean isMiniBoss;
+
+
     /**
      * Zombie constructor that takes in an EnemyAbility object
      */
-    public Zombie() {
-        super("Zombie", 15, 6, 2);
-        this.ability = new EnemySpecial();
-        EnemySpecial enemySpecial = bite();
+    public Zombie(Boolean isMiniBoss) {
+        super("Zombie", 0, 0, 0, isMiniBoss); // Initialize with default values
+
+        if (isMiniBoss) {
+            this.type = "Zombie Boss";
+            this.health = Randomizer.rollD10(6);
+            this.damage = Randomizer.rollD6(3);
+            this.armor = Randomizer.rollD6(3);
+        } else {
+            this.type = "Zombie";
+            this.health = Randomizer.rollD10(2);
+            this.damage = Randomizer.rollD6(1);
+            this.armor = Randomizer.rollD6(1);
+        }
+
         if (health <= 0) {
             revive();
         }
     }
 
     /**
-     * Method that will call the performAbility method from the EnemyAbility interface
-     * @return EnemySpecial object
+     * Method for the Zombie to bite the player
      */
-    protected EnemySpecial bite() {
+    protected void bite() {
         System.out.println("Zombie lunges at you and bites you");
+        int ogDamage = damage;
+        damage += Randomizer.rollD6(1);
+        attack(damage);
         infect();
-        return null;
+        setDamage(ogDamage);
     }
 
     /**
-     * Method that will call the performAbility method from the EnemyAbility interface
-     * This method will be called when the health of the Zombie object is less than or equal to 0
-     * and will be called in the Zombie constructor
+     * Method for the Zombie to infect the player
      */
     private void infect() {
-        Random random = new Random();
-        int chance = random.nextInt(100);
-        if(chance < 50) {
+        int chance = Randomizer.rollD20(1);
+        if(chance < 15) {
             System.out.println("Zombie has infected you");
         }
     }
+
 
     /**
      * Method that will set the health of the Zombie object to 5 and print out that the Zombie has revived
@@ -57,9 +70,8 @@ public class Zombie extends Enemies {
     private void revive() {
 
         if(deathcount < 2) {
-            Random rand = new Random();
-            int chance = rand.nextInt(100);
-            if(chance < 50) {
+            int chance = Randomizer.rollD4(1);
+            if(chance < 2) {
                 willRevive = true;
                 setHealth(5);
                 System.out.println("Zombie has revived");
@@ -78,7 +90,7 @@ public class Zombie extends Enemies {
      * This method will be called when the health of the Zombie object is less than or equal to 0
      */
     public void doAbility() {
-        ability.performAbility();
+        bite();
         System.out.println(type + " used special ability");
     }
 
