@@ -1,5 +1,7 @@
 package enemies;
 
+import support.Randomizer;
+
 /**
  * Kobold class is a subclass of the Enemies class
  * It contains the attributes and methods specific to the Kobold enemy
@@ -8,11 +10,26 @@ package enemies;
  */
 public class Kobold extends Enemies {
 
+    private Boolean isMiniBoss;
+
     /**
      * Kobold constructor that takes in an EnemyAbility object
      */
     public Kobold() {
-        super("Kobold", 5, 2, 0);
+        super("Kobold", 0, 0, 0, false); // Initialize with default values
+
+        if (isMiniBoss) {
+            this.type = "Kobold Boss";
+            this.health = Randomizer.rollD6(8);
+            this.damage = Randomizer.rollD4(4);
+            this.armor = Randomizer.rollD4(2);
+        } else {
+            this.type = "Kobold";
+            this.health = Randomizer.rollD6(4);
+            this.damage = Randomizer.rollD4(2);
+            this.armor = Randomizer.rollD4(1);
+        }
+
         this.ability = new EnemySpecial();
 
     }
@@ -20,17 +37,21 @@ public class Kobold extends Enemies {
     /**
      * Method that will call the performAbility method from the EnemyAbility interface
      */
-    protected void reinforce() {
-        System.out.println("Kobold has called for reinforcements");
-        new Kobold();
+    protected void ThrowWaspNest() {
+        System.out.println("Kobold is throwing a wasp nest at you!");
+        int ogDamage = damage;
+        damage += Randomizer.rollD4(3);
+        attack(damage);
+        setDamage(ogDamage);
     }
 
     /**
      * Method that will call the performAbility method from the EnemyAbility interface
      */
     public void doAbility() {
-        ability.performAbility();
+        ThrowWaspNest();
         System.out.println(type + " used special ability");
+
 
     }
 
@@ -111,7 +132,7 @@ public class Kobold extends Enemies {
      */
     public void attack(int dmg) {
         System.out.println(type + " is Attacking");
-        damage = dmg;
+        damage = dmg + Randomizer.rollD4(1);
 
     }
 

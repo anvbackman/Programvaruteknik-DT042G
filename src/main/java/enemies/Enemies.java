@@ -8,6 +8,7 @@ package enemies;
  */
 public abstract class Enemies {
 
+    private final boolean isMiniBoss;
     /**
      * ability is an instance of the EnemyAbility interface
      */
@@ -40,12 +41,12 @@ public abstract class Enemies {
      * @param damage specifies the damage of the enemy
      * @param armor specifies the armor of the enemy
      */
-    public Enemies(String type, int health, int damage, int armor) {
+    public Enemies(String type, int health, int damage, int armor, boolean isMiniBoss) {
         this.type = type;
         this.health = health;
         this.damage = damage;
         this.armor = armor;
-        this.ability = new EnemySpecial();
+        this.isMiniBoss = isMiniBoss;
     }
 
     /**

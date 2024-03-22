@@ -1,5 +1,7 @@
 package enemies;
 
+import support.Randomizer;
+
 /**
  * Goblin class that extends the Enemies class and implements the EnemyAbility interface
  * This class will be used to create a Goblin enemy with the ability to call for reinforcements
@@ -9,33 +11,48 @@ package enemies;
  */
 public class Goblin extends Enemies{
 
-    /**
-     * Goblin constructor that takes in an EnemyAbility object
-     */
-    EnemyAbility ability;
+    private boolean UsedPoison = false;
+
+    private Boolean isMiniBoss;
 
     /**
      * Goblin constructor that takes in an EnemyAbility object
      */
     public Goblin(){
-        super("Goblin", 10, 4, 1); // will use dice in the future
-        this.ability = new EnemySpecial();
+        super("Goblin", 0, 0, 0, false); // Initialize with default values
+
+        if (isMiniBoss) {
+            this.type = "Goblin Boss";
+            this.health = Randomizer.rollD10(6);
+            this.damage = Randomizer.rollD4(3);
+            this.armor = Randomizer.rollD4(3);
+        } else {
+            this.type = "Goblin";
+            this.health = Randomizer.rollD10(2);
+            this.damage = Randomizer.rollD4(1);
+            this.armor = Randomizer.rollD4(1);
+        }
+
     }
 
     /**
      * Method that will call the performAbility method from the EnemyAbility interface
      */
     public void doAbility() {
-        ability.performAbility();
+        poison();
         System.out.println(type + " used special ability");
     }
 
     /**
      * Method that will call the reinforce method from the Goblin class and create a new Goblin object
      */
-    protected void reinforce() {
-        System.out.println("Goblin has called for reinforcements");
-        new Goblin();
+    protected void poison() {
+        System.out.println("Goblin uses a poison attack");
+        int ogDamage = damage;
+        damage += Randomizer.rollD4(1);
+        attack(damage);
+        UsedPoison = true;
+        setDamage(ogDamage);
     }
 
     /**
@@ -70,7 +87,7 @@ public class Goblin extends Enemies{
     }
 
     /**
-     * Method that will take in an int value and set the damage of the Goblin object to that value
+     * Method that will take in an int value and set the damage of the Goblins attack to that value
      * @param damage int value that will be set to the damage of the Goblin object
      */
     public void setDamage(int damage) {
@@ -123,7 +140,7 @@ public class Goblin extends Enemies{
      */
     public void attack(int dmg) {
         System.out.println(type + " is Attacking");
-        damage = dmg;
+        damage = damage + Randomizer.rollD4(1);
         System.out.println("total damage: " + damage);
     }
 
