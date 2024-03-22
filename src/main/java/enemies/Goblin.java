@@ -17,6 +17,7 @@ public class Goblin extends Enemies{
 
     /**
      * Goblin constructor that takes in an EnemyAbility object
+     *
      */
     public Goblin(){
         super("Goblin", 0, 0, 0, false); // Initialize with default values

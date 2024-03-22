@@ -40,6 +40,7 @@ public abstract class Enemies {
      * @param health specifies the health of the enemy
      * @param damage specifies the damage of the enemy
      * @param armor specifies the armor of the enemy
+     * @param isMiniBoss specifies if the enemy is a mini boss
      */
     public Enemies(String type, int health, int damage, int armor, boolean isMiniBoss) {
         this.type = type;
