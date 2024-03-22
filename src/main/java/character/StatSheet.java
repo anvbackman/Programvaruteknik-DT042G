@@ -113,6 +113,9 @@ public class StatSheet {
 
     // TODO implement stat modifiers.
 
+    /**
+     * Levels up the characters stats by one.
+     */
     public void levelUp() {
         stats.replaceAll((stat, value) -> value + 1);
         reRollAmount += Constants.VALUE_MAX_STAT_REROLLS;
