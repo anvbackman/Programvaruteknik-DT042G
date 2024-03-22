@@ -19,8 +19,8 @@ public class Zombie extends Enemies {
     /**
      * Zombie constructor that takes in an EnemyAbility object
      */
-    public Zombie() {
-        super("Zombie", 0, 0, 0, false); // Initialize with default values
+    public Zombie(Boolean isMiniBoss) {
+        super("Zombie", 0, 0, 0, isMiniBoss); // Initialize with default values
 
         if (isMiniBoss) {
             this.type = "Zombie Boss";

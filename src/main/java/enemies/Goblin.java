@@ -19,8 +19,8 @@ public class Goblin extends Enemies{
      * Goblin constructor that takes in an EnemyAbility object
      *
      */
-    public Goblin(){
-        super("Goblin", 0, 0, 0, false); // Initialize with default values
+    public Goblin(boolean isMiniBoss){
+        super("Goblin", 0, 0, 0, isMiniBoss); // Initialize with default values
 
         if (isMiniBoss) {
             this.type = "Goblin Boss";

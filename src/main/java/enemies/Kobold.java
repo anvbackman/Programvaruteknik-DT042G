@@ -15,8 +15,8 @@ public class Kobold extends Enemies {
     /**
      * Kobold constructor that takes in an EnemyAbility object
      */
-    public Kobold() {
-        super("Kobold", 0, 0, 0, false); // Initialize with default values
+    public Kobold(boolean isMiniBoss) {
+        super("Kobold", 0, 0, 0, isMiniBoss); // Initialize with default values
 
         if (isMiniBoss) {
             this.type = "Kobold Boss";
