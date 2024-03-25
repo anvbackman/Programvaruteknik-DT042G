@@ -39,4 +39,13 @@ public class Output {
     public static void printSuccessMessage(String message) {
         System.out.printf("%s%s%s\n", Constants.COLOR_BLUE, message, Constants.COLOR_RESET);
     }
+
+    /**
+     * Prints an error message to the console, using a given string.
+     * Appends Color code red from the Constants class.
+     * @param message the message to be printed.
+     */
+    public static void printErrorMessage(String message) {
+        System.out.printf("%s%s%s\n", Constants.COLOR_RED, message, Constants.COLOR_RESET);
+    }
 }
