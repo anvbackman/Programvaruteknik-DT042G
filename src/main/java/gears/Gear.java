@@ -7,7 +7,7 @@ package gears;
  */
 public class Gear {
     private String name;
-    private String gearCategory;
+    private final String gearCategory;
     private int value;
     private int cost;
 
@@ -78,6 +78,4 @@ public class Gear {
     public void setCost(int cost) {
         this.cost = cost;
     }
-
-
 }
