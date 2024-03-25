@@ -6,29 +6,29 @@ package gears;
  * @author Andreas Backman
  */
 public class Gear {
-    private String type;
-    private String gearCategory;
+    private String name;
+    private final String gearCategory;
     private int value;
-    private JsonLoader jsonLoader;
+    private int cost;
 
     /**
      * Constructor for Gear
-     * @param type the type of gear
+     * @param name the type of gear
      * @param gearCategory the category of gear
      */
-    public Gear(String type, String gearCategory) {
-        jsonLoader = new JsonLoader("src/gearlist.json");
-        this.type = type;
+    public Gear(String name, String gearCategory, int value, int cost) {
+        this.name = name;
         this.gearCategory = gearCategory;
-        this.value = jsonLoader.getValue(gearCategory, type);
+        this.value = value;
+        this.cost = cost;
     }
 
     /**
      * Method to get the type of gear
      * @return the type of gear
      */
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -44,16 +44,15 @@ public class Gear {
      * @return the value of gear
      */
     public int getValue() {
-        System.out.println("Gear value: " + value);
         return value;
     }
 
     /**
      * Method to set the type of gear
-     * @param type the type of gear
+     * @param name the type of gear
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -69,8 +68,14 @@ public class Gear {
      * @return the cost of gear
      */
     public int getCost() {
-        return jsonLoader.getCost(gearCategory, type);
+        return cost;
     }
 
-
+    /**
+     * Method to set the cost of gear
+     * @param cost the cost of gear
+     */
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 }

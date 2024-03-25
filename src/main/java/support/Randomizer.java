@@ -1,12 +1,10 @@
 package support;
 
-import gears.Armor;
 import gears.Gear;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -183,12 +181,15 @@ public class Randomizer {
     }
 
     /**
-     * Creates a random gear of selected type and generates stat values.
-     * @param gearTypes a hashmap with gear types and their price values.
-     * @return the generated gear.
+     * Selects a random gear from a list of gear.
+     * @param gearList the list of gear to select from.
+     * @return the selected gear.
      */
-    public static Gear createRandomGear(HashMap<String, Integer> gearTypes) {
-        // TODO implement random gear generation when gear is fully implemented.
-        return new Armor("Test");
+    public static List<Gear> selectRandom(List<Gear> gearList, int amount) {
+        List<Gear> result = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            result.add(gearList.get((int) (Math.random() * gearList.size())));
+        }
+        return result;
     }
 }

@@ -17,8 +17,8 @@ public class TestGear {
      */
     @BeforeEach
     public void setUp() {
-        gear = new Gear("Iron Sword", "weapons");
-        gear2 = new Gear("Leather Armor", "armor");
+        gear = new Gear("Iron Sword", "weapons", 10, 20);
+        gear2 = new Gear("Leather Armor", "armor", 5, 1);
     }
 
     /**
@@ -26,8 +26,8 @@ public class TestGear {
      */
     @Test
     public void testGearType() {
-        assertEquals("Iron Sword", gear.getType());
-        assertEquals("Leather Armor", gear2.getType());
+        assertEquals("Iron Sword", gear.getName());
+        assertEquals("Leather Armor", gear2.getName());
     }
 
     /**
@@ -62,8 +62,8 @@ public class TestGear {
      */
     @Test
     public void testSetType() {
-        gear.setType("Steel Sword");
-        assertEquals("Steel Sword", gear.getType());
+        gear.setName("Steel Sword");
+        assertEquals("Steel Sword", gear.getName());
     }
 
     /**

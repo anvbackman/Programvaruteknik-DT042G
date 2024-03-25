@@ -35,6 +35,8 @@ public final class Constants {
     public final static String GEAR_TYPE_ARMOR = "armor";
     public final static String GEAR_TYPE_CONSUMABLE = "consumables";
     public final static String GEAR_TYPE_ARTIFACT = "artifact";
+    public final static String PLAYER_STARTING_ARMOR = "Rags";
+    public final static String PLAYER_STARTING_WEAPON = "Club of the Noob";
 
     // -- Value constants --
     public final static int VALUE_BASE_STAT_DICE_ROLLS = 4;
@@ -51,6 +53,7 @@ public final class Constants {
     public final static int VALUE_SHOP_PRICE_BASE_MODIFIER = 1;
     public final static double VALUE_SHOP_PRICE_DIFFICULTY_MODIFIER = 0.25;
     public final static double VALUE_SHOP_SELL_BASE_MODIFIER = 0.5;
+    public final static int VALUE_CHARACTER_STARTING_GOLD = 50;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";

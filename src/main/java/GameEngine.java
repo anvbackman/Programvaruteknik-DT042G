@@ -34,7 +34,6 @@ public class GameEngine {
      */
     public void init() {
         CharacterCreator characterCreator = new CharacterCreator();
-        this.shop = new Shop(Constants.DIFFICULTY_MEDIUM, scanner);
 
         int input;
         boolean proceed = false;
@@ -54,10 +53,13 @@ public class GameEngine {
                 default -> Output.printInvalidChoiceMessage();
             }
         }
+
+
         // Waits for user to press enter before continuing.
         promptContinue();
         promptMissionCreation();
         Output.printSuccessMessage("Your mission begins...");
+        this.shop = new Shop(mission.getDifficulty(), scanner, this.hero);
 
         // Loops until the mission is complete.
         proceed = false;
@@ -218,8 +220,7 @@ public class GameEngine {
             }
             case 3 -> {
                 // Show character inventory.
-                Output.printSuccessMessage("Viewing inventory...");
-                // TODO Implement inventory logic here
+                hero.showInventory();
                 promptContinue();
                 return false;
             }

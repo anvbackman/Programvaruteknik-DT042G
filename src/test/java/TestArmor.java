@@ -16,7 +16,7 @@ public class TestArmor {
      */
     @BeforeEach
     public void setUp() {
-        armor = new Armor("Iron Armor");
+        armor = new Armor("Iron Armor", 1, 1);
     }
 
     /**
@@ -24,7 +24,7 @@ public class TestArmor {
      */
     @Test
     public void testArmorType() {
-        assertEquals("Iron Armor", armor.getType());
+        assertEquals("Iron Armor", armor.getName());
     }
 
     /**
