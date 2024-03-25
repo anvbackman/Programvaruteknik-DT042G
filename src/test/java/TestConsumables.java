@@ -15,7 +15,7 @@ public class TestConsumables {
      */
     @BeforeEach
     public void setUp() {
-        consumables = new Consumables("Health Potion");
+        consumables = new Consumables("Health Potion", 1, 1);
     }
 
     /**
@@ -23,7 +23,7 @@ public class TestConsumables {
      */
     @Test
     public void testConsumablesType() {
-        assertEquals("Health Potion", consumables.getType());
+        assertEquals("Health Potion", consumables.getName());
     }
 
     /**

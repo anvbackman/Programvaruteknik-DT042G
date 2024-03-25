@@ -1,6 +1,9 @@
 import gears.JsonLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -16,7 +19,7 @@ public class TestJsonLoader {
      */
     @BeforeEach
     public void setUp() {
-        load = new JsonLoader("src/gearlist.json");
+        load = new JsonLoader(Objects.requireNonNull(getClass().getResource("/gearlist.json")).getPath());
     }
 
     /**

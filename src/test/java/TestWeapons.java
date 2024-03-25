@@ -16,7 +16,7 @@ public class TestWeapons {
      */
     @BeforeEach
     public void setUp() {
-        weapons = new Weapons("Iron Sword");
+        weapons = new Weapons("Iron Sword", 1 ,1);
     }
 
     /**
@@ -24,7 +24,7 @@ public class TestWeapons {
      */
     @Test
     public void testWeaponsType() {
-        assertEquals("Iron Sword", weapons.getType());
+        assertEquals("Iron Sword", weapons.getName());
     }
 
     /**
