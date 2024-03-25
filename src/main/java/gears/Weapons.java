@@ -8,10 +8,12 @@ package gears;
 public class Weapons extends Gear {
     /**
      * Constructor for Weapons
-     * @param type the type of weapon
+     * @param name the type of weapon
+     * @param value the value of the weapon
+     * @param cost the cost of the weapon
      */
-    public Weapons(String type) {
-        super(type, "weapons");
+    public Weapons(String name, int value, int cost) {
+        super(name, "weapons", value, cost);
     }
 }
 

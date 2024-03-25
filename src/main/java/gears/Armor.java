@@ -6,12 +6,15 @@ package gears;
  * @author Andreas Backman
  */
 public class Armor extends Gear {
+
     /**
      * Constructor for Armor
-     * @param type the type of armor
+     * @param name the type of armor
+     * @param value the value of the armor
+     * @param cost the cost of the armor
      */
-    public Armor(String type) {
-        super(type, "armor");
+    public Armor(String name, int value, int cost) {
+        super(name, "armor", value, cost);
     }
 }
 

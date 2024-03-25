@@ -6,11 +6,14 @@ package gears;
  * @author Andreas Backman
  */
 public class Consumables extends Gear {
+
     /**
      * Constructor for Consumables
-     * @param type the type of consumable
+     * @param name the type of consumable
+     * @param value the value of the consumable
+     * @param cost the cost of the consumable
      */
-    public Consumables(String type) {
-        super(type, "consumables");
+    public Consumables(String name, int value, int cost) {
+        super(name, "consumables", value, cost);
     }
 }
