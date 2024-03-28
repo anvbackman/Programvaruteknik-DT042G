@@ -16,20 +16,24 @@ public class Hero {
 
     private final String name;
     private final StatSheet stats;
+    private final String characterClass;
     private Armor equippedArmor;
     private Weapons equippedWeapon;
     private List<Consumables> consumables;
     private int gold;
+    private int health;
 
     /**
      * Constructor for a character.
      * @param statSheet the stat sheet for the character.
      * @param name the name of the character.
      */
-    public Hero(final StatSheet statSheet, final String name) {
+    public Hero(final StatSheet statSheet, final String name, final String characterClass) {
         this.name = name;
         this.stats = statSheet;
+        this.characterClass = characterClass;
         this.gold = Constants.VALUE_CHARACTER_STARTING_GOLD;
+        this.health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
         this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
         this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
         this.consumables = new ArrayList<>();
@@ -154,5 +158,29 @@ public class Hero {
         return true;
     }
 
+    /**
+     * Returns the health of the character.
+     * @return the current health of the character.
+     */
+    public int getHealth() {
+        return health;
+    }
 
+    /**
+     * Reduces the health of the character.
+     * @param damage the amount of damage to reduce the health by.
+     * @return the new health value of the character.
+     */
+    public int reduceHealth(int damage) {
+        health -= damage;
+        return health;
+    }
+
+    /**
+     * Returns the character class of the character.
+     * @return the character class string identifier of the character.
+     */
+    public String getCharacterClass() {
+        return characterClass;
+    }
 }

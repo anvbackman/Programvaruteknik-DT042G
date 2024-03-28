@@ -1,5 +1,4 @@
 package scenarios;
-import java.util.List;
 
 import creator.Mission;
 
@@ -24,7 +23,7 @@ public abstract class BaseScenario {
     /**
      * The list of encounters for the scenario, will eventually be changed to only contain 1 encounter at a time.
      */
-    protected List<Encounter> encounters;
+    protected Encounter encounters;
 
     /**
      * Constructor for the base scenario class.
@@ -32,7 +31,6 @@ public abstract class BaseScenario {
      */
     public BaseScenario(Mission mission) {
         this.mission = mission;
-        encounterGenerator = new EncounterGenerator(mission);
         encounters = generateEncounters();
     }
 
@@ -40,8 +38,8 @@ public abstract class BaseScenario {
      * Generates the encounters for the scenario.
      * @return a list of encounters.
      */
-    protected List<Encounter> generateEncounters() {
-        return encounterGenerator.generateEncounters();
+    protected Encounter generateEncounters() {
+        return encounterGenerator.generateEncounter("Test");
     }
 
     /**
@@ -49,9 +47,6 @@ public abstract class BaseScenario {
      * This will eventually be changed to only execute 1 encounter at a time.
      */
     public void execute() {
-        for (Encounter encounter : encounters) {
-            encounter.execute();
-        }
     }
 
     /**
@@ -74,7 +69,7 @@ public abstract class BaseScenario {
      * Gets the encounters for the scenario.
      * @return the encounters for the scenario.
      */
-    public List<Encounter> getEncounters() {
+    public Encounter getEncounters() {
         return encounters;
     }
 
