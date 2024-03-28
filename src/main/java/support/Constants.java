@@ -54,6 +54,7 @@ public final class Constants {
     public final static double VALUE_SHOP_PRICE_DIFFICULTY_MODIFIER = 0.25;
     public final static double VALUE_SHOP_SELL_BASE_MODIFIER = 0.5;
     public final static int VALUE_CHARACTER_STARTING_GOLD = 50;
+    public final static int VALUE_CHARACTER_STARTING_HEALTH = 100;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";
@@ -116,4 +117,9 @@ public final class Constants {
             MISSION_TYPE_PUZZLE,
             MISSION_TYPE_MINI_BOSS
     );
+
+    // -- Return Codes -- //
+    public final static int RETURN_CODE_SUCCESS = 1;
+    public final static int RETURN_CODE_FAILURE = -1;
+    public final static int RETURN_CODE_NEUTRAL = 0;
 }

@@ -1,6 +1,9 @@
 import character.Hero;
 import creator.CharacterCreator;
 import creator.Mission;
+import scenarios.Battle;
+import scenarios.Encounter;
+import scenarios.EncounterGenerator;
 import scenarios.Shop;
 import support.Constants;
 import support.Output;
@@ -21,6 +24,7 @@ public class GameEngine {
     private Mission mission;
     private Hero hero;
     private Shop shop;
+    private EncounterGenerator encounterGenerator;
 
     /**
      * Constructor for the game engine class.
@@ -59,14 +63,20 @@ public class GameEngine {
         promptContinue();
         promptMissionCreation();
         Output.printSuccessMessage("Your mission begins...");
+        this.encounterGenerator = new EncounterGenerator(this.mission, scanner, this.hero);
         this.shop = new Shop(mission.getDifficulty(), scanner, this.hero);
 
         // Loops until the mission is complete.
-        proceed = false;
-        while (!proceed) {
-            proceed = promptEncounterSelect();
+        int code = 0;
+        while (code == 0) {
+            code = promptEncounterSelect();
         }
-        // TODO Implement mission complete logic here
+        switch (code) {
+            // TODO handle mission complete and failure
+            case Constants.RETURN_CODE_SUCCESS -> System.out.println("Mission complete!");
+            case Constants.RETURN_CODE_FAILURE -> System.out.println("You died!");
+            default -> System.out.println("Something went wrong...");
+        }
     }
 
     /**
@@ -134,9 +144,9 @@ public class GameEngine {
 
     /**
      * Prompts the user to select an encounter or proceed if there is only one option.
-     * @return true if the mission is complete, false if not.
+     * @return return code for the game engine.
      */
-    private boolean promptEncounterSelect() {
+    private int promptEncounterSelect() {
         int input;
         String encounterType = "";
         boolean proceed = false;
@@ -148,7 +158,7 @@ public class GameEngine {
         // Checks if the mission has ended.
         if (fork.isEmpty()) {
             Output.printSuccessMessage("Mission complete!");
-            return true;
+            return Constants.RETURN_CODE_SUCCESS;
         }
 
         // Prompt the user to select alternative actions before starting an encounter.
@@ -190,11 +200,20 @@ public class GameEngine {
         if (Objects.equals(encounterType, Constants.MISSION_TYPE_MYSTERY)) {
             encounterType = Randomizer.getMysteryEncounter();
         }
-
+        Encounter encounter = encounterGenerator.generateEncounter(encounterType);
+        encounter.execute();
+        if (encounter instanceof Battle) {
+            CombatHandler combatHandler = new CombatHandler(this.hero, ((Battle) encounter).getEnemies());
+            combatHandler.startCombat();
+        }
         // TODO Implement encounter logic here
         System.out.printf("%sDoing encounter stuff...%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
+        if (this.hero.getHealth() <= 0) {
+            Output.printErrorMessage("You died!");
+            return Constants.RETURN_CODE_FAILURE;
+        }
 
-        return false;
+        return Constants.RETURN_CODE_NEUTRAL;
     }
 
     /**
