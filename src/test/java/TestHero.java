@@ -14,7 +14,7 @@ public class TestHero {
     private Hero hero;
     @BeforeEach
     public void setUp() {
-        hero = new Hero(new StatSheet(), "TestHero", "TestClass");
+        hero = new Hero(new StatSheet(), "TestHero");
     }
 
     /**
