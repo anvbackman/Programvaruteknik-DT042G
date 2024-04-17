@@ -1,5 +1,6 @@
 package enemies;
 
+import support.Constants;
 import support.Randomizer;
 
 /**
@@ -19,10 +20,10 @@ public class Zombie extends Enemies {
     /**
      * Zombie constructor that takes in an EnemyAbility object
      */
-    public Zombie(Boolean isMiniBoss) {
-        super("Zombie", 0, 0, 0, isMiniBoss); // Initialize with default values
+    public Zombie(int bossTier) {
+        super("Zombie", 0, 0, 0, bossTier); // Initialize with default values
 
-        if (isMiniBoss) {
+        if (bossTier >= Constants.VALUE_MINI_BOSS_TIER) {
             this.type = "Zombie Boss";
             this.health = Randomizer.rollD10(6);
             this.damage = Randomizer.rollD6(3);

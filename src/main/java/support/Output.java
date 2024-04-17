@@ -48,4 +48,75 @@ public class Output {
     public static void printErrorMessage(String message) {
         System.out.printf("%s%s%s\n", Constants.COLOR_RED, message, Constants.COLOR_RESET);
     }
+
+    /**
+     * Prints a message to the console, using a given string.
+     * @param health the health of the player
+     * @param damage the damage dealt by the player
+     * @param type the type of enemy
+     */
+    public static void printHeroAttackCombatLog(int health, int damage, String type){
+        System.out.printf("You attack %s for %d damage (%s%d%s-%s%d%s=%d)\n",
+                type,
+                damage,
+                Constants.COLOR_GREEN,
+                health,
+                Constants.COLOR_RESET,
+                Constants.COLOR_RED,
+                damage,
+                Constants.COLOR_RESET,
+                health - damage
+        );
+    }
+
+    public static void printHeroAbilityCombatLog(int health, int damage, String type, String ability){
+        System.out.printf("You use %s on %s for %d damage (%s%d%s-%s%d%s=%d)\n",
+                ability,
+                type,
+                damage,
+                Constants.COLOR_GREEN,
+                health,
+                Constants.COLOR_RESET,
+                Constants.COLOR_RED,
+                damage,
+                Constants.COLOR_RESET,
+                health - damage
+        );
+    }
+
+    /**
+     * Prints the combat log for an enemy attack.
+     * @param health the health of the player
+     * @param damage the damage dealt by the enemy
+     * @param type the type of the enemy
+     */
+    public static void printEnemyAttackCombatLog(int health, int damage, String type){
+        System.out.printf("%s attacks you for %d damage (%s%d%s-%s%d%s=%d)\n",
+                type,
+                damage,
+                Constants.COLOR_GREEN,
+                health,
+                Constants.COLOR_RESET,
+                Constants.COLOR_RED,
+                damage,
+                Constants.COLOR_RESET,
+                health - damage
+        );
+    }
+
+    /**
+     * Clears the console screen.
+     */
+    public static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (final Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

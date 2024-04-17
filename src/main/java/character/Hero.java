@@ -79,6 +79,21 @@ public class Hero {
         return stats;
     }
 
+    /**
+     * Returns the defense of the character.
+     * @return the defense value of the character.
+     */
+    public int getDefense() {
+        return equippedArmor.getValue();
+    }
+
+    /**
+     * Returns the attack of the character.
+     * @return the attack value of the character.
+     */
+    public int getAttack() {
+        return equippedWeapon.getValue();
+    }
 
     /**
      * Returns the equipped armor of the character.
@@ -120,12 +135,14 @@ public class Hero {
 
     /**
      * Opens the menu to use a consumable.
+     * @param inCombat true if the character is in combat, else false.
+     * @return true if the consumable was used, else false.
      */
-    public void openUseConsumableMenu() {
+    public boolean useConsumable(boolean inCombat) {
 
         if (consumables.isEmpty()) {
             Output.printErrorMessage("You have no consumables.");
-            return;
+            return false;
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -146,7 +163,7 @@ public class Hero {
 
             switch (input) {
                 case 0 -> {
-                    return;
+                    return false;
                 }
                 case -1 -> Output.printInvalidChoiceMessage();
                 default -> {
@@ -161,8 +178,8 @@ public class Hero {
                         this.addMana(consumable.getValue());
                     }
                     consumables.remove(consumable);
-                    if (consumables.isEmpty()) {
-                        return;
+                    if (consumables.isEmpty() || inCombat) {
+                        return true;
                     }
                 }
             }
