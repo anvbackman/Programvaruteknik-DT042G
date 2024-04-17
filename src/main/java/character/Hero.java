@@ -122,6 +122,12 @@ public class Hero {
      * Opens the menu to use a consumable.
      */
     public void openUseConsumableMenu() {
+
+        if (consumables.isEmpty()) {
+            Output.printErrorMessage("You have no consumables.");
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
         int input;
 
@@ -155,6 +161,9 @@ public class Hero {
                         this.addMana(consumable.getValue());
                     }
                     consumables.remove(consumable);
+                    if (consumables.isEmpty()) {
+                        return;
+                    }
                 }
             }
         }
