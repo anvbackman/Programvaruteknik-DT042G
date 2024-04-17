@@ -1,3 +1,5 @@
+import abilities.BaseAbility;
+import abilities.Brutalize;
 import character.Hero;
 import character.StatSheet;
 import org.junit.jupiter.api.Assertions;
@@ -54,5 +56,23 @@ public class TestHero {
     public void testRemoveMoneyFail() {
         int goldToRemove = hero.getGold() + 10;
         Assertions.assertFalse(hero.addGold(-goldToRemove));
+    }
+
+    /**
+     * Test the hero's ability
+     * this test checks if the hero has an ability and if it is of the correct type
+     */
+    @Test
+    public void testAbility() {
+        // Create a Hero object with a specific character class
+        Hero hero = new Hero(new StatSheet(), "TestHero", "barbarian");
+        // Get the ability associated with the hero
+        BaseAbility ability = hero.getAbility();
+
+        // Check if the ability is not null
+        Assertions.assertNotNull(ability, "Ability should not be null");
+
+        // Optionally, you can also check if the correct type of ability is added
+        Assertions.assertTrue(ability instanceof Brutalize, "Ability should be of type Brutalize");
     }
 }
