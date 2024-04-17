@@ -145,9 +145,9 @@ public class CombatHandler {
      * Rolls initiative to see who goes first.
      */
     private void rollInitiative(){
-        int heroInitiative = Randomizer.rollD20();
-        int enemiesInitiative = Randomizer.rollD20();
-        if (heroInitiative == enemiesInitiative){
+        heroInitiative = Randomizer.rollD20();
+        enemiesInitiative = Randomizer.rollD20();
+        if (heroInitiative == enemiesInitiative){ // Re-roll if initiative is the same
             rollInitiative();
         } else {
             if (heroInitiative > enemiesInitiative){
@@ -234,8 +234,7 @@ public class CombatHandler {
 
     private void useItem(){
         actions--;
-        System.out.println("You use an item!");
-        // this will implement a menu where you can choose from your inventory
+        hero.openUseConsumableMenu();
     }
 
     private void run(){
