@@ -10,5 +10,6 @@ public interface Encounter {
      * Executes the encounter.
      */
     void execute();
+
 }
 

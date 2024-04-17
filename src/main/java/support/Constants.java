@@ -37,6 +37,8 @@ public final class Constants {
     public final static String GEAR_TYPE_ARTIFACT = "artifact";
     public final static String PLAYER_STARTING_ARMOR = "Rags";
     public final static String PLAYER_STARTING_WEAPON = "Club of the Noob";
+    public final static String CONSUMABLE_TYPE_HEALTH = "Health";
+    public final static String CONSUMABLE_TYPE_MANA = "Mana";
 
     // -- Value constants --
     public final static int VALUE_BASE_STAT_DICE_ROLLS = 4;
@@ -54,6 +56,8 @@ public final class Constants {
     public final static double VALUE_SHOP_PRICE_DIFFICULTY_MODIFIER = 0.25;
     public final static double VALUE_SHOP_SELL_BASE_MODIFIER = 0.5;
     public final static int VALUE_CHARACTER_STARTING_GOLD = 50;
+    public final static int VALUE_CHARACTER_STARTING_HEALTH = 100;
+    public static final int VALUE_CHARACTER_STARTING_MANA = 50;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";
@@ -116,4 +120,9 @@ public final class Constants {
             MISSION_TYPE_PUZZLE,
             MISSION_TYPE_MINI_BOSS
     );
+
+    // -- Return Codes -- //
+    public final static int RETURN_CODE_SUCCESS = 1;
+    public final static int RETURN_CODE_FAILURE = -1;
+    public final static int RETURN_CODE_NEUTRAL = 0;
 }

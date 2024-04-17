@@ -3,6 +3,7 @@ import enemies.Enemies;
 import support.Randomizer;
 import support.Validation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,7 +43,7 @@ public class CombatHandler {
     /**
      * The enemies list, retrieve enemies, stats etc..
      */
-    private final List<Enemies> enemies;
+    private ArrayList<Enemies> enemies;
 
     /**
      * The scanner object, used for user input.
@@ -66,7 +67,7 @@ public class CombatHandler {
      */
     public CombatHandler(Hero hero, List<Enemies> enemies) {
         this.hero = hero;
-        this.enemies = enemies;
+        this.enemies = new ArrayList<>(enemies);
         this.scanner = new Scanner(System.in);
     }
 
@@ -80,7 +81,7 @@ public class CombatHandler {
 
     // Placeholder methods for the hero stats
     private int getHP(){
-        return 10;
+        return hero.getHealth();
     }
 
     // Placeholder methods for the hero stats
@@ -139,10 +140,24 @@ public class CombatHandler {
           System.out.println("You have defeated all the enemies!");
        }
     }
+
+    /**
+     * Rolls initiative to see who goes first.
+     */
     private void rollInitiative(){
-        int heroInitiative = Randomizer.rollD20(1);
-        int enemiesInitiative = Randomizer.rollD20(1);
-        isPlayerTurn = heroInitiative > enemiesInitiative;
+        heroInitiative = Randomizer.rollD20();
+        enemiesInitiative = Randomizer.rollD20();
+        if (heroInitiative == enemiesInitiative){ // Re-roll if initiative is the same
+            rollInitiative();
+        } else {
+            if (heroInitiative > enemiesInitiative){
+                System.out.println("You have the initiative!");
+                isPlayerTurn = true;
+            } else {
+                System.out.println("The enemies have the initiative!");
+                isPlayerTurn = false;
+            }
+        }
     }
 
 
@@ -178,6 +193,10 @@ public class CombatHandler {
     private void enemiesTurn(){
         System.out.println("It is the enemies turn!");
         for (Enemies enemy : enemies){
+            // TODO replace with actual attack method
+            int damage = Randomizer.rollD6();
+            System.out.println("The enemy attacks you for " + damage + " damage!");
+            hero.reduceHealth(damage);
             // enemy.attack(1); // this will implement a check to see if the enemy can attack
             if (getHP() <= 0){
                 declareDefeat();
@@ -189,13 +208,16 @@ public class CombatHandler {
     private void attack(){
         System.out.println("You attack the enemy!");
         actions--;
-        for (Enemies enemy : enemies){
+        ArrayList<Enemies> remainingEnemies = new ArrayList<>();
+        for (Enemies enemy : enemies) {
             //enemy.takeDamage(hero.getAttack());
             if (enemy.isDead()){
                 System.out.println("You have defeated an enemy!");
-                enemies.remove(enemy);
+            } else {
+                remainingEnemies.add(enemy);
             }
         }
+        enemies = remainingEnemies;
     }
 
     private void Abilities(){
@@ -212,8 +234,7 @@ public class CombatHandler {
 
     private void useItem(){
         actions--;
-        System.out.println("You use an item!");
-        // this will implement a menu where you can choose from your inventory
+        hero.openUseConsumableMenu();
     }
 
     private void run(){

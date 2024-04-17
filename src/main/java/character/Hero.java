@@ -4,9 +4,12 @@ import gears.Armor;
 import gears.Consumables;
 import gears.Weapons;
 import support.Constants;
+import support.Output;
+import support.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * A class to represent a character in the game.
@@ -16,20 +19,26 @@ public class Hero {
 
     private final String name;
     private final StatSheet stats;
+    private final String characterClass;
     private Armor equippedArmor;
     private Weapons equippedWeapon;
-    private List<Consumables> consumables;
+    private final List<Consumables> consumables;
     private int gold;
+    private int health;
+    private int manaPool;
 
     /**
      * Constructor for a character.
      * @param statSheet the stat sheet for the character.
      * @param name the name of the character.
      */
-    public Hero(final StatSheet statSheet, final String name) {
+    public Hero(final StatSheet statSheet, final String name, final String characterClass) {
         this.name = name;
         this.stats = statSheet;
+        this.characterClass = characterClass;
         this.gold = Constants.VALUE_CHARACTER_STARTING_GOLD;
+        this.health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
+        this.manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
         this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
         this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
         this.consumables = new ArrayList<>();
@@ -110,6 +119,57 @@ public class Hero {
     }
 
     /**
+     * Opens the menu to use a consumable.
+     */
+    public void openUseConsumableMenu() {
+
+        if (consumables.isEmpty()) {
+            Output.printErrorMessage("You have no consumables.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int input;
+
+        while (true) {
+            System.out.println("Select a consumable to use:");
+            for (int i = 0; i < consumables.size(); i++) {
+                System.out.printf("%d. %s (%d %s)\n",
+                        i + 1,
+                        consumables.get(i).getName(),
+                        consumables.get(i).getValue(),
+                        consumables.get(i).getName().contains(Constants.CONSUMABLE_TYPE_HEALTH) ? "HP" : "MP");
+            }
+            System.out.println("0. Back");
+            Output.printEnterNumberMessage();
+            input = Validation.validateInput(scanner.nextLine());
+
+            switch (input) {
+                case 0 -> {
+                    return;
+                }
+                case -1 -> Output.printInvalidChoiceMessage();
+                default -> {
+                    Consumables consumable = consumables.get(input - 1);
+                    if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_HEALTH)) {
+                        System.out.println("You used " + consumable.getName() +
+                                " and healed for " + consumable.getValue() + " HP.");
+                        this.applyHealing(consumable.getValue());
+                    } else if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_MANA)) {
+                        System.out.println("You used " + consumable.getName() +
+                                " and restored " + consumable.getValue() + " MP.");
+                        this.addMana(consumable.getValue());
+                    }
+                    consumables.remove(consumable);
+                    if (consumables.isEmpty()) {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Returns the consumables of the character.
      * @return list of consumables the character has.
      */
@@ -154,5 +214,72 @@ public class Hero {
         return true;
     }
 
+    /**
+     * Returns the health of the character.
+     * @return the current health of the character.
+     */
+    public int getHealth() {
+        return health;
+    }
 
+    /**
+     * Applies healing to the character.
+     * @param healing the amount of healing to apply.
+     * @return the new health value of the character.
+     */
+    public int applyHealing(int healing) {
+        health += healing;
+        if (health > Constants.VALUE_CHARACTER_STARTING_HEALTH) {
+            health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
+        }
+        return health;
+    }
+
+    /**
+     * Reduces the health of the character.
+     * @param damage the amount of damage to reduce the health by.
+     * @return the new health value of the character.
+     */
+    public int reduceHealth(int damage) {
+        health -= damage;
+        return health;
+    }
+
+    /**
+     * Returns the mana pool of the character.
+     * @return the current mana pool of the character.
+     */
+    public int getManaPool() {
+        return manaPool;
+    }
+
+    /**
+     * Adds mana to the character's mana pool.
+     * @param mana the amount of mana to add.
+     * @return the new mana pool value of the character.
+     */
+    public int addMana(int mana) {
+        manaPool += mana;
+        if (manaPool > Constants.VALUE_CHARACTER_STARTING_MANA) {
+            manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
+        }
+        return manaPool;
+    }
+
+    /**
+     * Reduces the mana pool of the character.
+     * @param mana the amount of mana to reduce the mana pool by.
+     */
+    public int reduceMana(int mana) {
+        manaPool -= mana;
+        return manaPool;
+    }
+
+    /**
+     * Returns the character class of the character.
+     * @return the character class string identifier of the character.
+     */
+    public String getCharacterClass() {
+        return characterClass;
+    }
 }

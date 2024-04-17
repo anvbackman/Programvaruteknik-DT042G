@@ -1,9 +1,10 @@
 package scenarios;
-import support.Constants;
+
+import character.Hero;
 import creator.Mission;
+import support.Constants;
 
-
-import java.util.List;
+import java.util.Scanner;
 
 /**
  * The rest class is a scenario that contains the encounters for a rest.
@@ -11,19 +12,23 @@ import java.util.List;
  * This will eventually be changed to only generate 1 scenario at a time, but we need to create the gameEngine first.
  * @author Martin Roos Eriksson
  */
-public class Rest implements Encounter{
+public class Rest implements Encounter {
 
     /**
      * The overarching mission for the scenario.
      */
     private final Mission mission;
+    private final Hero hero;
+    private final Scanner scanner;
 
     /**
      * Constructor for the rest class.
      * @param mission the mission for the rest.
      */
-    public Rest(Mission mission) {
+    public Rest(Mission mission, Hero hero, Scanner scanner) {
         this.mission = mission;
+        this.hero = hero;
+        this.scanner = scanner;
     }
 
     /**
@@ -32,20 +37,15 @@ public class Rest implements Encounter{
 
     public void execute() {
         System.out.println("You take a rest and regain some health.");
-        List<String> encounters = mission.getNextFork();
-        for (String encounter : encounters) {
-            if (encounter.equals(Constants.MISSION_TYPE_REST)) {
-                executeEncounter(mission.getDifficulty());
-            }
-        }
+        executeEncounter(mission.getDifficulty());
     }
 
     /**
      *  Executes the encounter for the rest.
-     * @param encounter the difficulty of the encounter, in this case it will still yield the same result, but it might be changed.
+     * @param difficulty the difficulty of the encounter, in this case it will still yield the same result, but it might be changed.
      */
-    private void executeEncounter(String encounter){
-        switch (encounter) {
+    private void executeEncounter(String difficulty){
+        switch (difficulty) {
             case Constants.DIFFICULTY_EASY -> generateEncountersForMissionEasy();
             case Constants.DIFFICULTY_MEDIUM -> generateEncountersForMissionMedium();
             case Constants.DIFFICULTY_HARD -> generateEncountersForMissionHard();
@@ -57,30 +57,21 @@ public class Rest implements Encounter{
      * Generates the encounters for the easy difficulty.
      */
     private void generateEncountersForMissionEasy() {
-        int numEncounters = mission.getLength();
-        for (int i = 0; i < numEncounters; i++) {
-            System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
-        }
+        System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
     }
 
     /**
      * Generates the encounters for the medium difficulty.
      */
     private void generateEncountersForMissionMedium() {
-        int numEncounters = mission.getLength();
-        for (int i = 0; i < numEncounters; i++) {
-            System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
-        }
+        System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
     }
 
     /**
      * Generates the encounters for the hard difficulty.
      */
     private void generateEncountersForMissionHard() {
-        int numEncounters = mission.getLength();
-        for (int i = 0; i < numEncounters; i++) {
-            System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
-        }
+        System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
     }
 
 

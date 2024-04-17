@@ -56,7 +56,7 @@ public class CharacterCreator {
 
         // Creates the character and prints the result.
         Output.printSuccessMessage("Character created!.");
-        Hero hero = new Hero(statSheet, name);
+        Hero hero = new Hero(statSheet, name, classChoice);
         System.out.println(hero.getName() + " the " + classChoice);
         System.out.println(hero.getStats());
 
