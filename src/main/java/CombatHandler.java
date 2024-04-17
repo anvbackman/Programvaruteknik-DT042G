@@ -1,3 +1,4 @@
+import abilities.BaseAbility;
 import character.Hero;
 import enemies.Enemies;
 import support.Randomizer;
@@ -221,7 +222,7 @@ public class CombatHandler {
     }
 
     private void Abilities(){
-        System.out.println("You use your ability!");
+        System.out.println("You use your ability" + hero.getAbility().getName() +"!");
         actions--;
         for (Enemies enemy : enemies){
             //hero.doAbility(enemy); // this will implement a menu where you can choose from your class abilities
@@ -242,6 +243,8 @@ public class CombatHandler {
         System.out.println("You run away!");
         // this will implement a check to see if you can run away
     }
+
+
 
 
 
