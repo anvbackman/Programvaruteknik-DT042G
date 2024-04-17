@@ -57,7 +57,11 @@ public final class Constants {
     public final static double VALUE_SHOP_SELL_BASE_MODIFIER = 0.5;
     public final static int VALUE_CHARACTER_STARTING_GOLD = 50;
     public final static int VALUE_CHARACTER_STARTING_HEALTH = 100;
-    public static final int VALUE_CHARACTER_STARTING_MANA = 50;
+    public final static int VALUE_CHARACTER_STARTING_MANA = 50;
+    public final static int VALUE_CHARACTER_COMBAT_ACTIONS = 2;
+    public final static int VALUE_COMBAT_ESCAPE_CHANCE = 4;
+    public final static int VALUE_FINAL_BOSS_TIER = 2;
+    public final static int VALUE_MINI_BOSS_TIER = 1;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";

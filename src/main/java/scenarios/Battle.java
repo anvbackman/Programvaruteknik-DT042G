@@ -88,10 +88,10 @@ public class Battle implements Encounter {
             default -> System.out.println("You encounter nothing unusual.");
         }
         enemies = List.of(
-                new Goblin(false),
-                new Goblin(false),
-                new Goblin(false),
-                new Goblin(false)
+                new Goblin(0),
+                new Goblin(0),
+                new Goblin(0),
+                new Goblin(0)
         );
     }
 
