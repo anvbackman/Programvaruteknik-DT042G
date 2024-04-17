@@ -1,9 +1,13 @@
+import abilities.BaseAbility;
+import abilities.Brutalize;
 import character.Hero;
 import character.StatSheet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import support.Constants;
+
+import java.util.function.Supplier;
 
 /**
  * Test the Hero class.
@@ -14,7 +18,7 @@ public class TestHero {
     private Hero hero;
     @BeforeEach
     public void setUp() {
-        hero = new Hero(new StatSheet(), "TestHero");
+        hero = new Hero(new StatSheet(), "TestHero", "barbarian");
     }
 
     /**
@@ -54,5 +58,22 @@ public class TestHero {
     public void testRemoveMoneyFail() {
         int goldToRemove = hero.getGold() + 10;
         Assertions.assertFalse(hero.addGold(-goldToRemove));
+    }
+
+    /**
+     * Test to see the correct ability is added to the hero depneden on the character class.
+     */
+    @Test
+    public void testAbility() {
+        // Create a Hero object with a specific character class
+        Hero hero = new Hero(new StatSheet(), "TestHero", "barbarian");
+        // Get the ability associated with the hero
+        BaseAbility ability = hero.getAbility();
+
+        // Check if the ability is not null
+        Assertions.assertNotNull(ability, "Ability should not be null");
+
+        // Optionally, you can also check if the correct type of ability is added
+        Assertions.assertTrue(ability instanceof Brutalize, "Ability should be of type Brutalize");
     }
 }
