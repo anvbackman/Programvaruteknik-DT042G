@@ -20,7 +20,7 @@ public class Goblin extends Enemies{
      *
      */
     public Goblin(boolean isMiniBoss){
-        super("Goblin", 0, 0, 0, isMiniBoss); // Initialize with default values
+        super("Goblin", 0, 0, 0, isMiniBoss, false); // Initialize with default values
 
         if (isMiniBoss) {
             this.type = "Goblin Boss";

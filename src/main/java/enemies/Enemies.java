@@ -9,6 +9,7 @@ package enemies;
 public abstract class Enemies {
 
     private final boolean isMiniBoss;
+    private final boolean isBigBoss;
     /**
      * ability is an instance of the EnemyAbility interface
      */
@@ -41,13 +42,15 @@ public abstract class Enemies {
      * @param damage specifies the damage of the enemy
      * @param armor specifies the armor of the enemy
      * @param isMiniBoss specifies if the enemy is a mini boss
+     * @param isBigBoss specifies if the enemy is a big boss
      */
-    public Enemies(String type, int health, int damage, int armor, boolean isMiniBoss) {
+    public Enemies(String type, int health, int damage, int armor, boolean isMiniBoss, boolean isBigBoss) {
         this.type = type;
         this.health = health;
         this.damage = damage;
         this.armor = armor;
         this.isMiniBoss = isMiniBoss;
+        this.isBigBoss = isBigBoss;
     }
 
     /**
