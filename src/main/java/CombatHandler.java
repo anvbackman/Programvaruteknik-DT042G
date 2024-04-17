@@ -176,7 +176,7 @@ public class CombatHandler {
 
             switch (choice) {
                 case 1 -> attack();
-                case 2 -> Abilities();
+                case 2 -> castAbility();
                 case 3 -> useItem();
                 case 4 -> run();
                 default -> Output.printInvalidChoiceMessage();
@@ -212,7 +212,6 @@ public class CombatHandler {
      * Prompt the player to choose an enemy to attack, then attack that enemy.
      */
     private void attack() {
-
         Enemies target = chooseTarget();
         if (target == null) {
             return;
@@ -230,7 +229,7 @@ public class CombatHandler {
     /**
      * Prompt the player to choose an enemy to use an ability on and the ability to use.
      */
-    private void Abilities() {
+    private void castAbility() {
         int input;
         boolean proceed = false;
         BaseAbility ability = null;
@@ -266,20 +265,20 @@ public class CombatHandler {
                     }
                 }
             }
+        }
 
-            Enemies target = chooseTarget();
-            if (target == null) {
-                return;
-            }
+        Enemies target = chooseTarget();
+        if (target == null) {
+            return;
+        }
 
-            actions--;
-            //TODO Implement ability damage calculation
-            int damage = 100;
-            Output.printHeroAbilityCombatLog(target.getHealth(), damage, target.getType(), ability.getName());
-            target.takeDamage(damage);
-            if (target.isDead()) {
-                enemies.remove(target);
-            }
+        actions--;
+        //TODO Implement ability damage calculation
+        int damage = 100;
+        Output.printHeroAbilityCombatLog(target.getHealth(), damage, target.getType(), ability.getName());
+        target.takeDamage(damage);
+        if (target.isDead()) {
+            enemies.remove(target);
         }
     }
 
