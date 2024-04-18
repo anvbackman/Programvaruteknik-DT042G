@@ -1,6 +1,4 @@
 import abilities.BaseAbility;
-import abilities.FireBolt;
-import abilities.Smite;
 import character.Hero;
 import enemies.Enemies;
 import support.Calculator;
@@ -100,11 +98,7 @@ public class CombatHandler {
      * @return the list of abilities the hero has.
      */
     private List<BaseAbility> getAbilities(){
-        // TODO Implement abilities
-        return List.of(
-            new FireBolt(),
-            new Smite()
-        );
+        return List.of(this.hero.getAbility());
     }
 
     /**
@@ -242,17 +236,18 @@ public class CombatHandler {
         int input;
         boolean proceed = false;
         BaseAbility ability = null;
+        BaseAbility temp;
 
         // Prompt the player to choose an ability to use
         while (!proceed) {
             Output.printPromptHeader("Choose an ability to use!");
             for (int i = 0; i < getAbilities().size(); i++) {
+                temp = getAbilities().get(i);
                 // Lists available abilities
                 System.out.printf("%d. %s (-%d Mana)\n",
                         i + 1, // Input number
-                        getAbilities().get(i).getName(), // Ability name
-                        //TODO Implement mana cost
-                        20 // Mana cost
+                        temp.getName(), // Ability name
+                        temp.getCost() // Mana cost
                 );
             }
             System.out.println("0. Back");
@@ -269,9 +264,8 @@ public class CombatHandler {
                         Output.printInvalidChoiceMessage(); // Input out of range
                     } else {
                         ability = getAbilities().get(input - 1);
-                        // TODO implement ability mana cost
                         // Check if the player has enough mana to use the ability
-                        if (getMana() < 20) {
+                        if (getMana() < ability.getCost()) {
                             System.out.println("Not enough mana!");
                         } else {
                             proceed = true;

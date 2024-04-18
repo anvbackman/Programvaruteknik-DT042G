@@ -82,6 +82,7 @@ public final class Constants {
     public final static String CLASS_PALADIN = "Paladin";
     public final static String CLASS_RANGER = "Ranger";
     public final static String CLASS_ROGUE = "Rogue";
+    public final static String CLASS_WIZARD = "Wizard";
     public final static String CLASS_SORCERER = "Sorcerer";
     public final static String CLASS_WARLOCK = "Warlock";
     // List of above classes.
@@ -96,7 +97,8 @@ public final class Constants {
             CLASS_RANGER,
             CLASS_ROGUE,
             CLASS_SORCERER,
-            CLASS_WARLOCK
+            CLASS_WARLOCK,
+            CLASS_WIZARD
     );
 
     // -- Mission types --

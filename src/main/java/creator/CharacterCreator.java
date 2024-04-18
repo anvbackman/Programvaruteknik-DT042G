@@ -1,5 +1,18 @@
 package creator;
 
+import abilities.BaseAbility;
+import abilities.Brutalize;
+import abilities.EldritchCrush;
+import abilities.FireBolt;
+import abilities.KiStrike;
+import abilities.SacredFlames;
+import abilities.SilverTongue;
+import abilities.Smite;
+import abilities.SneakAttack;
+import abilities.TacticalShot;
+import abilities.WarCry;
+import abilities.WildBolt;
+import abilities.Wildshape;
 import character.Hero;
 import character.StatSheet;
 import support.Constants;
@@ -59,6 +72,24 @@ public class CharacterCreator {
         Hero hero = new Hero(statSheet, name, classChoice);
         System.out.println(hero.getName() + " the " + classChoice);
         System.out.println(hero.getStats());
+
+        BaseAbility ability = null;
+        switch (hero.getCharacterClass()) {
+            case Constants.CLASS_BARBARIAN -> ability = new Brutalize();
+            case Constants.CLASS_SORCERER -> ability = new WildBolt();
+            case Constants.CLASS_PALADIN -> ability = new Smite();
+            case Constants.CLASS_BARD -> ability = new SilverTongue();
+            case Constants.CLASS_FIGHTER -> ability = new WarCry();
+            case Constants.CLASS_DRUID -> ability = new Wildshape();
+            case Constants.CLASS_RANGER -> ability = new TacticalShot();
+            case Constants.CLASS_ROGUE -> ability = new SneakAttack();
+            case Constants.CLASS_WIZARD -> ability = new FireBolt();
+            case Constants.CLASS_CLERIC -> ability = new SacredFlames();
+            case Constants.CLASS_MONK -> ability = new KiStrike();
+            case Constants.CLASS_WARLOCK -> ability = new EldritchCrush();
+            default -> ability = new Brutalize();
+        }
+        hero.setAbility(ability);
 
         return hero;
     }
