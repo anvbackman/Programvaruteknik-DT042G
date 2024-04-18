@@ -1,8 +1,8 @@
+import enemies.Enemies;
 import enemies.Goblin;
 import enemies.Kobold;
 import enemies.Zombie;
 import org.junit.Test;
-import enemies.Enemies;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,17 +17,14 @@ public class TestEnemies {
 
     @Test
     public void testEnemyCreation() {
-        boolean isMiniBoss = false;
-        Enemies enemy = new Zombie(isMiniBoss);
+        Enemies enemy = new Zombie(0);
         assertEquals("Zombie", enemy.getType());
     }
 
     @Test
     public void testAttack() {
         // Test attack method
-        boolean isMiniBoss = false;
-
-        Enemies enemy = new Goblin(isMiniBoss);
+        Enemies enemy = new Goblin(0);
         enemy.attack(20);
         assertEquals(20, enemy.getDamage());
     }
@@ -35,8 +32,7 @@ public class TestEnemies {
     @Test
     public void testAbility() {
         // Test ability execution
-        boolean isMiniBoss = false;
-        Enemies enemy = new Goblin(isMiniBoss);
+        Enemies enemy = new Goblin(0);
         enemy.doAbility(); // Assuming the default ability is being executed
         // Add assertions to verify the outcome of the ability execution
     }
@@ -44,8 +40,7 @@ public class TestEnemies {
     @Test
     public void testTakeDamage() {
         // Test damage calculation
-        boolean isMiniBoss = false;
-        Enemies enemy = new Goblin(isMiniBoss);
+        Enemies enemy = new Goblin(0);
         enemy.takeDamage(15);
         assertEquals(0, enemy.getHealth());
     }
@@ -53,8 +48,7 @@ public class TestEnemies {
     @Test
     public void testDeath() {
         // Test death
-        boolean isMiniBoss = false;
-        Enemies enemy = new Kobold(isMiniBoss);
+        Enemies enemy = new Kobold(0);
         enemy.takeDamage(150); // Assuming this leads to death
         // Add assertions to verify the outcome of death
     }
@@ -62,8 +56,7 @@ public class TestEnemies {
     @Test
     public void testMiniBoss() {
         // Test mini boss creation
-        boolean isMiniBoss = true;
-        Enemies enemy = new Goblin(isMiniBoss);
+        Enemies enemy = new Goblin(0);
         assertEquals("Goblin Boss", enemy.getType());
     }
 

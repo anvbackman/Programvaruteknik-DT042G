@@ -206,8 +206,7 @@ public class GameEngine {
             CombatHandler combatHandler = new CombatHandler(this.hero, ((Battle) encounter).getEnemies());
             combatHandler.startCombat();
         }
-        // TODO Implement encounter logic here
-        System.out.printf("%sDoing encounter stuff...%s\n", Constants.COLOR_BLUE, Constants.COLOR_RESET);
+
         if (this.hero.getHealth() <= 0) {
             Output.printErrorMessage("You died!");
             return Constants.RETURN_CODE_FAILURE;
@@ -247,7 +246,6 @@ public class GameEngine {
                 // Show mission map.
                 Output.printSuccessMessage("Viewing map...");
                 mission.showMission();
-                // TODO Implement map logic here
                 promptContinue();
                 return false;
             }

@@ -1,5 +1,6 @@
 package enemies;
 
+import support.Constants;
 import support.Randomizer;
 
 /**
@@ -19,10 +20,10 @@ public class Goblin extends Enemies{
      * Goblin constructor that takes in an EnemyAbility object
      *
      */
-    public Goblin(boolean isMiniBoss){
-        super("Goblin", 0, 0, 0, isMiniBoss, false); // Initialize with default values
+    public Goblin(int bossTier){
+        super("Goblin", 0, 0, 0, bossTier); // Initialize with default values
 
-        if (isMiniBoss) {
+        if (bossTier >= Constants.VALUE_MINI_BOSS_TIER) {
             this.type = "Goblin Boss";
             this.health = Randomizer.rollD10(6);
             this.damage = Randomizer.rollD4(3);
@@ -61,9 +62,7 @@ public class Goblin extends Enemies{
      * @param damage int value that will be subtracted from the health of the Goblin object
      */
     public void takeDamage(int damage) {
-        getHealth();
         health -= damage;
-        System.out.println(type + " took " + damage + " damage");
         if(health <= 0) {
             Death();
         }
@@ -142,7 +141,6 @@ public class Goblin extends Enemies{
     public void attack(int dmg) {
         System.out.println(type + " is Attacking");
         damage = damage + Randomizer.rollD4(1);
-        System.out.println("total damage: " + damage);
     }
 
 

@@ -1,6 +1,11 @@
 import abilities.BaseAbility;
+import abilities.FireBolt;
+import abilities.Smite;
 import character.Hero;
 import enemies.Enemies;
+import support.Calculator;
+import support.Constants;
+import support.Output;
 import support.Randomizer;
 import support.Validation;
 
@@ -22,29 +27,14 @@ public class CombatHandler {
     private final Hero hero;
 
     /**
-     * The initiative for the hero.
-     */
-    private int heroInitiative;
-
-    /**
-     * The initiative for the enemies.
-     */
-    private int enemiesInitiative;
-
-    /**
-     * The attack value for the enemies.
-     */
-    private final int enemyAttack = 10;
-
-    /**
      * The amount of actions the player has.
      */
-    private int actions = 2;
+    private int actions;
 
     /**
      * The enemies list, retrieve enemies, stats etc..
      */
-    private ArrayList<Enemies> enemies;
+    private final ArrayList<Enemies> enemies;
 
     /**
      * The scanner object, used for user input.
@@ -70,44 +60,51 @@ public class CombatHandler {
         this.hero = hero;
         this.enemies = new ArrayList<>(enemies);
         this.scanner = new Scanner(System.in);
+        this.actions = Constants.VALUE_CHARACTER_COMBAT_ACTIONS;
     }
 
     /**
-     * Method that will return the amount of actions the player has.
-     * @return int value that represents the amount of actions the player has.
+     * Returns the health value of the hero.
+     * @return the health value of the hero.
      */
-    private int getActions(){
-        return actions;
-    }
-
-    // Placeholder methods for the hero stats
     private int getHP(){
         return hero.getHealth();
     }
 
-    // Placeholder methods for the hero stats
+    /**
+     * Returns the mana value of the hero.
+     * @return the mana value of the hero.
+     */
     private int getMana(){
-        return 10;
+        return this.hero.getManaPool();
     }
 
-    // Placeholder methods for the hero stats
+    /**
+     * Returns the attack value of the hero.
+     * @return the attack value of the hero.
+     */
     private int getAttack(){
-        return 10;
+        return this.hero.getAttack();
     }
 
-    // Placeholder methods for the hero stats
-    private int getDefense(){
-        return 10;
+    /**
+     * Returns the defense value of the hero.
+     * @return the defense value of the hero.
+     */
+    private int getDefense() {
+        return this.hero.getDefense();
     }
 
-    // Placeholder methods for the hero stats
-    private int getSpeed(){
-        return 10;
-    }
-
-    // Placeholder methods for the hero stats
-    private int getEnemyHP(){
-        return 10;
+    /**
+     * Returns the list of abilities the hero has.
+     * @return the list of abilities the hero has.
+     */
+    private List<BaseAbility> getAbilities(){
+        // TODO Implement abilities
+        return List.of(
+            new FireBolt(),
+            new Smite()
+        );
     }
 
     /**
@@ -124,9 +121,10 @@ public class CombatHandler {
      * It will also print out the result of the combat.
      * If the hero is defeated, it will print out that the hero has been defeated.
      */
-    public void startCombat(){
+    public void startCombat() {
         System.out.println("Combat has started!");
-        rollInitiative(); // this will roll initiative to see who goes first
+        // Decides initial value of isPlayerTurn
+        rollInitiative();
         System.out.println("You are facing " + enemies.size() + " enemies!");
         while (!enemies.isEmpty() && !isDefeated) {
             if(isPlayerTurn){
@@ -146,8 +144,9 @@ public class CombatHandler {
      * Rolls initiative to see who goes first.
      */
     private void rollInitiative(){
-        heroInitiative = Randomizer.rollD20();
-        enemiesInitiative = Randomizer.rollD20();
+        int heroInitiative = Randomizer.rollD20();
+        int enemiesInitiative = Randomizer.rollD20();
+
         if (heroInitiative == enemiesInitiative){ // Re-roll if initiative is the same
             rollInitiative();
         } else {
@@ -161,91 +160,201 @@ public class CombatHandler {
         }
     }
 
-
-
+    /**
+     * The player turn method. It will prompt the player to choose an action.
+     */
     private void playerTurn(){
-        System.out.println("It is your turn!");
-
-
-        System.out.println("What do you want to do?");
-        System.out.println("1. Attack");
-        System.out.println("2. Ability");
-        System.out.println("3. Use item");
-        System.out.println("4. Run");
-        int choice = Validation.validateInput(scanner.nextLine());
         if(actions >= 1) {
+            System.out.println("It is your turn!");
+            System.out.println("You have " + actions + " actions left!");
+            System.out.println("What would you like to do?");
+            System.out.println("1. Attack");
+            System.out.println("2. Ability");
+            System.out.println("3. Use consumable item");
+            System.out.println("4. Run");
+            Output.printEnterNumberMessage();
+            int choice = Validation.validateInput(scanner.nextLine());
+
             switch (choice) {
                 case 1 -> attack();
-                case 2 -> Abilities();
+                case 2 -> castAbility();
                 case 3 -> useItem();
                 case 4 -> run();
-                default -> System.out.println("Invalid choice, try again!");
+                default -> Output.printInvalidChoiceMessage();
             }
-
-        }else{
+        } else {
             SwapTurn();
         }
     }
 
-    public void SwapTurn(){
+    /**
+     * Swaps the turn between player and enemies.
+     */
+    public void SwapTurn() {
+        actions = Constants.VALUE_CHARACTER_COMBAT_ACTIONS;
         isPlayerTurn = !isPlayerTurn;
     }
 
-    private void enemiesTurn(){
+    /**
+     * The enemies turn method. It will loop through all enemies and attack the hero.
+     */
+    private void enemiesTurn() {
         System.out.println("It is the enemies turn!");
         for (Enemies enemy : enemies){
-            // TODO replace with actual attack method
-            int damage = Randomizer.rollD6();
-            System.out.println("The enemy attacks you for " + damage + " damage!");
+            int damage = Calculator.calculateEnemyAttackDamage(enemy, hero);
+            Output.printEnemyAttackCombatLog(hero.getHealth(), damage, enemy.getType());
             hero.reduceHealth(damage);
-            // enemy.attack(1); // this will implement a check to see if the enemy can attack
             if (getHP() <= 0){
                 declareDefeat();
             }
         }
-        SwapTurn(); // after all enemies have attacked, it will swap the turn back to the player
+        // Swap turn back to player after enemies have attacked.
+        SwapTurn();
     }
 
-    private void attack(){
-        System.out.println("You attack the enemy!");
-        actions--;
-        ArrayList<Enemies> remainingEnemies = new ArrayList<>();
-        for (Enemies enemy : enemies) {
-            //enemy.takeDamage(hero.getAttack());
-            if (enemy.isDead()){
-                System.out.println("You have defeated an enemy!");
-            } else {
-                remainingEnemies.add(enemy);
-            }
+    /**
+     * Prompt the player to choose an enemy to attack, then attack that enemy.
+     */
+    private void attack() {
+        // Prompt the player to choose an enemy to attack
+        Enemies target = chooseTarget();
+        if (target == null) {
+            // Cancel the attack if the player chose to go back
+            return;
         }
-        enemies = remainingEnemies;
-    }
 
-    private void Abilities(){
-        System.out.println("You use your ability" + hero.getAbility().getName() +"!");
+        // Reduce the player's actions by 1
         actions--;
-        for (Enemies enemy : enemies){
-            //hero.doAbility(enemy); // this will implement a menu where you can choose from your class abilities
-            if (enemy.isDead()){
-                System.out.println("You have defeated an enemy!");
-                enemies.remove(enemy);
-            }
+
+        // Calculate the damage dealt by the player's attack
+        int damage = Calculator.calculateHeroAttackDamage(hero, target);
+        Output.printHeroAttackCombatLog(target.getHealth(), damage, target.getType());
+        target.takeDamage(damage);
+        if (target.isDead()){
+            enemies.remove(target);
         }
     }
 
-    private void useItem(){
+    /**
+     * Prompt the player to choose an enemy to use an ability on and the ability to use.
+     */
+    private void castAbility() {
+        int input;
+        boolean proceed = false;
+        BaseAbility ability = null;
+
+        // Prompt the player to choose an ability to use
+        while (!proceed) {
+            Output.printPromptHeader("Choose an ability to use!");
+            for (int i = 0; i < getAbilities().size(); i++) {
+                // Lists available abilities
+                System.out.printf("%d. %s (-%d Mana)\n",
+                        i + 1, // Input number
+                        getAbilities().get(i).getName(), // Ability name
+                        //TODO Implement mana cost
+                        20 // Mana cost
+                );
+            }
+            System.out.println("0. Back");
+            Output.printEnterNumberMessage();
+
+            input = Validation.validateInput(scanner.nextLine());
+            switch (input) {
+                case -1 -> Output.printInvalidChoiceMessage(); // Invalid input
+                case 0 -> {
+                    return; // Go back
+                }
+                default -> {
+                    if (input < 1 || input > getAbilities().size()) {
+                        Output.printInvalidChoiceMessage(); // Input out of range
+                    } else {
+                        ability = getAbilities().get(input - 1);
+                        // TODO implement ability mana cost
+                        // Check if the player has enough mana to use the ability
+                        if (getMana() < 20) {
+                            System.out.println("Not enough mana!");
+                        } else {
+                            proceed = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Prompt the player to choose an enemy to target with the ability
+        Enemies target = chooseTarget();
+        if (target == null) {
+            // Cancel the ability if the player chose to go back
+            return;
+        }
+
+        // Reduce the player's actions by 1
         actions--;
-        hero.openUseConsumableMenu();
+        //TODO Implement ability damage calculation
+        int damage = 100;
+        Output.printHeroAbilityCombatLog(target.getHealth(), damage, target.getType(), ability.getName());
+        target.takeDamage(damage);
+
+        // Remove the enemy from the list if it is dead
+        if (target.isDead()) {
+            enemies.remove(target);
+        }
     }
 
+    /**
+     * Prompt the player to choose an enemy to attack or target with an ability.
+     * @return the enemy the player chose to attack, or null if the player chose to go back.
+     */
+    private Enemies chooseTarget() {
+        int input;
+        while (true) {
+            Output.printPromptHeader("Choose an enemy to attack!");
+            for (int i = 0; i < enemies.size(); i++){
+                System.out.println((i + 1) + ". " + enemies.get(i).getType() + " HP: " + enemies.get(i).getHealth());
+            }
+            System.out.println("0. Back");
+            Output.printEnterNumberMessage();
+            input = Validation.validateInput(scanner.nextLine());
+            switch (input) {
+                case -1 -> Output.printInvalidChoiceMessage();
+                case 0 -> {
+                    return null;
+                }
+                default -> {
+                    if (input < 1 || input > enemies.size()){
+                        Output.printInvalidChoiceMessage();
+                    } else {
+                        return enemies.get(input - 1);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Uses a consumable item from the inventory, does not consume an action if the item is not used.
+     */
+    private void useItem() {
+        if (hero.useConsumable(true)) {
+            actions--;
+        }
+    }
+
+    /**
+     * Attempts to run away from combat, consumes an action.
+     * If the player is fighting the final boss, they cannot run away and action is not consumed.
+     */
     private void run(){
+        if (enemies.stream().anyMatch(enemies -> enemies.getBossTier() == Constants.VALUE_FINAL_BOSS_TIER)) {
+            System.out.println("You can't run away from the final boss!");
+            return;
+        }
         actions--;
-        System.out.println("You run away!");
-        // this will implement a check to see if you can run away
+        if (Randomizer.rollD20() > Constants.VALUE_COMBAT_ESCAPE_CHANCE) {
+            System.out.println("You run away!");
+            isDefeated = true;
+        } else {
+            System.out.println("Escape failed! You are still in combat!");
+        }
     }
-
-
-
-
-
 }
