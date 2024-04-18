@@ -4,11 +4,9 @@ import character.Hero;
 import creator.Mission;
 import enemies.Boblin;
 import enemies.Enemies;
-import enemies.Goblin;
 import enemies.Skara;
 import enemies.Vorkath;
 import support.Constants;
-import support.Randomizer;
 
 import java.util.List;
 import java.util.Scanner;
@@ -64,7 +62,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionEasy() {
         System.out.println("You encounter a goblin boss, Dressed in rags with a red skin, he looks at you with a grin.");
-        new Boblin(true); //might elaborate further here, later.
+        new Boblin(Constants.VALUE_FINAL_BOSS_TIER); //might elaborate further here, later.
 
     }
 
@@ -73,7 +71,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionMedium() {
         System.out.println("You encounter the blind Kobold, Skara, his clicking maw echoing in the dark, as he leaps out from the shadows!");
-        new Skara(true);
+        new Skara(Constants.VALUE_FINAL_BOSS_TIER);
     }
 
     /**
@@ -81,7 +79,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionHard() {
         System.out.println("You encounter Vorkath, the Devourer of Souls! appearing from smoke and shadow his glowing eyes look at you with malice!");
-        new Vorkath(true);
+        new Vorkath(Constants.VALUE_FINAL_BOSS_TIER);
 
     }
 

@@ -232,6 +232,19 @@ public class GameEngine {
             case 2 -> {
                 // Show character stats.
                 Output.printSuccessMessage("Viewing stats...");
+                System.out.printf("%s%d/%d%s Health | %s%d/%d%s Mana | %s%d/%d%s XP\n",
+                        Constants.COLOR_RED,
+                        hero.getHealth(), Constants.VALUE_CHARACTER_STARTING_HEALTH,
+                        Constants.COLOR_RESET,
+
+                        Constants.COLOR_BLUE,
+                        hero.getManaPool(), Constants.VALUE_CHARACTER_STARTING_MANA,
+                        Constants.COLOR_RESET,
+
+                        Constants.COLOR_GREEN,
+                        hero.getStats().getExperience(), hero.getStats().calculateNextLevelExperience(),
+                        Constants.COLOR_RESET
+                );
                 System.out.println(hero.getStats());
                 promptContinue();
                 return false;

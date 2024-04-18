@@ -1,18 +1,6 @@
 package character;
 
 import abilities.BaseAbility;
-import abilities.Brutalize;
-import abilities.EldritchCrush;
-import abilities.FireBolt;
-import abilities.KiStrike;
-import abilities.SacredFlames;
-import abilities.SilverTongue;
-import abilities.Smite;
-import abilities.SneakAttack;
-import abilities.TacticalShot;
-import abilities.WarCry;
-import abilities.WildBolt;
-import abilities.Wildshape;
 import gears.Armor;
 import gears.Consumables;
 import gears.Weapons;
@@ -40,7 +28,7 @@ public class Hero {
     private int health;
     private int manaPool;
 
-    private final BaseAbility ability;
+    private BaseAbility ability;
 
     /**
      * Constructor for a character.
@@ -57,7 +45,6 @@ public class Hero {
         this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
         this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
         this.consumables = new ArrayList<>();
-        this.ability = setAbility(characterClass);
     }
 
     /**
@@ -326,50 +313,17 @@ public class Hero {
 
     /**
      * Sets the ability of the character.
-     * @param characterClass the character class of the character.
-     * @return the ability object of the character.
+     * @param ability the ability to assign to the character.
      */
-    public BaseAbility setAbility(String characterClass) {
-        switch (characterClass.toLowerCase()){
-            case "barbarian" -> {
-                return new Brutalize();
-            }
-            case "sorcerer" -> {
-                return new WildBolt();
-            }
-            case "paladin" -> {
-                return new Smite();
-            }
-            case "bard" -> {
-                return new SilverTongue();
-            }
-            case "fighter" -> {
-                return new WarCry();
-            }
-            case "druid" -> {
-                return new Wildshape();
-            }
-            case "ranger" -> {
-                return new TacticalShot();
-            }
-            case "rogue" -> {
-                return new SneakAttack();
-            }
-            case "wizard" -> {
-                return new FireBolt();
-            }
-            case "cleric" -> {
-                return new SacredFlames();
-            }
-            case "monk" -> {
-                return new KiStrike();
-            }
-            case "warlock" -> {
-                return new EldritchCrush();
-            }
-            default -> {
-                return null;
-            }
-        }
+    public void setAbility(BaseAbility ability) {
+        this.ability = ability;
+    }
+
+    /**
+     * Returns the level of the character from the stat sheet.
+     * @return the level of the character.
+     */
+    public int getLevel() {
+        return stats.getLevel();
     }
 }

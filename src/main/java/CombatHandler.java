@@ -1,6 +1,4 @@
 import abilities.BaseAbility;
-import abilities.FireBolt;
-import abilities.Smite;
 import character.Hero;
 import enemies.Enemies;
 import support.Calculator;
@@ -67,7 +65,7 @@ public class CombatHandler {
      * Returns the health value of the hero.
      * @return the health value of the hero.
      */
-    private int getHP(){
+    private int getHealth(){
         return hero.getHealth();
     }
 
@@ -80,31 +78,11 @@ public class CombatHandler {
     }
 
     /**
-     * Returns the attack value of the hero.
-     * @return the attack value of the hero.
-     */
-    private int getAttack(){
-        return this.hero.getAttack();
-    }
-
-    /**
-     * Returns the defense value of the hero.
-     * @return the defense value of the hero.
-     */
-    private int getDefense() {
-        return this.hero.getDefense();
-    }
-
-    /**
      * Returns the list of abilities the hero has.
      * @return the list of abilities the hero has.
      */
     private List<BaseAbility> getAbilities(){
-        // TODO Implement abilities
-        return List.of(
-            new FireBolt(),
-            new Smite()
-        );
+        return List.of(this.hero.getAbility());
     }
 
     /**
@@ -133,11 +111,9 @@ public class CombatHandler {
                 enemiesTurn();
             }
         }
-      if (isDefeated){
-          System.out.println("You have been defeated!");
-       } else {
-          System.out.println("You have defeated all the enemies!");
-       }
+        if (!isDefeated){
+            System.out.println("You have defeated all the enemies!");
+        }
     }
 
     /**
@@ -166,7 +142,23 @@ public class CombatHandler {
     private void playerTurn(){
         if(actions >= 1) {
             System.out.println("It is your turn!");
-            System.out.println("You have " + actions + " actions left!");
+            System.out.printf("%s%d %s%s | %s%d/%d%s Health | %s%d/%d%s Mana | %s%d/%d%s XP\n",
+                    Constants.COLOR_PURPLE,
+                    actions, actions > 1 ? "Actions" : "Action",
+                    Constants.COLOR_RESET,
+
+                    Constants.COLOR_RED,
+                    getHealth(), Constants.VALUE_CHARACTER_STARTING_HEALTH,
+                    Constants.COLOR_RESET,
+
+                    Constants.COLOR_BLUE,
+                    getMana(), Constants.VALUE_CHARACTER_STARTING_MANA,
+                    Constants.COLOR_RESET,
+
+                    Constants.COLOR_GREEN,
+                    hero.getStats().getExperience(), hero.getStats().calculateNextLevelExperience(),
+                    Constants.COLOR_RESET
+                    );
             System.out.println("What would you like to do?");
             System.out.println("1. Attack");
             System.out.println("2. Ability");
@@ -204,7 +196,7 @@ public class CombatHandler {
             int damage = Calculator.calculateEnemyAttackDamage(enemy, hero);
             Output.printEnemyAttackCombatLog(hero.getHealth(), damage, enemy.getType());
             hero.reduceHealth(damage);
-            if (getHP() <= 0){
+            if (getHealth() <= 0){
                 declareDefeat();
             }
         }
@@ -231,7 +223,7 @@ public class CombatHandler {
         Output.printHeroAttackCombatLog(target.getHealth(), damage, target.getType());
         target.takeDamage(damage);
         if (target.isDead()){
-            enemies.remove(target);
+            removeEnemy(target);
         }
     }
 
@@ -242,17 +234,18 @@ public class CombatHandler {
         int input;
         boolean proceed = false;
         BaseAbility ability = null;
+        BaseAbility temp;
 
         // Prompt the player to choose an ability to use
         while (!proceed) {
             Output.printPromptHeader("Choose an ability to use!");
             for (int i = 0; i < getAbilities().size(); i++) {
+                temp = getAbilities().get(i);
                 // Lists available abilities
                 System.out.printf("%d. %s (-%d Mana)\n",
                         i + 1, // Input number
-                        getAbilities().get(i).getName(), // Ability name
-                        //TODO Implement mana cost
-                        20 // Mana cost
+                        temp.getName(), // Ability name
+                        temp.getCost() // Mana cost
                 );
             }
             System.out.println("0. Back");
@@ -269,9 +262,8 @@ public class CombatHandler {
                         Output.printInvalidChoiceMessage(); // Input out of range
                     } else {
                         ability = getAbilities().get(input - 1);
-                        // TODO implement ability mana cost
                         // Check if the player has enough mana to use the ability
-                        if (getMana() < 20) {
+                        if (getMana() < ability.getCost()) {
                             System.out.println("Not enough mana!");
                         } else {
                             proceed = true;
@@ -290,14 +282,14 @@ public class CombatHandler {
 
         // Reduce the player's actions by 1
         actions--;
-        //TODO Implement ability damage calculation
-        int damage = 100;
+        int damage = ability.damageCalc(hero.getLevel());
         Output.printHeroAbilityCombatLog(target.getHealth(), damage, target.getType(), ability.getName());
         target.takeDamage(damage);
+        hero.reduceMana(ability.getCost());
 
         // Remove the enemy from the list if it is dead
         if (target.isDead()) {
-            enemies.remove(target);
+            removeEnemy(target);
         }
     }
 
@@ -338,6 +330,15 @@ public class CombatHandler {
         if (hero.useConsumable(true)) {
             actions--;
         }
+    }
+
+    /**
+     * Removes an enemy from the list of enemies.
+     * @param enemy the enemy to remove.
+     */
+    private void removeEnemy(Enemies enemy) {
+        hero.getStats().addExperience(enemy.getDamage() * 4);
+        enemies.remove(enemy);
     }
 
     /**

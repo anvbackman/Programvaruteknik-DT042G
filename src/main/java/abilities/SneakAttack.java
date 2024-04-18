@@ -7,13 +7,13 @@ import support.Randomizer;
  * The damage is calculated by rolling a d10 for every level the character has - will be changed later.'
  * @author Martin Roos Eriksson
  */
-public class SneakAttack extends BaseAbility{
+public class SneakAttack extends BaseAbility {
 
     /**
      * Constructor for the SneakAttack class.
      */
     public SneakAttack() {
-        super("SneakAttack");
+        super("SneakAttack", 10);
     }
 
     /**
@@ -21,10 +21,9 @@ public class SneakAttack extends BaseAbility{
      * @param CharLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    private int damageCalc(int CharLevel) {
+    public int damageCalc(int CharLevel) {
 
-        int result = Randomizer.rollD10(CharLevel);
-        return result;
+        return Randomizer.rollD10(CharLevel);
 
     }
 
@@ -32,18 +31,8 @@ public class SneakAttack extends BaseAbility{
      * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    private int getTargets(){
+    public int getTargets(){
         return 1;
-    }
-
-    /**
-     * Method that executes the ability.
-     * @param target the target of the ability.
-     * @param charLevel the level of the character using the ability.
-     */
-    public void execute(int target, int charLevel) {
-        int targets = getTargets();
-        int damage = damageCalc(charLevel);
     }
 
 }

@@ -8,9 +8,8 @@ import support.Randomizer;
  */
 public class Boblin extends Enemies {
 
-    private Boolean isBigBoss;
-    public Boblin(boolean isBigBoss) {
-        super("Boblin the Goblin", 0, 0, 0, false, isBigBoss);
+    public Boblin(int bossTier) {
+        super("Boblin the Goblin", 0, 0, 0, bossTier);
         this.health = Randomizer.rollD10(6);
         this.damage = Randomizer.rollD6(3);
         this.armor = Randomizer.rollD6(3);
