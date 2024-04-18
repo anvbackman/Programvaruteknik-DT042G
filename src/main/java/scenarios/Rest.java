@@ -59,41 +59,53 @@ public class Rest implements Encounter {
      */
     private void generateEncountersForMissionEasy() {
         int Danger = Randomizer.rollD20(1);
-        if (Danger <= 5) {
-            System.out.println("During your rest you are ambushed by a group of goblins!");
-            System.out.println("You fight them off, but you are injured during the fight.");
-            hero.reduceHealth(Randomizer.rollD4(1));
-        } else {
-            System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
+        if (hero.getCharacterClass() == Constants.CLASS_RANGER) {
+            Danger += 5;
         }
-        System.out.println("The rest of the night is peaceful, and you embark further on your journey.");
-    }
+            System.out.println("You are a ranger, and you are more aware of your surroundings. +5 to rolls to avoid danger");
+            if (Danger <= 5) {
+                System.out.println("During your rest you are ambushed by a group of goblins!");
+                System.out.println("You fight them off, but you are injured during the fight.");
+                hero.reduceHealth(Randomizer.rollD4(1));
+            } else {
+                System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
+            }
+            System.out.println("The rest of the night is peaceful, and you embark further on your journey.");
+        }
 
     /**
      * Generates the encounters for the medium difficulty.
      */
     private void generateEncountersForMissionMedium() {
         int Danger = Randomizer.rollD20(1);
-        if(Danger <= 5){
-            System.out.println(" During the night, someone seems to have stolen some of your supplies.");
-            hero.removeConsumable(hero.getConsumables().get(Randomizer.rollD4(1) - 1));
-            hero.addGold(-10);
+        if (hero.getCharacterClass() == Constants.CLASS_RANGER) {
+            Danger += 5;
+            System.out.println("You are a ranger, and you are more aware of your surroundings. +5 to rolls to avoid danger");
         }
-        if(Danger <= 10){
-            System.out.println("During your rest you are ambushed by a group of Kobolds!");
-            System.out.println("You fight them off, but you are injured during the fight.");
-            hero.reduceHealth(Randomizer.rollD4(2));
-        } else {
-            System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
+            if (Danger <= 5) {
+                System.out.println(" During the night, someone seems to have stolen some of your supplies.");
+                hero.removeConsumable(hero.getConsumables().get(Randomizer.rollD4(1) - 1));
+                hero.addGold(-10);
+            }
+            if (Danger <= 10) {
+                System.out.println("During your rest you are ambushed by a group of Kobolds!");
+                System.out.println("You fight them off, but you are injured during the fight.");
+                hero.reduceHealth(Randomizer.rollD4(2));
+            } else {
+                System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
+            }
+            System.out.println("The rest of the night is peaceful, and you embark further on your journey.");
         }
-        System.out.println("The rest of the night is peaceful, and you embark further on your journey.");
-    }
 
     /**
      * Generates the encounters for the hard difficulty.
      */
     private void generateEncountersForMissionHard() {
         int Danger = Randomizer.rollD20(1);
+        if(hero.getCharacterClass() == Constants.CLASS_RANGER){
+            Danger += 5;
+            System.out.println("You are a ranger, and you are more aware of your surroundings. +5 to rolls to avoid danger");
+        }
         if(Danger <= 5){
             System.out.println(" During the night, one of the survivors in the village must have taken some of your money");
             hero.addGold(-10);
@@ -107,7 +119,5 @@ public class Rest implements Encounter {
         }
         System.out.println("The rest of the night is peaceful, and you embark further on your journey.");
     }
-
-
 
 }
