@@ -62,6 +62,9 @@ public final class Constants {
     public final static int VALUE_COMBAT_ESCAPE_CHANCE = 4;
     public final static int VALUE_FINAL_BOSS_TIER = 2;
     public final static int VALUE_MINI_BOSS_TIER = 1;
+    public final static List<Integer> VALUES_EXPERIENCE_PER_LEVEL = List.of(
+            100, 200, 400, 800
+    );
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";

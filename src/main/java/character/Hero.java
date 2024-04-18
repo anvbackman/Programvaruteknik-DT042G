@@ -318,4 +318,12 @@ public class Hero {
     public void setAbility(BaseAbility ability) {
         this.ability = ability;
     }
+
+    /**
+     * Returns the level of the character from the stat sheet.
+     * @return the level of the character.
+     */
+    public int getLevel() {
+        return stats.getLevel();
+    }
 }
