@@ -37,6 +37,9 @@ public class Social implements Encounter {
         this.scanner = scanner;
     }
 
+    /**
+     * The encounter for the injured guardsman.
+     */
     private final Runnable injuredGuardsmanEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -98,6 +101,9 @@ public class Social implements Encounter {
         }
     };
 
+    /**
+     * The encounter for the merchant.
+     */
     private final Runnable merchantEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -128,7 +134,7 @@ public class Social implements Encounter {
                 }
                 case 3 -> {
                     // Roll chance for success.
-                    int bonus = ((hero.getStats().getStat("dexterity") - 10) / 2);
+                    int bonus = ((hero.getStats().getStat(Constants.STAT_DEXTERITY) - 10) / 2);
                     if ((Randomizer.rollD20() + bonus) < 12) {
                         System.out.println("You attempt to rob the merchant, but he catches you and calls on his guards.");
                         hero.reduceHealth(Randomizer.rollD6(1));
@@ -170,7 +176,7 @@ public class Social implements Encounter {
                 case 2 -> {
                     System.out.println("You help the survivors, and they thank you for your kindness.");
                     hero.addGold(Randomizer.rollD20(10));
-                    if (hero.getClass().toString() == "paladin" || hero.getClass().toString() == "cleric") {
+                    if (hero.getCharacterClass().equals(Constants.CLASS_PALADIN) || hero.getCharacterClass().equals(Constants.CLASS_CLERIC)) {
                         hero.applyHealing(100);
                         System.out.println("You feel a sense of divine power, and you feel rejuvenated, A divine gift from your patron.");
                         int gold = (Randomizer.rollD20(10));
@@ -183,7 +189,7 @@ public class Social implements Encounter {
                 }
                 case 3 -> {
                 System.out.println("You decide to put the survivors out of their misery, and you kill them all...");
-                if(hero.getClass().toString() == "Warlock"){
+                if(hero.getCharacterClass().equals(Constants.CLASS_WARLOCK)){
                     System.out.println("You feel a sense of power, and you feel rejuvenated, A dark gift from your patron.");
                     int gold = (Randomizer.rollD20(10));
                     hero.addGold(gold);
@@ -207,6 +213,9 @@ public class Social implements Encounter {
         }
     };
 
+    /**
+     * The encounter for the toll.
+     */
     private final Runnable tollEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -229,7 +238,7 @@ public class Social implements Encounter {
                     proceed = true;
                 }
                 case 2 -> {
-                    int bonus = ((hero.getStats().getStat("dexterity") - 10) / 2);
+                    int bonus = ((hero.getStats().getStat(Constants.STAT_DEXTERITY) - 10) / 2);
                     int danger = Randomizer.rollD20(1);
                     if (danger + bonus <= 14) {
                         System.out.println("You rolled = " + danger + " + " + bonus + " = " + (danger + bonus));
@@ -242,7 +251,7 @@ public class Social implements Encounter {
                     proceed = true;
                 }
                 case 3 -> {
-                    int bonus = ((hero.getStats().getStat("strength") - 10) / 2);
+                    int bonus = ((hero.getStats().getStat(Constants.STAT_STRENGTH)- 10) / 2);
                     int danger = Randomizer.rollD20(1);
                     if (danger + bonus <= 14) {
                         System.out.println("You rolled = " + danger + " + " + bonus + " = " + (danger + bonus));
@@ -266,6 +275,9 @@ public class Social implements Encounter {
         }
     };
 
+    /**
+     * The encounter for the ghost.
+     */
     private final Runnable ghostEncounter = () -> {
         System.out.println("""
                 You enter an abandoned shop, but as you search through the shelves, you hear a voice behind you.

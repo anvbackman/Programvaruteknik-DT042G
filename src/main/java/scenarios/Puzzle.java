@@ -57,6 +57,9 @@ public class Puzzle implements Encounter {
         }
     }
 
+    /**
+     * Generates the encounters for the easy difficulty. this is a puzzle with a wishing well
+     */
     private final Runnable wellPuzzle = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -114,6 +117,9 @@ public class Puzzle implements Encounter {
         }
     };
 
+    /**
+     * Generates the encounters for the easy difficulty, this is a hermit encounter
+     */
     private final Runnable hermitEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -126,7 +132,7 @@ public class Puzzle implements Encounter {
             System.out.println("2. What is in my pocket?");
             System.out.println("3. An Echo?");
             System.out.println("4. A shadow?");
-            if (hero.getCharacterClass().toString() == "wizard") {
+            if (hero.getCharacterClass().equals(Constants.CLASS_WIZARD)) {
                 System.out.println("5. Answer with ease, and tell him a riddle of your own.");
             }
             switch (Validation.validateInput(scanner.nextLine())) {
@@ -174,6 +180,9 @@ public class Puzzle implements Encounter {
         }
     };
 
+    /**
+     * Generates the encounters for the medium difficulty.
+     */
     private final Runnable KoboldEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -220,6 +229,9 @@ public class Puzzle implements Encounter {
         }
     };
 
+    /**
+     * Generates the encounters for the medium difficulty.
+     */
     private final Runnable ChestEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -269,6 +281,9 @@ public class Puzzle implements Encounter {
         }
     };
 
+    /**
+     * Generates the encounters for the hard difficulty.
+     */
     private final Runnable ZombieEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
@@ -315,6 +330,9 @@ public class Puzzle implements Encounter {
         }
     };
 
+    /**
+     * Generates the encounters for the hard difficulty.
+     */
     private final Runnable AutomatonEncounter = () -> {
         boolean proceed = false;
         System.out.println("""
