@@ -64,7 +64,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionEasy() {
         System.out.println("You encounter a goblin boss, Dressed in rags with a red skin, he looks at you with a grin.");
-        new Boblin(true);
+        new Boblin(true); //might elaborate further here.
 
     }
 
