@@ -13,7 +13,7 @@ public class Brutalize extends BaseAbility {
      * Constructor for the Brutalize class.
      */
     public Brutalize() {
-        super("Brutalize");
+        super("Brutalize", 10);
     }
 
     /**
@@ -21,30 +21,15 @@ public class Brutalize extends BaseAbility {
      * @param CharLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    private int damageCalc(int CharLevel) {
-
-        int result = Randomizer.rollD10(CharLevel);
-        return result;
+    public int damageCalc(int CharLevel) {
+        return Randomizer.rollD10(CharLevel);
     }
 
     /**
      * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    private int getTargets() {
+    public int getTargets() {
         return 1;
     }
-
-    /**
-     * Method that executes the ability.
-     * @param target the target of the ability.
-     * @param charLevel the level of the character using the ability.
-     */
-    public void execute(int target, int charLevel) {
-        int targets = getTargets();
-        int damage = damageCalc(charLevel);
-    }
-
-
-
 }

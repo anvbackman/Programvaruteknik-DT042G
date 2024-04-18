@@ -8,9 +8,8 @@ import support.Randomizer;
  */
 public class Skara extends Enemies {
 
-    private Boolean isBigBoss;
-    public Skara(boolean isBigBoss) {
-        super("Skara, The Braille Script", 0, 0, 0, false, isBigBoss);
+    public Skara(int bossTier) {
+        super("Skara, The Braille Script", 0, 0, 0, bossTier);
         this.health = Randomizer.rollD10(8);
         this.damage = Randomizer.rollD6(4);
         this.armor = Randomizer.rollD6(4);
