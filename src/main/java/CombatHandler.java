@@ -120,7 +120,7 @@ public class CombatHandler {
      * It will also print out the result of the combat.
      * If the hero is defeated, it will print out that the hero has been defeated.
      */
-    public void startCombat(){
+    public void startCombat() {
         System.out.println("Combat has started!");
         // Decides initial value of isPlayerTurn
         rollInitiative();
@@ -186,7 +186,10 @@ public class CombatHandler {
         }
     }
 
-    public void SwapTurn(){
+    /**
+     * Swaps the turn between player and enemies.
+     */
+    public void SwapTurn() {
         actions = Constants.VALUE_CHARACTER_COMBAT_ACTIONS;
         isPlayerTurn = !isPlayerTurn;
     }
@@ -194,7 +197,7 @@ public class CombatHandler {
     /**
      * The enemies turn method. It will loop through all enemies and attack the hero.
      */
-    private void enemiesTurn(){
+    private void enemiesTurn() {
         System.out.println("It is the enemies turn!");
         for (Enemies enemy : enemies){
             int damage = Math.max(enemy.getDamage() - getDefense(), 0);
@@ -315,7 +318,7 @@ public class CombatHandler {
     /**
      * Uses a consumable item from the inventory, does not consume an action if the item is not used.
      */
-    private void useItem(){
+    private void useItem() {
         if (hero.useConsumable(true)) {
             actions--;
         }
