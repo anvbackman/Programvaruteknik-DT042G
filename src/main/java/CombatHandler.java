@@ -3,6 +3,7 @@ import abilities.FireBolt;
 import abilities.Smite;
 import character.Hero;
 import enemies.Enemies;
+import support.Calculator;
 import support.Constants;
 import support.Output;
 import support.Randomizer;
@@ -200,7 +201,7 @@ public class CombatHandler {
     private void enemiesTurn() {
         System.out.println("It is the enemies turn!");
         for (Enemies enemy : enemies){
-            int damage = Math.max(enemy.getDamage() - getDefense(), 0);
+            int damage = Calculator.calculateEnemyAttackDamage(enemy, hero);
             Output.printEnemyAttackCombatLog(hero.getHealth(), damage, enemy.getType());
             hero.reduceHealth(damage);
             if (getHP() <= 0){
@@ -215,13 +216,18 @@ public class CombatHandler {
      * Prompt the player to choose an enemy to attack, then attack that enemy.
      */
     private void attack() {
+        // Prompt the player to choose an enemy to attack
         Enemies target = chooseTarget();
         if (target == null) {
+            // Cancel the attack if the player chose to go back
             return;
         }
 
+        // Reduce the player's actions by 1
         actions--;
-        int damage = Math.max(getAttack() - target.getArmor(), 0) ;
+
+        // Calculate the damage dealt by the player's attack
+        int damage = Calculator.calculateHeroAttackDamage(hero, target);
         Output.printHeroAttackCombatLog(target.getHealth(), damage, target.getType());
         target.takeDamage(damage);
         if (target.isDead()){
@@ -237,29 +243,34 @@ public class CombatHandler {
         boolean proceed = false;
         BaseAbility ability = null;
 
+        // Prompt the player to choose an ability to use
         while (!proceed) {
             Output.printPromptHeader("Choose an ability to use!");
             for (int i = 0; i < getAbilities().size(); i++) {
-                System.out.printf("%d. %s (-%d Mana\n",
-                        i + 1,
-                        getAbilities().get(i).getName(),
+                // Lists available abilities
+                System.out.printf("%d. %s (-%d Mana)\n",
+                        i + 1, // Input number
+                        getAbilities().get(i).getName(), // Ability name
                         //TODO Implement mana cost
-                        20);
+                        20 // Mana cost
+                );
             }
             System.out.println("0. Back");
             Output.printEnterNumberMessage();
+
             input = Validation.validateInput(scanner.nextLine());
             switch (input) {
-                case -1 -> Output.printInvalidChoiceMessage();
+                case -1 -> Output.printInvalidChoiceMessage(); // Invalid input
                 case 0 -> {
-                    return;
+                    return; // Go back
                 }
                 default -> {
                     if (input < 1 || input > getAbilities().size()) {
-                        Output.printInvalidChoiceMessage();
+                        Output.printInvalidChoiceMessage(); // Input out of range
                     } else {
                         ability = getAbilities().get(input - 1);
                         // TODO implement ability mana cost
+                        // Check if the player has enough mana to use the ability
                         if (getMana() < 20) {
                             System.out.println("Not enough mana!");
                         } else {
@@ -270,16 +281,21 @@ public class CombatHandler {
             }
         }
 
+        // Prompt the player to choose an enemy to target with the ability
         Enemies target = chooseTarget();
         if (target == null) {
+            // Cancel the ability if the player chose to go back
             return;
         }
 
+        // Reduce the player's actions by 1
         actions--;
         //TODO Implement ability damage calculation
         int damage = 100;
         Output.printHeroAbilityCombatLog(target.getHealth(), damage, target.getType(), ability.getName());
         target.takeDamage(damage);
+
+        // Remove the enemy from the list if it is dead
         if (target.isDead()) {
             enemies.remove(target);
         }
