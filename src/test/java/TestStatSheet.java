@@ -1,3 +1,4 @@
+import character.Hero;
 import character.StatSheet;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -72,6 +73,8 @@ public class TestStatSheet {
         int excess;
         int expected;
         StatSheet testingSheet = new StatSheet();
+        statSheet.setHero(new Hero(statSheet, "TestHero", "TestClass"));
+        testingSheet.setHero(new Hero(testingSheet, "TestHero", "TestClass"));
         for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size() + 1; i++) {
             statSheet.levelUp();
         }

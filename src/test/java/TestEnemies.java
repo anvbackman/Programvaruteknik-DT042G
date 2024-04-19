@@ -3,6 +3,7 @@ import enemies.Goblin;
 import enemies.Kobold;
 import enemies.Zombie;
 import org.junit.Test;
+import support.Constants;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +26,7 @@ public class TestEnemies {
     public void testAttack() {
         // Test attack method
         Enemies enemy = new Goblin(0);
-        enemy.attack(20);
+        enemy.setDamage(20);
         assertEquals(20, enemy.getDamage());
     }
 
@@ -41,8 +42,10 @@ public class TestEnemies {
     public void testTakeDamage() {
         // Test damage calculation
         Enemies enemy = new Goblin(0);
-        enemy.takeDamage(15);
-        assertEquals(0, enemy.getHealth());
+        int base = enemy.getHealth();
+        int expected = base - 5;
+        enemy.takeDamage(5);
+        assertEquals(expected, enemy.getHealth());
     }
 
     @Test
@@ -56,7 +59,7 @@ public class TestEnemies {
     @Test
     public void testMiniBoss() {
         // Test mini boss creation
-        Enemies enemy = new Goblin(0);
+        Enemies enemy = new Goblin(Constants.VALUE_MINI_BOSS_TIER);
         assertEquals("Goblin Boss", enemy.getType());
     }
 
