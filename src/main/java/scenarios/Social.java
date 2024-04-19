@@ -137,7 +137,7 @@ public class Social implements Encounter {
                     int bonus = ((hero.getStats().getStat(Constants.STAT_DEXTERITY) - 10) / 2);
                     if ((Randomizer.rollD20() + bonus) < 12) {
                         System.out.println("You attempt to rob the merchant, but he catches you and calls on his guards.");
-                        hero.reduceHealth(Randomizer.rollD6(1));
+                        hero.adjustHealth(-Randomizer.rollD6(1));
                     } else {
                         // Roll amount of gold to steal
                         int gold = Randomizer.rollD20(10);
@@ -177,7 +177,7 @@ public class Social implements Encounter {
                     System.out.println("You help the survivors, and they thank you for your kindness.");
                     hero.addGold(Randomizer.rollD20(10));
                     if (hero.getCharacterClass().equals(Constants.CLASS_PALADIN) || hero.getCharacterClass().equals(Constants.CLASS_CLERIC)) {
-                        hero.applyHealing(100);
+                        hero.adjustHealth(100);
                         System.out.println("You feel a sense of divine power, and you feel rejuvenated, A divine gift from your patron.");
                         int gold = (Randomizer.rollD20(10));
                         hero.addGold(gold);
@@ -246,7 +246,7 @@ public class Social implements Encounter {
                     } else {
                         System.out.println("You rolled = " + danger + " + " + bonus + " = " + (danger + bonus));
                         System.out.println("You try to sneak past the bandits, but they notice you and attack you!");
-                        hero.reduceHealth(Randomizer.rollD6(1));
+                        hero.adjustHealth(-Randomizer.rollD6(1));
                     }
                     proceed = true;
                 }
@@ -257,11 +257,11 @@ public class Social implements Encounter {
                         System.out.println("You rolled = " + danger + " + " + bonus + " = " + (danger + bonus));
                         System.out.println("You attack the bandits, and they fight back!");
                         System.out.println("You are injured during the fight, but manage to run past them in the chaos");
-                        hero.reduceHealth(Randomizer.rollD6(2));
+                        hero.adjustHealth(-Randomizer.rollD6(2));
                     } else {
                         System.out.println("You rolled = " + danger + " + " + bonus + " = " + (danger + bonus));
                         System.out.println("You strike at their leader, and quickly dispatch him, the rest of the bandits flee in terror.");
-                        hero.reduceHealth(Randomizer.rollD6(2));
+                        hero.adjustHealth(-Randomizer.rollD6(2));
                     }
                     proceed = true;
 
@@ -302,7 +302,7 @@ public class Social implements Encounter {
                 }
                 case 2 -> {
                     System.out.println("You attack the ghost, but your weapon passes through it, and it curses you.");
-                    hero.reduceHealth(Randomizer.rollD6(2));
+                    hero.adjustHealth(-Randomizer.rollD6(2));
                     proceed = true;
                 }
                 case 3 -> {

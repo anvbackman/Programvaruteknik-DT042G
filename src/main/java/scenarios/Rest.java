@@ -66,7 +66,7 @@ public class Rest implements Encounter {
             if (Danger <= 5) {
                 System.out.println("During your rest you are ambushed by a group of goblins!");
                 System.out.println("You fight them off, but you are injured during the fight.");
-                hero.reduceHealth(Randomizer.rollD4(1));
+                hero.adjustHealth(-Randomizer.rollD6(1));
             } else {
                 System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
             }
@@ -90,7 +90,7 @@ public class Rest implements Encounter {
             if (Danger <= 10) {
                 System.out.println("During your rest you are ambushed by a group of Kobolds!");
                 System.out.println("You fight them off, but you are injured during the fight.");
-                hero.reduceHealth(Randomizer.rollD4(2));
+                hero.adjustHealth(-Randomizer.rollD6(2));
             } else {
                 System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
             }
@@ -113,7 +113,7 @@ public class Rest implements Encounter {
         if(Danger <= 15){
             System.out.println("During your rest you are ambushed by a group of Zombies!");
             System.out.println("You fight them off, but you are injured during the fight.");
-            hero.reduceHealth(Randomizer.rollD4(3));
+            hero.adjustHealth(-Randomizer.rollD6(3));
         } else {
             System.out.println("You encounter nothing unusual, and enjoy a peaceful rest.");
         }

@@ -234,11 +234,11 @@ public class GameEngine {
                 Output.printSuccessMessage("Viewing stats...");
                 System.out.printf("%s%d/%d%s Health | %s%d/%d%s Mana | %s%d/%d%s XP\n",
                         Constants.COLOR_RED,
-                        hero.getHealth(), Constants.VALUE_CHARACTER_STARTING_HEALTH,
+                        hero.getHealth(), hero.getMaxHealth(),
                         Constants.COLOR_RESET,
 
                         Constants.COLOR_BLUE,
-                        hero.getManaPool(), Constants.VALUE_CHARACTER_STARTING_MANA,
+                        hero.getManaPool(), hero.getMaxMana(),
                         Constants.COLOR_RESET,
 
                         Constants.COLOR_GREEN,

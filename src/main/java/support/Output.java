@@ -87,7 +87,7 @@ public class Output {
     public static int printHeroAbilityCombatLog(Enemies target, Hero hero, BaseAbility ability) {
         int damage = ability.damageCalc(hero.getLevel());
         System.out.printf("You use %s on %s for %d damage (%d-%d HP)\n",
-                ability,
+                ability.getName(),
                 target.getType(),
                 damage,
                 target.getHealth(),

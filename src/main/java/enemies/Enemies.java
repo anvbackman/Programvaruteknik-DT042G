@@ -147,7 +147,7 @@ public abstract class Enemies {
      * @return true if the enemy is dead, false if the enemy is still alive
      */
     public boolean isDead() {
-        return getHealth() == 0;
+        return getHealth() <= 0;
     }
 
     /**

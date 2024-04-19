@@ -27,6 +27,7 @@ public class CombatHandler {
      * The amount of actions the player has.
      */
     private int actions;
+    private int reward;
 
     /**
      * The enemies list, retrieve enemies, stats etc..
@@ -101,6 +102,7 @@ public class CombatHandler {
     public void startCombat() {
         System.out.println("Combat has started!");
         // Decides initial value of isPlayerTurn
+        determineReward();
         rollInitiative();
         System.out.println("You are facing " + enemies.size() + " enemies!");
         while (!enemies.isEmpty() && !isDefeated) {
@@ -112,6 +114,8 @@ public class CombatHandler {
         }
         if (!isDefeated){
             System.out.println("You have defeated all the enemies!");
+            System.out.println("You have earned " + reward + " gold!");
+            hero.addGold(reward);
         }
     }
 
@@ -147,11 +151,11 @@ public class CombatHandler {
                     Constants.COLOR_RESET,
 
                     Constants.COLOR_RED,
-                    getHealth(), Constants.VALUE_CHARACTER_STARTING_HEALTH,
+                    getHealth(), hero.getMaxHealth(),
                     Constants.COLOR_RESET,
 
                     Constants.COLOR_BLUE,
-                    getMana(), Constants.VALUE_CHARACTER_STARTING_MANA,
+                    getMana(), hero.getMaxMana(),
                     Constants.COLOR_RESET,
 
                     Constants.COLOR_GREEN,
@@ -193,7 +197,7 @@ public class CombatHandler {
         System.out.println("It is the enemies turn!");
         for (Enemies enemy : enemies){
             int damage = Output.printEnemyAttackCombatLog(enemy, hero);
-            hero.reduceHealth(damage);
+            hero.adjustHealth(-damage);
             if (getHealth() <= 0){
                 declareDefeat();
             }
@@ -281,7 +285,7 @@ public class CombatHandler {
         actions--;
         int damage = Output.printHeroAbilityCombatLog(target, hero, ability);
         target.takeDamage(damage);
-        hero.reduceMana(ability.getCost());
+        hero.adjustMana(-ability.getCost());
 
         // Remove the enemy from the list if it is dead
         if (target.isDead()) {
@@ -352,6 +356,19 @@ public class CombatHandler {
             isDefeated = true;
         } else {
             System.out.println("Escape failed! You are still in combat!");
+        }
+    }
+
+    private void determineReward(){
+        reward = 0;
+        for (Enemies enemy : enemies){
+            if (enemy.getBossTier() == Constants.VALUE_FINAL_BOSS_TIER)
+                reward += Randomizer.rollD20(25);
+            else if (enemy.getBossTier() == Constants.VALUE_MINI_BOSS_TIER)
+                reward += Randomizer.rollD20(10);
+            else if (enemy.getBossTier() == 0) {
+                reward += Randomizer.rollD20(2);
+            }
         }
     }
 }

@@ -2,7 +2,6 @@ package scenarios;
 
 import character.Hero;
 import creator.Mission;
-import gears.Consumables;
 import support.Constants;
 import support.Output;
 import support.Randomizer;
@@ -81,28 +80,28 @@ public class Puzzle implements Encounter {
                 System.out.println("You wish for the way to be revealed, but nothing happens.");
                 System.out.println("You attempt to find another way, and waste valuable time.");
                 int dmg = Randomizer.rollD6(1);
-                hero.reduceHealth(dmg);
+                hero.adjustHealth(-dmg);
                 System.out.printf("You take %d damage from the alternate path.\n", dmg);
             }
             case 2 -> {
                 System.out.println("You say 'melon? melon!' but nothing happens.");
                 System.out.println("You attempt to find another way, and waste valuable time... and you feel slightly judged.");
                 int dmg = Randomizer.rollD6(1);
-                hero.reduceHealth(dmg);
+                hero.adjustHealth(-dmg);
                 System.out.printf("You take %d damage from the judgemental silence.\n", dmg);
             }
             case 3 -> {
                 System.out.println("You throw a coin in the well, and the door opens.");
                 System.out.println("You proceed through the door.");
                 int heal = Randomizer.rollD6(2);
-                hero.applyHealing(heal);
+                hero.adjustHealth(heal);
                 System.out.printf("You heal %d as a gift from the Well spirit..\n", heal);
                 proceed = true;
             }
             case 4 -> {
                 System.out.println("You decide to leave, and find another way.");
                 int dmg = Randomizer.rollD6(1);
-                hero.reduceHealth(dmg);
+                hero.adjustHealth(-dmg);
                 System.out.printf("You take %d damage from the alternate path.\n", dmg);
                 proceed = true;
             }
@@ -140,7 +139,7 @@ public class Puzzle implements Encounter {
                     System.out.println("Your answer is incorrect, the hermit looks at you with a sad smile.");
                     System.out.println("You feel a sense of loss...");
                     int dmg = Randomizer.rollD6(1);
-                    hero.reduceHealth(dmg);
+                    hero.adjustHealth(-dmg);
                     System.out.printf("You take %d psychic damage from the hermit's disappointing gaze.\n", dmg);
                     proceed = true;
                 }
@@ -152,7 +151,7 @@ public class Puzzle implements Encounter {
                     System.out.println("Your answer is correct, the hermit looks at you with a smile.");
                     System.out.println("You feel a sense of gain...");
                     int heal = Randomizer.rollD6(4);
-                    hero.applyHealing(heal);
+                    hero.adjustHealth(heal);
                     System.out.printf("You heal %d from the hermit's approval.\n", heal);
                     System.out.println("The hermit gives you a small token of his appreciation before he leaves...");
                     int gold = Randomizer.rollD6(2);
@@ -168,7 +167,7 @@ public class Puzzle implements Encounter {
                     System.out.println("Your answer is correct, the hermit looks at you with a smile, as he ponders your riddle)");
                     System.out.println("You feel a sense of gain...");
                     int heal = Randomizer.rollD6(4);
-                    hero.applyHealing(heal);
+                    hero.adjustHealth(heal);
                     System.out.printf("You heal %d from the hermit's approval.\n", heal);
                     System.out.println("The hermit gives you a small token of his appreciation before he leaves... scratching his head over your riddle.");
                     int gold = Randomizer.rollD6(6);
@@ -209,7 +208,7 @@ public class Puzzle implements Encounter {
                         System.out.println("You attempt to communicate with the kobolds, but you are unable to understand them.");
                         System.out.println("You feel a sense of loss...");
                         int dmg = Randomizer.rollD6(1);
-                        hero.reduceHealth(dmg);
+                        hero.adjustHealth(-dmg);
                         System.out.printf("You take %d psychic damage from the kobolds' confusing language.\n", dmg);
                     }
                 }
@@ -217,7 +216,7 @@ public class Puzzle implements Encounter {
                     System.out.println("You attack the kobolds, and they retaliate.");
                     System.out.println("Although you defeat them with ease, you are injured in the process.");
                     int dmg = Randomizer.rollD6(2);
-                    hero.reduceHealth(dmg);
+                    hero.adjustHealth(-dmg);
                     System.out.printf("You take %d damage from the kobolds' retaliation.\n", dmg);
                     proceed = true;
                 }
@@ -261,7 +260,7 @@ public class Puzzle implements Encounter {
                         System.out.println("You attempt to open the chest, but you are unable to solve the riddle.");
                         System.out.println("You feel a sense of loss...");
                         int dmg = Randomizer.rollD6(1);
-                        hero.reduceHealth(dmg);
+                        hero.adjustHealth(-dmg);
                         System.out.printf("You take %d psychic damage from the chest's confusing riddle.\n", dmg);
                     }
                 }
@@ -303,14 +302,14 @@ public class Puzzle implements Encounter {
                         System.out.println("You attempt to hold the door shut, and you are able to keep the zombies out.");
                         System.out.println("The zombies eventually give up, and you are able to rest for the night.");
                         int heal = Randomizer.rollD6(2);
-                        hero.applyHealing(heal);
+                        hero.adjustHealth(heal);
                         System.out.printf("You heal %d from the night's rest.\n", heal);
                         proceed = true;
                     } else {
                         System.out.println("You attempt to hold the door shut, but the zombies are too strong.");
                         System.out.println("You feel a sense of loss...");
                         int dmg = Randomizer.rollD6(2);
-                        hero.reduceHealth(dmg);
+                        hero.adjustHealth(-dmg);
                         System.out.printf("You take %d damage from the zombies' attack.\n", dmg);
                     }
                 }
@@ -318,7 +317,7 @@ public class Puzzle implements Encounter {
                     System.out.println("You attempt to barricade the door, but the zombies are too strong.");
                     System.out.println("You face the zombies head on, and you are injured in the process.");
                     int dmg = Randomizer.rollD6(2);
-                    hero.reduceHealth(dmg);
+                    hero.adjustHealth(-dmg);
                     System.out.printf("You take %d damage from the zombies' attack.\n", dmg);
                     proceed = true;
                 }
@@ -358,7 +357,7 @@ public class Puzzle implements Encounter {
                     System.out.println("The Automaton rumble to life, and targets you.");
                     System.out.println("You attack, but against its metal body, you are unable to do any damage.");
                     int dmg = Randomizer.rollD6(1);
-                    hero.reduceHealth(dmg);
+                    hero.adjustHealth(-dmg);
                     System.out.printf("You take %d piercing damage from the automaton's weapons before you manage to flee.\n", dmg);
                     proceed = true;
                 }
@@ -377,7 +376,7 @@ public class Puzzle implements Encounter {
                 case 5 -> {
                     System.out.println("Your answer does not seem to be what the Automaton was looking for...");
                     int heal = Randomizer.rollD6(12);
-                    hero.applyHealing(heal);
+                    hero.adjustHealth(heal);
                     System.out.printf("But such a spiritual discovery is not without reward, and you are healed for %d.\n", heal);
                     proceed = true;
                 }
