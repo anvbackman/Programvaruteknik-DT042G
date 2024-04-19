@@ -17,6 +17,7 @@ public class StatSheet {
     private int nextLevelExperience;
     private int reRollAmount;
     private final HashMap<String, Integer> stats;
+    private Hero hero;
 
     /**
      * Constructor for the stat sheet class.
@@ -91,6 +92,14 @@ public class StatSheet {
     }
 
     /**
+     * Sets the hero of the stat sheet.
+     * @param hero the hero to set.
+     */
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    /**
      * Sets the value of a selected stat.
      * @param stat the stat to set the value of.
      * @param value the value to set the stat to.
@@ -116,8 +125,6 @@ public class StatSheet {
         return statsString.toString();
     }
 
-    // TODO implement stat modifiers.
-
     /**
      * Levels up the characters stats by one.
      */
@@ -125,6 +132,8 @@ public class StatSheet {
         level++;
         stats.replaceAll((stat, value) -> value + 1);
         reRollAmount += Constants.VALUE_MAX_STAT_REROLLS;
+        hero.adjustHealth(hero.getMaxHealth() / 2);
+        hero.adjustMana(hero.getMaxMana() / 2);
         System.out.println("Leveled up! Your stats are now: " + this);
     }
 
