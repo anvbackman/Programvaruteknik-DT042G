@@ -1,7 +1,6 @@
 import abilities.BaseAbility;
 import character.Hero;
 import enemies.Enemies;
-import support.Calculator;
 import support.Constants;
 import support.Output;
 import support.Randomizer;
@@ -193,8 +192,7 @@ public class CombatHandler {
     private void enemiesTurn() {
         System.out.println("It is the enemies turn!");
         for (Enemies enemy : enemies){
-            int damage = Calculator.calculateEnemyAttackDamage(enemy, hero);
-            Output.printEnemyAttackCombatLog(hero.getHealth(), damage, enemy.getType());
+            int damage = Output.printEnemyAttackCombatLog(enemy, hero);
             hero.reduceHealth(damage);
             if (getHealth() <= 0){
                 declareDefeat();
@@ -219,8 +217,7 @@ public class CombatHandler {
         actions--;
 
         // Calculate the damage dealt by the player's attack
-        int damage = Calculator.calculateHeroAttackDamage(hero, target);
-        Output.printHeroAttackCombatLog(target.getHealth(), damage, target.getType());
+        int damage = Output.printHeroAttackCombatLog(target, hero);
         target.takeDamage(damage);
         if (target.isDead()){
             removeEnemy(target);
@@ -282,8 +279,7 @@ public class CombatHandler {
 
         // Reduce the player's actions by 1
         actions--;
-        int damage = ability.damageCalc(hero.getLevel());
-        Output.printHeroAbilityCombatLog(target.getHealth(), damage, target.getType(), ability.getName());
+        int damage = Output.printHeroAbilityCombatLog(target, hero, ability);
         target.takeDamage(damage);
         hero.reduceMana(ability.getCost());
 

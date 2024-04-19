@@ -41,7 +41,10 @@ public class EncounterGenerator {
             case Constants.MISSION_TYPE_SOCIAL -> encounter = new Social(mission, hero, scanner);
             case Constants.MISSION_TYPE_REST -> encounter = new Rest(mission, hero, scanner);
             case Constants.MISSION_TYPE_PUZZLE -> encounter = new Puzzle(mission, hero, scanner);
-            default -> encounter = new Battle(mission, hero, scanner);
+            case Constants.MISSION_TYPE_BOSS -> encounter = new BossBattle(mission, hero, scanner);
+            case Constants.MISSION_TYPE_MINI_BOSS -> encounter = new Battle(
+                    mission, hero, scanner, Constants.VALUE_MINI_BOSS_TIER);
+            default -> encounter = new Battle(mission, hero, scanner, 0);
         }
         return encounter;
     }

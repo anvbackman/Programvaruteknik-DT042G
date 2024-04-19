@@ -9,6 +9,7 @@ import enemies.Zombie;
 import support.Constants;
 import support.Randomizer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,14 +25,15 @@ public class Battle implements Encounter {
      * The overarching mission for the scenario.
      */
     private final Mission mission;
-    private List<Enemies> enemies;
+    private final List<Enemies> enemies;
 
     /**
      * Constructor for the battle class.
      * @param mission the mission for the battle.
      */
-    public Battle(Mission mission, Hero hero, Scanner scanner) {
+    public Battle(Mission mission, Hero hero, Scanner scanner, int bossTier) {
         this.mission = mission;
+        enemies = new ArrayList<>();
     }
 
     /**

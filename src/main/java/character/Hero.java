@@ -42,8 +42,8 @@ public class Hero {
         this.gold = Constants.VALUE_CHARACTER_STARTING_GOLD;
         this.health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
         this.manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
-        this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
-        this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
+        this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 5, 0);
+        this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 5, 0);
         this.consumables = new ArrayList<>();
     }
 
