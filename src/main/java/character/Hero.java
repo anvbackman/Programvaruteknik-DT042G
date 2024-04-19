@@ -26,7 +26,9 @@ public class Hero {
     private final List<Consumables> consumables;
     private int gold;
     private int health;
+    private int maxHealth;
     private int manaPool;
+    private int maxMana;
 
     private BaseAbility ability;
 
@@ -40,8 +42,10 @@ public class Hero {
         this.stats = statSheet;
         this.characterClass = characterClass;
         this.gold = Constants.VALUE_CHARACTER_STARTING_GOLD;
-        this.health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
-        this.manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
+        this.getMaxHealth();
+        this.health = maxHealth;
+        this.getMaxMana();
+        this.manaPool = maxMana;
         this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
         this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
         this.consumables = new ArrayList<>();
@@ -95,7 +99,7 @@ public class Hero {
      * @return the attack value of the character.
      */
     public int getAttack() {
-        return equippedWeapon.getValue();
+        return equippedWeapon.getValue() + stats.getStat(Constants.STAT_STRENGTH);
     }
 
     /**
@@ -174,11 +178,11 @@ public class Hero {
                     if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_HEALTH)) {
                         System.out.println("You used " + consumable.getName() +
                                 " and healed for " + consumable.getValue() + " HP.");
-                        this.applyHealing(consumable.getValue());
+                        this.adjustHealth(consumable.getValue());
                     } else if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_MANA)) {
                         System.out.println("You used " + consumable.getName() +
                                 " and restored " + consumable.getValue() + " MP.");
-                        this.addMana(consumable.getValue());
+                        this.adjustMana(consumable.getValue());
                     }
                     consumables.remove(consumable);
                     if (consumables.isEmpty() || inCombat) {
@@ -243,26 +247,23 @@ public class Hero {
     }
 
     /**
-     * Applies healing to the character.
-     * @param healing the amount of healing to apply.
-     * @return the new health value of the character.
+     * Retrieves the current maximum health of the character.
+     * @return the maximum health of the character.
      */
-    public int applyHealing(int healing) {
-        health += healing;
-        if (health > Constants.VALUE_CHARACTER_STARTING_HEALTH) {
-            health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
-        }
-        return health;
+    public int getMaxHealth() {
+        this.maxHealth = Constants.VALUE_CHARACTER_STARTING_HEALTH + stats.getStat(Constants.STAT_CONSTITUTION);
+        return maxHealth;
     }
 
     /**
-     * Reduces the health of the character.
-     * @param damage the amount of damage to reduce the health by.
-     * @return the new health value of the character.
+     * Applies healing to the character.
+     * @param healing the amount of healing to apply.
      */
-    public int reduceHealth(int damage) {
-        health -= damage;
-        return health;
+    public void adjustHealth(int healing) {
+        health += healing;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
     }
 
     /**
@@ -274,25 +275,24 @@ public class Hero {
     }
 
     /**
-     * Adds mana to the character's mana pool.
-     * @param mana the amount of mana to add.
-     * @return the new mana pool value of the character.
+     * Retrieves the current maximum mana of the character.
+     * @return the maximum mana of the character.
      */
-    public int addMana(int mana) {
-        manaPool += mana;
-        if (manaPool > Constants.VALUE_CHARACTER_STARTING_MANA) {
-            manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
-        }
-        return manaPool;
+    public int getMaxMana() {
+        this.maxMana = Constants.VALUE_CHARACTER_STARTING_MANA + stats.getStat(Constants.STAT_INTELLIGENCE);
+        return maxMana;
     }
 
     /**
-     * Reduces the mana pool of the character.
-     * @param mana the amount of mana to reduce the mana pool by.
+     * Adds mana to the character's mana pool.
+     *
+     * @param mana the amount of mana to add.
      */
-    public int reduceMana(int mana) {
-        manaPool -= mana;
-        return manaPool;
+    public void adjustMana(int mana) {
+        manaPool += mana;
+        if (manaPool > maxMana) {
+            manaPool = maxMana;
+        }
     }
 
     /**

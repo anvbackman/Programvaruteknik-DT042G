@@ -73,7 +73,15 @@ public class CharacterCreator {
         System.out.println(hero.getName() + " the " + classChoice);
         System.out.println(hero.getStats());
 
-        BaseAbility ability = null;
+        BaseAbility ability = getAbility(hero);
+        hero.setAbility(ability);
+        statSheet.setHero(hero);
+
+        return hero;
+    }
+
+    private BaseAbility getAbility(final Hero hero) {
+        BaseAbility ability;
         switch (hero.getCharacterClass()) {
             case Constants.CLASS_BARBARIAN -> ability = new Brutalize();
             case Constants.CLASS_SORCERER -> ability = new WildBolt();
@@ -87,11 +95,9 @@ public class CharacterCreator {
             case Constants.CLASS_CLERIC -> ability = new SacredFlames();
             case Constants.CLASS_MONK -> ability = new KiStrike();
             case Constants.CLASS_WARLOCK -> ability = new EldritchCrush();
-            default -> ability = new Brutalize();
+            default -> ability = null;
         }
-        hero.setAbility(ability);
-
-        return hero;
+        return ability;
     }
 
     /**
@@ -110,7 +116,7 @@ public class CharacterCreator {
      * @param input number input from the user.
      * @return true if the input is valid, false if not.
      */
-    public boolean selectClass(final int input) {
+    public final boolean selectClass(final int input) {
 
         if (input < 1 || input > Constants.CLASSES.size()) {
             Output.printInvalidChoiceMessage();
@@ -147,7 +153,7 @@ public class CharacterCreator {
      * @param input number input from the user.
      * @return true if the input is valid, false if not.
      */
-    public boolean reRollStatSheet(final int input) {
+    public final boolean reRollStatSheet(final int input) {
 
         // Checks if the user has no re-rolls left.
         if (statSheet.getReRollAmount() == 0) {
@@ -198,14 +204,6 @@ public class CharacterCreator {
             proceed = true;
         }
         return proceed;
-    }
-
-    /**
-     * Returns the stat sheet of the current character.
-     * @return stat sheet object.
-     */
-    public StatSheet getStatSheet() {
-        return statSheet;
     }
 
     /**

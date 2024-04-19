@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The battle class is a scenario that contains the encounters for a battle.
- * It contains the execute method which is used to execute the encounters.
- * This will eventually be changed to only generate 1 scenario at a time, but we need to create the gameEngine first.
+ * Class for the boss battle scenario in the game.
+ * The class is used to generate the encounters for the boss battle scenario.
  * @author Martin Roos Eriksson
  */
 public class BossBattle implements Encounter {
@@ -62,7 +61,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionEasy() {
         System.out.println("You encounter a goblin boss, Dressed in rags with a red skin, he looks at you with a grin.");
-        new Boblin(Constants.VALUE_FINAL_BOSS_TIER); //might elaborate further here, later.
+        enemies.add(new Boblin(Constants.VALUE_FINAL_BOSS_TIER)); //might elaborate further here, later.
 
     }
 
@@ -71,7 +70,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionMedium() {
         System.out.println("You encounter the blind Kobold, Skara, his clicking maw echoing in the dark, as he leaps out from the shadows!");
-        new Skara(Constants.VALUE_FINAL_BOSS_TIER);
+        enemies.add(new Skara(Constants.VALUE_FINAL_BOSS_TIER));
     }
 
     /**
@@ -79,7 +78,7 @@ public class BossBattle implements Encounter {
      */
     private void generateEncountersForMissionHard() {
         System.out.println("You encounter Vorkath, the Devourer of Souls! appearing from smoke and shadow his glowing eyes look at you with malice!");
-        new Vorkath(Constants.VALUE_FINAL_BOSS_TIER);
+        enemies.add(new Vorkath(Constants.VALUE_FINAL_BOSS_TIER));
 
     }
 

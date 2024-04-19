@@ -9,6 +9,7 @@ import enemies.Zombie;
 import support.Constants;
 import support.Randomizer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,14 +25,17 @@ public class Battle implements Encounter {
      * The overarching mission for the scenario.
      */
     private final Mission mission;
-    private List<Enemies> enemies;
+    private final List<Enemies> enemies;
+    private final int bossTier;
 
     /**
      * Constructor for the battle class.
      * @param mission the mission for the battle.
      */
-    public Battle(Mission mission, Hero hero, Scanner scanner) {
+    public Battle(Mission mission, Hero hero, Scanner scanner, int bossTier) {
         this.mission = mission;
+        this.bossTier = bossTier;
+        enemies = new ArrayList<>();
     }
 
     /**
@@ -69,7 +73,7 @@ public class Battle implements Encounter {
                         """);
                 int GoblinAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < GoblinAmount; i++){
-                    enemies.add(new Goblin(0));
+                    enemies.add(new Goblin(bossTier));
                 }
             }
 
@@ -81,7 +85,7 @@ public class Battle implements Encounter {
                         """);
                 int GoblinAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < GoblinAmount; i++) {
-                    enemies.add(new Goblin(0));
+                    enemies.add(new Goblin(bossTier));
                 }
             }
             case 3 -> {
@@ -92,7 +96,7 @@ public class Battle implements Encounter {
                         """);
                 int GoblinAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < GoblinAmount; i++) {
-                    enemies.add(new Goblin(0));
+                    enemies.add(new Goblin(bossTier));
                 }
             }
             case 4 -> {
@@ -105,7 +109,7 @@ public class Battle implements Encounter {
                         """);
                 int GoblinAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < GoblinAmount; i++) {
-                    enemies.add(new Goblin(0));
+                    enemies.add(new Goblin(bossTier));
                 }
 
             }
@@ -127,7 +131,7 @@ public class Battle implements Encounter {
                         """);
                 int KoboldAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < KoboldAmount; i++){
-                    enemies.add(new Kobold(0));
+                    enemies.add(new Kobold(bossTier));
                 }
             }
             case 2 -> {
@@ -137,7 +141,7 @@ public class Battle implements Encounter {
                         roll Initiative!""");
                 int KoboldAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < KoboldAmount; i++) {
-                    enemies.add(new Kobold(0));
+                    enemies.add(new Kobold(bossTier));
                 }
             }
             case 3 -> {
@@ -148,7 +152,7 @@ public class Battle implements Encounter {
                         """);
                 int KoboldAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < KoboldAmount; i++) {
-                    enemies.add(new Kobold(0));
+                    enemies.add(new Kobold(bossTier));
                 }
             }
             case 4 -> {
@@ -159,7 +163,7 @@ public class Battle implements Encounter {
                         """);
                 int KoboldAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < KoboldAmount; i++) {
-                    enemies.add(new Kobold(0));
+                    enemies.add(new Kobold(bossTier));
                 }
             }
             default -> System.out.println("You encounter nothing unusual.");
@@ -181,7 +185,7 @@ public class Battle implements Encounter {
 
                 int ZombieAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < ZombieAmount; i++) {
-                    enemies.add(new Zombie(0));
+                    enemies.add(new Zombie(bossTier));
                 }
             }
             case 2 -> {
@@ -194,7 +198,7 @@ public class Battle implements Encounter {
                         """);
                 int ZombieAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < ZombieAmount; i++) {
-                    enemies.add(new Zombie(0));
+                    enemies.add(new Zombie(bossTier));
                 }
             }
             case 3 -> {
@@ -206,7 +210,7 @@ public class Battle implements Encounter {
                         """);
                 int ZombieAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < ZombieAmount; i++) {
-                    enemies.add(new Zombie(0));
+                    enemies.add(new Zombie(bossTier));
                 }
             }
             case 4 -> {
@@ -217,7 +221,7 @@ public class Battle implements Encounter {
                         """);
                 int ZombieAmount = Randomizer.rollD4(1);
                 for(int i = 0; i < ZombieAmount; i++) {
-                    enemies.add(new Zombie(0));
+                    enemies.add(new Zombie(bossTier));
                 }
             }
             default -> System.out.println("You encounter nothing unusual.");
