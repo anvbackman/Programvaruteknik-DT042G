@@ -82,6 +82,10 @@ public class BossBattle implements Encounter {
 
     }
 
+    /**
+     * Getter for the enemies in the encounter.
+     * @return the enemies in the encounter.
+     */
     public List<Enemies> getEnemies() {
         return enemies;
     }

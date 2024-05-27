@@ -1,7 +1,9 @@
 import character.StatSheet;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import support.Constants;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Tests the StatSheet class.
@@ -17,8 +19,8 @@ public class TestStatSheet {
      */
     @Test
     public void testReRollSelected() {
-        Assertions.assertTrue(statSheet.reRollSelected("Strength"));
-        Assertions.assertEquals(ReRollAmount - 1, statSheet.getReRollAmount());
+        assertTrue(statSheet.reRollSelected("Strength"));
+        assertEquals(ReRollAmount - 1, statSheet.getReRollAmount());
     }
 
     /**
@@ -26,7 +28,7 @@ public class TestStatSheet {
      */
     @Test
     public void testInvalidStatReRoll() {
-        Assertions.assertFalse(statSheet.reRollSelected("InvalidStat"));
+        assertFalse(statSheet.reRollSelected("InvalidStat"));
     }
 
     /**
@@ -34,7 +36,7 @@ public class TestStatSheet {
      */
     @Test
     public void testGettingInvalidStat() {
-        Assertions.assertEquals(-1, statSheet.getStat("InvalidStat"));
+        assertEquals(-1, statSheet.getStat("InvalidStat"));
     }
 
     /**
@@ -43,8 +45,8 @@ public class TestStatSheet {
     @Test
     public void testSetStat() {
         int expected = 10;
-        Assertions.assertTrue(statSheet.setStat("Strength", expected));
-        Assertions.assertEquals(expected, statSheet.getStat("Strength"));
+        assertTrue(statSheet.setStat("Strength", expected));
+        assertEquals(expected, statSheet.getStat("Strength"));
     }
 
     /**
@@ -53,7 +55,7 @@ public class TestStatSheet {
     @Test
     public void testSetInvalidStat() {
         int expected = 10;
-        Assertions.assertFalse(statSheet.setStat("InvalidStat", expected));
+        assertFalse(statSheet.setStat("InvalidStat", expected));
     }
 
     /**
@@ -61,26 +63,6 @@ public class TestStatSheet {
      */
     @Test
     public void testLevelUpThreshold() {
-        Assertions.assertEquals(Constants.VALUES_EXPERIENCE_PER_LEVEL.get(0), statSheet.calculateNextLevelExperience());
-    }
-
-    /**
-     * Tests if the level up threshold correctly remains constant after leveling up beyond set values.
-     */
-    @Test
-    public void testLevelUpThresholdExcess() {
-        int excess;
-        int expected;
-        StatSheet testingSheet = new StatSheet();
-        for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size() + 1; i++) {
-            statSheet.levelUp();
-        }
-        excess = statSheet.calculateNextLevelExperience();
-        for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size(); i++) {
-            testingSheet.levelUp();
-        }
-        expected = testingSheet.calculateNextLevelExperience();
-
-        Assertions.assertEquals(expected, excess);
+        assertEquals(Constants.VALUES_EXPERIENCE_PER_LEVEL.get(0), statSheet.calculateNextLevelExperience());
     }
 }

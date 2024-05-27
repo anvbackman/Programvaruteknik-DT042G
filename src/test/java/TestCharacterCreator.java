@@ -1,7 +1,11 @@
 import creator.CharacterCreator;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+
 import support.Constants;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests the character creator class.
@@ -17,7 +21,7 @@ public class TestCharacterCreator {
     @Test
     public void testValidClassSelect() {
         for (int i = 1; i <= Constants.CLASSES.size(); i++) {
-            Assertions.assertTrue(characterCreator.selectClass(i));
+            assertTrue(characterCreator.selectClass(i));
         }
     }
 
@@ -26,7 +30,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testInValidClassSelect() {
-        Assertions.assertFalse(characterCreator.selectClass(Constants.CLASSES.size() + 1));
+        assertFalse(characterCreator.selectClass(Constants.CLASSES.size() + 1));
     }
 
     /**
@@ -34,7 +38,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testValidNameSelect() {
-        Assertions.assertTrue(characterCreator.selectName("TestName"));
+        assertTrue(characterCreator.selectName("TestName"));
     }
 
     /**
@@ -42,7 +46,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testEmptyNameSelect() {
-        Assertions.assertFalse(characterCreator.selectName(""));
+        assertFalse(characterCreator.selectName(""));
     }
 
     /**
@@ -50,7 +54,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testLongNameSelect() {
-        Assertions.assertFalse(characterCreator.selectName("ThisNameIsTooLongToBeAccepted"));
+        assertFalse(characterCreator.selectName("ThisNameIsTooLongToBeAccepted"));
     }
 
     /**
@@ -58,7 +62,7 @@ public class TestCharacterCreator {
      */
     @Test
     public void testIfNameOnlyContainsSpaces() {
-        Assertions.assertFalse(characterCreator.selectName("    "));
+        assertFalse(characterCreator.selectName("    "));
     }
 
     /**
@@ -69,7 +73,7 @@ public class TestCharacterCreator {
         for (int i = 1; i < 6; i++) {
             // Creates new characterCreator instance for each test, ensuring that the re-roll amount is reset.
             characterCreator = new CharacterCreator();
-            Assertions.assertFalse(characterCreator.reRollStatSheet(i));
+            assertFalse(characterCreator.reRollStatSheet(i));
         }
     }
 
@@ -79,7 +83,7 @@ public class TestCharacterCreator {
     @Test
     public void testInvalidStatReRolls() {
         characterCreator = new CharacterCreator();
-        Assertions.assertFalse(characterCreator.reRollStatSheet(7));
+        assertFalse(characterCreator.reRollStatSheet(7));
     }
 
     /**
@@ -91,7 +95,7 @@ public class TestCharacterCreator {
         for (int i = 0; i < Constants.VALUE_MAX_STAT_REROLLS; i++) {
             characterCreator.reRollStatSheet(1);
         }
-        Assertions.assertEquals(0, characterCreator.getReRollAmount());
+        assertEquals(0, characterCreator.getReRollAmount());
     }
 
     /**
@@ -103,6 +107,6 @@ public class TestCharacterCreator {
         for (int i = 0; i < Constants.VALUE_MAX_STAT_REROLLS + 1; i++) {
             characterCreator.reRollStatSheet(1);
         }
-        Assertions.assertEquals(0, characterCreator.getReRollAmount());
+        assertEquals(0, characterCreator.getReRollAmount());
     }
 }
