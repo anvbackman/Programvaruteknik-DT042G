@@ -42,7 +42,7 @@ public class Randomizer {
      */
     public static int rollD10(int n) {
         int result = 0;
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
             result += (int) (Math.random() * 10) + 1;
         }
         return result;
@@ -63,7 +63,7 @@ public class Randomizer {
      */
     public static int rollD20(int n) {
         int result = 0;
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
             result += (int) (Math.random() * 20) + 1;
         }
         return result;
