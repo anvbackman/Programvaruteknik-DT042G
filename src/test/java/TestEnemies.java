@@ -15,13 +15,20 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestEnemies {
 
-
+    /**
+     * Test the creation of an enemy
+     * This test will create an enemy object and check if the type is correct
+     */
     @Test
     public void testEnemyCreation() {
         Enemies enemy = new Zombie(0);
         assertEquals("Zombie", enemy.getType());
     }
 
+    /**
+     * Test the attack method
+     * This test will create an enemy object and check if the attack method works as intended
+     */
     @Test
     public void testAttack() {
         // Test attack method
@@ -34,6 +41,10 @@ public class TestEnemies {
         assertTrue(newDmg >= minDmg && newDmg <= maxDmg);
     }
 
+    /**
+     * Test the ability method
+     * This test will create an enemy object and check if the ability method works as intended
+     */
     @Test
     public void testAbility() {
         // Test ability execution
@@ -43,6 +54,10 @@ public class TestEnemies {
 
     }
 
+    /**
+     * Test the takeDamage method
+     * This test will create an enemy object and check if the takeDamage method works as intended
+     */
     @Test
     public void testTakeDamage() {
         // Test damage calculation
@@ -51,6 +66,10 @@ public class TestEnemies {
         assertEquals(0, enemy.getHealth());
     }
 
+    /**
+     * Test the death method
+     * This test will create an enemy object and check if the death method works as intended
+     */
     @Test
     public void testDeath() {
         // Test death
@@ -58,7 +77,11 @@ public class TestEnemies {
         enemy.takeDamage(150); // Assuming this leads to death
         // Add assertions to verify the outcome of death
     }
-    
+
+    /**
+     * Test the MiniBoss method
+     * This test will create an enemy object and check if their type is MiniBoss
+     */
     @Test
     public void testMiniBoss() {
         // Test mini boss creation
@@ -66,6 +89,10 @@ public class TestEnemies {
         assertEquals("Goblin Boss", enemy.getType());
     }
 
+    /**
+     * TestZombie method
+     * This test will create a zombie object and check if the type is correct
+     */
     @Test
     public void testZombie() {
         // Test zombie creation
@@ -73,6 +100,10 @@ public class TestEnemies {
         assertEquals("Zombie", enemy.getType());
     }
 
+    /**
+     * TestKobold method
+     * This test will create a kobold object and check if the type is correct
+     */
     @Test
     public void testKobold() {
         // Test kobold creation
