@@ -28,8 +28,8 @@ public class TestAbilities {
      */
     @Test
     public void testAbilityName() {
-        assertEquals("Brutalize", ability.getName(), "Ability should be of type Brutalize");
-        assertNotEquals("EldritchCrush", ability.getName(), "Ability should not be of type EldritchCrush");
+        assertEquals("Brutalize", ability.getName());
+        assertNotEquals("EldritchCrush", ability.getName());
     }
 
     /**
