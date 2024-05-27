@@ -48,4 +48,6 @@ public abstract class BaseAbility {
      * @return the number of targets the ability can hit.
      */
     public abstract int getTargets();
+
+    public abstract int execute(int target, int charLevel);
 }

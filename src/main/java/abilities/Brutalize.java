@@ -32,4 +32,18 @@ public class Brutalize extends BaseAbility {
     public int getTargets() {
         return 1;
     }
+
+    /**
+     * Method that executes the ability.
+     * @param target the target of the ability.
+     * @param charLevel the level of the character using the ability.
+     */
+    public int execute(int target, int charLevel) {
+        int targets = getTargets();
+        int damage = damageCalc(charLevel);
+        return damage;
+    }
+
+
+
 }
