@@ -28,5 +28,5 @@ public abstract class BaseAbility {
     /**
      * Method that executes the ability.
      */
-    public abstract void execute(int target, int charLevel);
+    public abstract int execute(int target, int charLevel);
 }

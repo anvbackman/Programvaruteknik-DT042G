@@ -55,10 +55,11 @@ public class WildBolt extends BaseAbility{
      * @param target the target of the ability.
      * @param charLevel the level of the character using the ability.
      */
-    public void execute(int target, int charLevel) {
+    public int execute(int target, int charLevel) {
         int targets = getTargets();
         int damage = damageCalc(charLevel);
         String element = generateElement();
+        return damage;
     }
 
 }
