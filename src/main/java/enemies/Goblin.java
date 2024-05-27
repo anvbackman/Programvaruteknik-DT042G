@@ -57,6 +57,10 @@ public class Goblin extends Enemies{
         setDamage(ogDamage);
     }
 
+    public Boolean getUsedPoison() {
+        return UsedPoison;
+    }
+
     /**
      * Method that will take in an int value and subtract it from the health of the Goblin object
      * @param damage int value that will be subtracted from the health of the Goblin object

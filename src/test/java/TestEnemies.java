@@ -5,6 +5,7 @@ import enemies.Zombie;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for the Enemies package
@@ -25,8 +26,12 @@ public class TestEnemies {
     public void testAttack() {
         // Test attack method
         Enemies enemy = new Goblin(0);
-        enemy.attack(20);
-        assertEquals(20, enemy.getDamage());
+        int initialDmg = enemy.getDamage();
+        enemy.attack(5);
+        int newDmg = enemy.getDamage();
+        int minDmg = initialDmg + 1;
+        int maxDmg = initialDmg + 4;
+        assertTrue(newDmg >= minDmg && newDmg <= maxDmg);
     }
 
     @Test
@@ -34,14 +39,15 @@ public class TestEnemies {
         // Test ability execution
         Enemies enemy = new Goblin(0);
         enemy.doAbility(); // Assuming the default ability is being executed
-        // Add assertions to verify the outcome of the ability execution
+        assertTrue(((Goblin) enemy).getUsedPoison());
+
     }
 
     @Test
     public void testTakeDamage() {
         // Test damage calculation
         Enemies enemy = new Goblin(0);
-        enemy.takeDamage(15);
+        enemy.takeDamage(60);
         assertEquals(0, enemy.getHealth());
     }
 
@@ -56,8 +62,22 @@ public class TestEnemies {
     @Test
     public void testMiniBoss() {
         // Test mini boss creation
-        Enemies enemy = new Goblin(0);
+        Enemies enemy = new Goblin(1);
         assertEquals("Goblin Boss", enemy.getType());
+    }
+
+    @Test
+    public void testZombie() {
+        // Test zombie creation
+        Enemies enemy = new Zombie(0);
+        assertEquals("Zombie", enemy.getType());
+    }
+
+    @Test
+    public void testKobold() {
+        // Test kobold creation
+        Enemies enemy = new Kobold(0);
+        assertEquals("Kobold", enemy.getType());
     }
 
 
