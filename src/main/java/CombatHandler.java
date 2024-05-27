@@ -359,6 +359,10 @@ public class CombatHandler {
         }
     }
 
+    /**
+     * Determines the reward for the combat.
+     * The reward is based on the tier of the enemies.
+     */
     private void determineReward(){
         reward = 0;
         for (Enemies enemy : enemies){

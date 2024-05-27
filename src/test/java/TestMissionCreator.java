@@ -1,7 +1,8 @@
 import creator.Mission;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import support.Constants;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 /**
  * This class is used to test the Mission class.
@@ -16,6 +17,6 @@ public class TestMissionCreator {
     public void testMissionDifficultyReturn() {
         String difficulty = Constants.DIFFICULTY_HARD;
         Mission mission = new Mission(difficulty, 3);
-        Assertions.assertEquals(difficulty, mission.getDifficulty());
+        assertEquals(difficulty, mission.getDifficulty());
     }
 }

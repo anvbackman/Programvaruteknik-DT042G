@@ -1,11 +1,10 @@
-import abilities.BaseAbility;
-import abilities.Brutalize;
 import character.Hero;
 import character.StatSheet;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import support.Constants;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Test the Hero class.
@@ -14,6 +13,10 @@ import support.Constants;
 public class TestHero {
 
     private Hero hero;
+
+    /**
+     * Set up the test environment
+     */
     @BeforeEach
     public void setUp() {
         hero = new Hero(new StatSheet(), "TestHero", "TestClass");
@@ -24,7 +27,7 @@ public class TestHero {
      */
     @Test
     public void testStartMoney() {
-        Assertions.assertEquals(Constants.VALUE_CHARACTER_STARTING_GOLD, hero.getGold());
+        assertEquals(Constants.VALUE_CHARACTER_STARTING_GOLD, hero.getGold());
     }
 
     /**
@@ -35,7 +38,7 @@ public class TestHero {
         int startingGold = hero.getGold();
         int goldToAdd = 100;
         hero.addGold(goldToAdd);
-        Assertions.assertEquals(startingGold + goldToAdd, hero.getGold());
+        assertEquals(startingGold + goldToAdd, hero.getGold());
     }
 
     /**
@@ -46,7 +49,7 @@ public class TestHero {
         int startingGold = hero.getGold();
         int goldToRemove = -25;
         hero.addGold(goldToRemove);
-        Assertions.assertEquals(startingGold + goldToRemove, hero.getGold());
+        assertEquals(startingGold + goldToRemove, hero.getGold());
     }
 
     /**
@@ -55,6 +58,6 @@ public class TestHero {
     @Test
     public void testRemoveMoneyFail() {
         int goldToRemove = hero.getGold() + 10;
-        Assertions.assertFalse(hero.addGold(-goldToRemove));
+        assertFalse(hero.addGold(-goldToRemove));
     }
 }

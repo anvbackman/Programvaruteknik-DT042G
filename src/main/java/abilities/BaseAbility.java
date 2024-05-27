@@ -49,5 +49,11 @@ public abstract class BaseAbility {
      */
     public abstract int getTargets();
 
+    /**
+     * Method that executes the ability.
+     * @param target the target of the ability.
+     * @param charLevel the level of the character using the ability.
+     * @return the damage dealt by the ability.
+     */
     public abstract int execute(int target, int charLevel);
 }
