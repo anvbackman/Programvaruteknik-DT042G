@@ -228,6 +228,10 @@ public class Battle implements Encounter {
         }
     }
 
+    /**
+     * Getter for the enemies in the battle.
+     * @return the enemies in the battle.
+     */
     public List<Enemies> getEnemies() {
         return enemies;
     }

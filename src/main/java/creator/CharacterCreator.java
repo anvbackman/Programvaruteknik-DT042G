@@ -80,6 +80,11 @@ public class CharacterCreator {
         return hero;
     }
 
+    /**
+     * Returns the ability based on the selected class.
+     * @param hero the hero to get the ability for.
+     * @return the ability.
+     */
     private BaseAbility getAbility(final Hero hero) {
         BaseAbility ability;
         switch (hero.getCharacterClass()) {

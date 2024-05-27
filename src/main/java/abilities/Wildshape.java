@@ -40,7 +40,7 @@ public class Wildshape extends BaseAbility {
      * @param charLevel the level of the character using the ability.
      */
     public int execute(int target, int charLevel) {
-        int targets = getTargets();
+        target = getTargets();
         int damage = damageCalc(charLevel);
         return damage;
     }
