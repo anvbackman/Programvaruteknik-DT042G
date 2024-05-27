@@ -1,18 +1,6 @@
 package character;
 
 import abilities.BaseAbility;
-import abilities.Brutalize;
-import abilities.EldritchCrush;
-import abilities.FireBolt;
-import abilities.KiStrike;
-import abilities.SacredFlames;
-import abilities.SilverTongue;
-import abilities.Smite;
-import abilities.SneakAttack;
-import abilities.TacticalShot;
-import abilities.WarCry;
-import abilities.WildBolt;
-import abilities.Wildshape;
 import gears.Armor;
 import gears.Consumables;
 import gears.Weapons;
@@ -38,9 +26,11 @@ public class Hero {
     private final List<Consumables> consumables;
     private int gold;
     private int health;
+    private int maxHealth;
     private int manaPool;
+    private int maxMana;
 
-    private final BaseAbility ability;
+    private BaseAbility ability;
 
     /**
      * Constructor for a character.
@@ -52,12 +42,13 @@ public class Hero {
         this.stats = statSheet;
         this.characterClass = characterClass;
         this.gold = Constants.VALUE_CHARACTER_STARTING_GOLD;
-        this.health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
-        this.manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
+        this.getMaxHealth();
+        this.health = maxHealth;
+        this.getMaxMana();
+        this.manaPool = maxMana;
         this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
         this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
         this.consumables = new ArrayList<>();
-        this.ability = setAbility(characterClass);
     }
 
     /**
@@ -95,6 +86,21 @@ public class Hero {
         return stats;
     }
 
+    /**
+     * Returns the defense of the character.
+     * @return the defense value of the character.
+     */
+    public int getDefense() {
+        return equippedArmor.getValue();
+    }
+
+    /**
+     * Returns the attack of the character.
+     * @return the attack value of the character.
+     */
+    public int getAttack() {
+        return equippedWeapon.getValue() + stats.getStat(Constants.STAT_STRENGTH);
+    }
 
     /**
      * Returns the equipped armor of the character.
@@ -136,12 +142,14 @@ public class Hero {
 
     /**
      * Opens the menu to use a consumable.
+     * @param inCombat true if the character is in combat, else false.
+     * @return true if the consumable was used, else false.
      */
-    public void openUseConsumableMenu() {
+    public boolean useConsumable(boolean inCombat) {
 
         if (consumables.isEmpty()) {
             Output.printErrorMessage("You have no consumables.");
-            return;
+            return false;
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -162,7 +170,7 @@ public class Hero {
 
             switch (input) {
                 case 0 -> {
-                    return;
+                    return false;
                 }
                 case -1 -> Output.printInvalidChoiceMessage();
                 default -> {
@@ -170,15 +178,15 @@ public class Hero {
                     if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_HEALTH)) {
                         System.out.println("You used " + consumable.getName() +
                                 " and healed for " + consumable.getValue() + " HP.");
-                        this.applyHealing(consumable.getValue());
+                        this.adjustHealth(consumable.getValue());
                     } else if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_MANA)) {
                         System.out.println("You used " + consumable.getName() +
                                 " and restored " + consumable.getValue() + " MP.");
-                        this.addMana(consumable.getValue());
+                        this.adjustMana(consumable.getValue());
                     }
                     consumables.remove(consumable);
-                    if (consumables.isEmpty()) {
-                        return;
+                    if (consumables.isEmpty() || inCombat) {
+                        return true;
                     }
                 }
             }
@@ -239,26 +247,23 @@ public class Hero {
     }
 
     /**
-     * Applies healing to the character.
-     * @param healing the amount of healing to apply.
-     * @return the new health value of the character.
+     * Retrieves the current maximum health of the character.
+     * @return the maximum health of the character.
      */
-    public int applyHealing(int healing) {
-        health += healing;
-        if (health > Constants.VALUE_CHARACTER_STARTING_HEALTH) {
-            health = Constants.VALUE_CHARACTER_STARTING_HEALTH;
-        }
-        return health;
+    public int getMaxHealth() {
+        this.maxHealth = Constants.VALUE_CHARACTER_STARTING_HEALTH + stats.getStat(Constants.STAT_CONSTITUTION);
+        return maxHealth;
     }
 
     /**
-     * Reduces the health of the character.
-     * @param damage the amount of damage to reduce the health by.
-     * @return the new health value of the character.
+     * Applies healing to the character.
+     * @param healing the amount of healing to apply.
      */
-    public int reduceHealth(int damage) {
-        health -= damage;
-        return health;
+    public void adjustHealth(int healing) {
+        health += healing;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
     }
 
     /**
@@ -270,25 +275,24 @@ public class Hero {
     }
 
     /**
-     * Adds mana to the character's mana pool.
-     * @param mana the amount of mana to add.
-     * @return the new mana pool value of the character.
+     * Retrieves the current maximum mana of the character.
+     * @return the maximum mana of the character.
      */
-    public int addMana(int mana) {
-        manaPool += mana;
-        if (manaPool > Constants.VALUE_CHARACTER_STARTING_MANA) {
-            manaPool = Constants.VALUE_CHARACTER_STARTING_MANA;
-        }
-        return manaPool;
+    public int getMaxMana() {
+        this.maxMana = Constants.VALUE_CHARACTER_STARTING_MANA + stats.getStat(Constants.STAT_INTELLIGENCE);
+        return maxMana;
     }
 
     /**
-     * Reduces the mana pool of the character.
-     * @param mana the amount of mana to reduce the mana pool by.
+     * Adds mana to the character's mana pool.
+     *
+     * @param mana the amount of mana to add.
      */
-    public int reduceMana(int mana) {
-        manaPool -= mana;
-        return manaPool;
+    public void adjustMana(int mana) {
+        manaPool += mana;
+        if (manaPool > maxMana) {
+            manaPool = maxMana;
+        }
     }
 
     /**
@@ -309,50 +313,17 @@ public class Hero {
 
     /**
      * Sets the ability of the character.
-     * @param characterClass the character class of the character.
-     * @return the ability object of the character.
+     * @param ability the ability to assign to the character.
      */
-    public BaseAbility setAbility(String characterClass) {
-        switch (characterClass.toLowerCase()){
-            case "barbarian" -> {
-                return new Brutalize();
-            }
-            case "sorcerer" -> {
-                return new WildBolt();
-            }
-            case "paladin" -> {
-                return new Smite();
-            }
-            case "bard" -> {
-                return new SilverTongue();
-            }
-            case "fighter" -> {
-                return new WarCry();
-            }
-            case "druid" -> {
-                return new Wildshape();
-            }
-            case "ranger" -> {
-                return new TacticalShot();
-            }
-            case "rogue" -> {
-                return new SneakAttack();
-            }
-            case "wizard" -> {
-                return new FireBolt();
-            }
-            case "cleric" -> {
-                return new SacredFlames();
-            }
-            case "monk" -> {
-                return new KiStrike();
-            }
-            case "warlock" -> {
-                return new EldritchCrush();
-            }
-            default -> {
-                return null;
-            }
-        }
+    public void setAbility(BaseAbility ability) {
+        this.ability = ability;
+    }
+
+    /**
+     * Returns the level of the character from the stat sheet.
+     * @return the level of the character.
+     */
+    public int getLevel() {
+        return stats.getLevel();
     }
 }

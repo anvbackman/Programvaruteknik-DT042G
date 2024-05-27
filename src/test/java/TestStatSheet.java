@@ -1,6 +1,7 @@
 import character.StatSheet;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import support.Constants;
 
 /**
  * Tests the StatSheet class.
@@ -53,5 +54,33 @@ public class TestStatSheet {
     public void testSetInvalidStat() {
         int expected = 10;
         Assertions.assertFalse(statSheet.setStat("InvalidStat", expected));
+    }
+
+    /**
+     * Tests if the level up threshold is correct.
+     */
+    @Test
+    public void testLevelUpThreshold() {
+        Assertions.assertEquals(Constants.VALUES_EXPERIENCE_PER_LEVEL.get(0), statSheet.calculateNextLevelExperience());
+    }
+
+    /**
+     * Tests if the level up threshold correctly remains constant after leveling up beyond set values.
+     */
+    @Test
+    public void testLevelUpThresholdExcess() {
+        int excess;
+        int expected;
+        StatSheet testingSheet = new StatSheet();
+        for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size() + 1; i++) {
+            statSheet.levelUp();
+        }
+        excess = statSheet.calculateNextLevelExperience();
+        for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size(); i++) {
+            testingSheet.levelUp();
+        }
+        expected = testingSheet.calculateNextLevelExperience();
+
+        Assertions.assertEquals(expected, excess);
     }
 }

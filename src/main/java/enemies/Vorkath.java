@@ -8,9 +8,8 @@ import support.Randomizer;
  */
 public class Vorkath extends Enemies {
 
-    private Boolean isBigBoss;
-    public Vorkath(boolean isBigBoss) {
-        super("Vorkath the Soul Devourer", 0, 0, 0, false, isBigBoss);
+    public Vorkath(int bossTier) {
+        super("Vorkath the Soul Devourer", 0, 0, 0, bossTier);
         this.health = Randomizer.rollD10(12);
         this.damage = Randomizer.rollD6(6);
         this.armor = Randomizer.rollD6(6);

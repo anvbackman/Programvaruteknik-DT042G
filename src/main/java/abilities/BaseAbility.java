@@ -10,11 +10,14 @@ public abstract class BaseAbility {
     /** The name of the ability. */
     private final String name;
 
+    private final int cost;
+
     /**
      * Constructor for the BaseAbility class.
      */
-    public BaseAbility(String name) {
+    public BaseAbility(String name, int cost) {
         this.name = name;
+        this.cost = cost;
     }
 
     /**
@@ -26,7 +29,25 @@ public abstract class BaseAbility {
     }
 
     /**
-     * Method that executes the ability.
+     * Method that returns the cost of the ability.
+     * @return the cost of the ability.
      */
+    public int getCost() {
+        return cost;
+    }
+
+    /**
+     * Method that calculates the damage of the ability.
+     * @param CharLevel the level of the character using the ability.
+     * @return the damage dealt by the ability.
+     */
+    public abstract int damageCalc(int CharLevel);
+
+    /**
+     * Method that returns the number of targets the ability can hit.
+     * @return the number of targets the ability can hit.
+     */
+    public abstract int getTargets();
+
     public abstract int execute(int target, int charLevel);
 }

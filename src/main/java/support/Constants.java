@@ -57,7 +57,14 @@ public final class Constants {
     public final static double VALUE_SHOP_SELL_BASE_MODIFIER = 0.5;
     public final static int VALUE_CHARACTER_STARTING_GOLD = 50;
     public final static int VALUE_CHARACTER_STARTING_HEALTH = 100;
-    public static final int VALUE_CHARACTER_STARTING_MANA = 50;
+    public final static int VALUE_CHARACTER_STARTING_MANA = 50;
+    public final static int VALUE_CHARACTER_COMBAT_ACTIONS = 2;
+    public final static int VALUE_COMBAT_ESCAPE_CHANCE = 4;
+    public final static int VALUE_FINAL_BOSS_TIER = 2;
+    public final static int VALUE_MINI_BOSS_TIER = 1;
+    public final static List<Integer> VALUES_EXPERIENCE_PER_LEVEL = List.of(
+            100, 200, 400, 800
+    );
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";
@@ -78,6 +85,7 @@ public final class Constants {
     public final static String CLASS_PALADIN = "Paladin";
     public final static String CLASS_RANGER = "Ranger";
     public final static String CLASS_ROGUE = "Rogue";
+    public final static String CLASS_WIZARD = "Wizard";
     public final static String CLASS_SORCERER = "Sorcerer";
     public final static String CLASS_WARLOCK = "Warlock";
     // List of above classes.
@@ -92,7 +100,8 @@ public final class Constants {
             CLASS_RANGER,
             CLASS_ROGUE,
             CLASS_SORCERER,
-            CLASS_WARLOCK
+            CLASS_WARLOCK,
+            CLASS_WIZARD
     );
 
     // -- Mission types --

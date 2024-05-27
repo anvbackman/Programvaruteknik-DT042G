@@ -1,5 +1,6 @@
 package enemies;
 
+import support.Constants;
 import support.Randomizer;
 
 /**
@@ -15,10 +16,10 @@ public class Kobold extends Enemies {
     /**
      * Kobold constructor that takes in an EnemyAbility object
      */
-    public Kobold(boolean isMiniBoss) {
-        super("Kobold", 0, 0, 0, isMiniBoss, false); // Initialize with default values
+    public Kobold(int bossTier) {
+        super("Kobold", 0, 0, 0, bossTier); // Initialize with default values
 
-        if (isMiniBoss) {
+        if (bossTier >= Constants.VALUE_MINI_BOSS_TIER) {
             this.type = "Kobold Boss";
             this.health = Randomizer.rollD6(8);
             this.damage = Randomizer.rollD4(4);

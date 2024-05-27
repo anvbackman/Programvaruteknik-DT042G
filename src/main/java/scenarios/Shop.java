@@ -161,7 +161,7 @@ public class Shop implements Encounter{
                     } else {
                         Output.printSuccessMessage("You have purchased " +
                                 selectedGear.getName() +
-                                "(-" + calculatePrice(selectedGear.getCost()) + " gold).");
+                                " (-" + calculatePrice(selectedGear.getCost()) + " gold).");
 
                         // Removes the purchased gear from the shop inventory.
                         gearList.remove(input - 1);

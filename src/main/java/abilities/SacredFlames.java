@@ -12,7 +12,7 @@ public class SacredFlames extends BaseAbility {
      * Constructor for the SacredFlames class.
      */
     public SacredFlames() {
-        super("SacredFlames");
+        super("SacredFlames", 25);
     }
 
     /**
@@ -20,10 +20,9 @@ public class SacredFlames extends BaseAbility {
      * @param CharLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    private int damageCalc(int CharLevel) {
+    public int damageCalc(int CharLevel) {
 
-        int result = Randomizer.rollD10(CharLevel);
-        return result;
+        return Randomizer.rollD10(CharLevel);
 
     }
 
@@ -31,7 +30,7 @@ public class SacredFlames extends BaseAbility {
      * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    private int getTargets(){
+    public int getTargets(){
         return 1;
     }
 

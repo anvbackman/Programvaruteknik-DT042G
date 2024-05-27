@@ -8,8 +8,7 @@ package enemies;
  */
 public abstract class Enemies {
 
-    private final boolean isMiniBoss;
-    private final boolean isBigBoss;
+    private final int bossTier;
     /**
      * ability is an instance of the EnemyAbility interface
      */
@@ -41,16 +40,14 @@ public abstract class Enemies {
      * @param health specifies the health of the enemy
      * @param damage specifies the damage of the enemy
      * @param armor specifies the armor of the enemy
-     * @param isMiniBoss specifies if the enemy is a mini boss
-     * @param isBigBoss specifies if the enemy is a big boss
+     * @param bossTier specifies the tier of the boss, 1 for mini-boss, 2 for boss
      */
-    public Enemies(String type, int health, int damage, int armor, boolean isMiniBoss, boolean isBigBoss) {
+    public Enemies(String type, int health, int damage, int armor, int bossTier) {
         this.type = type;
         this.health = health;
         this.damage = damage;
         this.armor = armor;
-        this.isMiniBoss = isMiniBoss;
-        this.isBigBoss = isBigBoss;
+        this.bossTier = bossTier;
     }
 
     /**
@@ -136,7 +133,6 @@ public abstract class Enemies {
      */
     public void takeDamage(int damage) {
         health -= damage;
-        System.out.println(type + " took " + damage + " damage");
     }
 
     /**
@@ -151,6 +147,14 @@ public abstract class Enemies {
      * @return true if the enemy is dead, false if the enemy is still alive
      */
     public boolean isDead() {
-        return true;
+        return getHealth() <= 0;
+    }
+
+    /**
+     * Retrieves the boss tier of the enemy.
+     * @return the boss tier of the enemy. 1 for mini-boss, 2 for boss.
+     */
+    public int getBossTier() {
+        return bossTier;
     }
 }

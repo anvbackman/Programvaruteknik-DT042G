@@ -6,7 +6,7 @@ import support.Randomizer;
  * WildBolt ability for the Sorcerer class, this ability is used to deal damage to a single target.
  * The damage is calculated by rolling a d10 for every level the character has.
  */
-public class WildBolt extends BaseAbility{
+public class WildBolt extends BaseAbility {
 
     /**
      * Array of elements that the ability can generate.
@@ -17,7 +17,7 @@ public class WildBolt extends BaseAbility{
      * Constructor for the WildBolt class.
      */
     public WildBolt() {
-        super("WildBolt");
+        super("WildBolt", 20);
     }
 
     /**
@@ -25,10 +25,9 @@ public class WildBolt extends BaseAbility{
      * @param CharLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    private int damageCalc(int CharLevel) {
+    public int damageCalc(int CharLevel) {
 
-        int result = Randomizer.rollD10(CharLevel);
-        return result;
+        return Randomizer.rollD10(CharLevel);
 
     }
 
@@ -36,7 +35,7 @@ public class WildBolt extends BaseAbility{
      * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    private int getTargets(){
+    public int getTargets(){
         return 1;
     }
 

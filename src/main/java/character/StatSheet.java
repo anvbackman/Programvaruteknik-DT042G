@@ -12,15 +12,21 @@ import java.util.HashMap;
  */
 public class StatSheet {
 
-
+    private int level;
+    private int experience;
+    private int nextLevelExperience;
     private int reRollAmount;
     private final HashMap<String, Integer> stats;
+    private Hero hero;
 
     /**
      * Constructor for the stat sheet class.
      */
     public StatSheet() {
         reRollAmount = Constants.VALUE_MAX_STAT_REROLLS;
+        this.level = 1;
+        this.experience = 0;
+        calculateNextLevelExperience();
         stats = new HashMap<>();
         Constants.STATS.forEach(stat -> stats.put(stat, Randomizer.rollStat()));
     }
@@ -86,6 +92,14 @@ public class StatSheet {
     }
 
     /**
+     * Sets the hero of the stat sheet.
+     * @param hero the hero to set.
+     */
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    /**
      * Sets the value of a selected stat.
      * @param stat the stat to set the value of.
      * @param value the value to set the stat to.
@@ -111,15 +125,54 @@ public class StatSheet {
         return statsString.toString();
     }
 
-    // TODO implement stat modifiers.
-
     /**
      * Levels up the characters stats by one.
      */
     public void levelUp() {
+        level++;
         stats.replaceAll((stat, value) -> value + 1);
         reRollAmount += Constants.VALUE_MAX_STAT_REROLLS;
-        System.out.println("Leveled up! Your stats are now: " + this.toString());
-        // TODO find out when to call
+        hero.adjustHealth(hero.getMaxHealth() / 2);
+        hero.adjustMana(hero.getMaxMana() / 2);
+        System.out.println("Leveled up! Your stats are now: " + this);
+    }
+
+    /**
+     * Returns the level of the character.
+     * @return the level of the character as integer value.
+     */
+    public int getLevel() {
+        return level;
+    }
+
+
+    /**
+     * Adds experience to the character. Progresses the character to the next level if enough experience is gained.
+     * @param experience the number of experience points to add.
+     */
+    public void addExperience(int experience) {
+        System.out.printf("Gained %d experience points.\n", experience);
+        this.experience += experience;
+        if (this.experience >= nextLevelExperience) {
+            this.experience -= nextLevelExperience;
+            levelUp();
+            calculateNextLevelExperience();
+        }
+    }
+
+    /**
+     * Retrieves number of experience points the character has.
+     * @return the experience of the character as integer value.
+     */
+    public int getExperience() {
+        return experience;
+    }
+
+    /**
+     * Retrieves and sets the next level experience threshold.
+     */
+    public int calculateNextLevelExperience() {
+        int levelModifier = Math.min(level, Constants.VALUES_EXPERIENCE_PER_LEVEL.size());
+        return nextLevelExperience = Constants.VALUES_EXPERIENCE_PER_LEVEL.get(levelModifier-1);
     }
 }

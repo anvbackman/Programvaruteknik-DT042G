@@ -13,7 +13,7 @@ public class WarCry extends BaseAbility {
      * Constructor for the WarCry class.
      */
     public WarCry() {
-        super("WarCry");
+        super("WarCry", 15);
     }
 
     /**
@@ -21,10 +21,9 @@ public class WarCry extends BaseAbility {
      * @param CharLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    private int damageCalc(int CharLevel) {
+    public int damageCalc(int CharLevel) {
 
-        int result = Randomizer.rollD10(CharLevel);
-        return result;
+        return Randomizer.rollD10(CharLevel);
 
     }
 
@@ -32,7 +31,7 @@ public class WarCry extends BaseAbility {
      * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    private int getTargets(){
+    public int getTargets(){
         return 1;
     }
 
