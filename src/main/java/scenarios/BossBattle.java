@@ -8,6 +8,7 @@ import enemies.Skara;
 import enemies.Vorkath;
 import support.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,6 +35,7 @@ public class BossBattle implements Encounter {
         this.mission = mission;
         this.hero = hero;
         this.scanner = scanner;
+        this.enemies = new ArrayList<>();
     }
 
     /**

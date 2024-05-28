@@ -2,6 +2,7 @@ import character.Hero;
 import creator.CharacterCreator;
 import creator.Mission;
 import scenarios.Battle;
+import scenarios.BossBattle;
 import scenarios.Encounter;
 import scenarios.EncounterGenerator;
 import scenarios.Shop;
@@ -204,6 +205,9 @@ public class GameEngine {
         encounter.execute();
         if (encounter instanceof Battle) {
             CombatHandler combatHandler = new CombatHandler(this.hero, ((Battle) encounter).getEnemies());
+            combatHandler.startCombat();
+        } else if (encounter instanceof BossBattle) {
+            CombatHandler combatHandler = new CombatHandler(this.hero, ((BossBattle) encounter).getEnemies());
             combatHandler.startCombat();
         }
 

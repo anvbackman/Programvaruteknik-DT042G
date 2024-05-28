@@ -71,47 +71,47 @@ public class Puzzle implements Encounter {
             System.out.println("2. Melon? Melon!");
             System.out.println("3. Throw a coin in the well");
             System.out.println("4. Leave");
-            if(hero.getCharacterClass() == Constants.CLASS_BARD){
+            if (hero.getCharacterClass() == Constants.CLASS_BARD) {
                 System.out.println("5. Sing a song to the well");
             }
-        }
-        switch (Validation.validateInput(scanner.nextLine())) {
-            case 1 -> {
-                System.out.println("You wish for the way to be revealed, but nothing happens.");
-                System.out.println("You attempt to find another way, and waste valuable time.");
-                int dmg = Randomizer.rollD6(1);
-                hero.adjustHealth(-dmg);
-                System.out.printf("You take %d damage from the alternate path.\n", dmg);
-            }
-            case 2 -> {
-                System.out.println("You say 'melon? melon!' but nothing happens.");
-                System.out.println("You attempt to find another way, and waste valuable time... and you feel slightly judged.");
-                int dmg = Randomizer.rollD6(1);
-                hero.adjustHealth(-dmg);
-                System.out.printf("You take %d damage from the judgemental silence.\n", dmg);
-            }
-            case 3 -> {
-                System.out.println("You throw a coin in the well, and the door opens.");
-                System.out.println("You proceed through the door.");
-                int heal = Randomizer.rollD6(2);
-                hero.adjustHealth(heal);
-                System.out.printf("You heal %d as a gift from the Well spirit..\n", heal);
-                proceed = true;
-            }
-            case 4 -> {
-                System.out.println("You decide to leave, and find another way.");
-                int dmg = Randomizer.rollD6(1);
-                hero.adjustHealth(-dmg);
-                System.out.printf("You take %d damage from the alternate path.\n", dmg);
-                proceed = true;
-            }
-            case 5 -> {
-                System.out.println("You sing a song to the well, and the well responds in harmony, as glittering gold erupts from the well.");
-                System.out.println("The well remains silent, but a grateful presence opens the door");
-                int gold = Randomizer.rollD6(5);
-                hero.addGold(gold);
-                System.out.printf("You find %d gold from the well, and proceed through the door.\n", gold);
-                proceed = true;
+            switch (Validation.validateInput(scanner.nextLine())) {
+                case 1 -> {
+                    System.out.println("You wish for the way to be revealed, but nothing happens.");
+                    System.out.println("You attempt to find another way, and waste valuable time.");
+                    int dmg = Randomizer.rollD6(1);
+                    hero.adjustHealth(-dmg);
+                    System.out.printf("You take %d damage from the alternate path.\n", dmg);
+                }
+                case 2 -> {
+                    System.out.println("You say 'melon? melon!' but nothing happens.");
+                    System.out.println("You attempt to find another way, and waste valuable time... and you feel slightly judged.");
+                    int dmg = Randomizer.rollD6(1);
+                    hero.adjustHealth(-dmg);
+                    System.out.printf("You take %d damage from the judgemental silence.\n", dmg);
+                }
+                case 3 -> {
+                    System.out.println("You throw a coin in the well, and the door opens.");
+                    System.out.println("You proceed through the door.");
+                    int heal = Randomizer.rollD6(2);
+                    hero.adjustHealth(heal);
+                    System.out.printf("You heal %d as a gift from the Well spirit..\n", heal);
+                    proceed = true;
+                }
+                case 4 -> {
+                    System.out.println("You decide to leave, and find another way.");
+                    int dmg = Randomizer.rollD6(1);
+                    hero.adjustHealth(-dmg);
+                    System.out.printf("You take %d damage from the alternate path.\n", dmg);
+                    proceed = true;
+                }
+                case 5 -> {
+                    System.out.println("You sing a song to the well, and the well responds in harmony, as glittering gold erupts from the well.");
+                    System.out.println("The well remains silent, but a grateful presence opens the door");
+                    int gold = Randomizer.rollD6(5);
+                    hero.addGold(gold);
+                    System.out.printf("You find %d gold from the well, and proceed through the door.\n", gold);
+                    proceed = true;
+                }
             }
         }
     };
@@ -204,12 +204,14 @@ public class Puzzle implements Encounter {
                         int gold = Randomizer.rollD6(2);
                         hero.addGold(gold);
                         System.out.printf("You recieve %d gold from the kobolds, and proceed on your journey.\n", gold);
+                        proceed = true;
                     } else {
                         System.out.println("You attempt to communicate with the kobolds, but you are unable to understand them.");
                         System.out.println("You feel a sense of loss...");
                         int dmg = Randomizer.rollD6(1);
                         hero.adjustHealth(-dmg);
                         System.out.printf("You take %d psychic damage from the kobolds' confusing language.\n", dmg);
+                        proceed = true;
                     }
                 }
                 case 2 -> {
