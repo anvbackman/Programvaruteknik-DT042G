@@ -12,7 +12,7 @@ public class Weapons extends Gear {
      * @param value the value of the weapon
      * @param cost the cost of the weapon
      */
-    public Weapons(String name, int value, int cost) {
+    public Weapons(final String name, final int value, final int cost) {
         super(name, "weapons", value, cost);
     }
 }

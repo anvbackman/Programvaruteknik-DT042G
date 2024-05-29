@@ -21,7 +21,7 @@ public class Wildshape extends BaseAbility {
      * @param CharLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    public int damageCalc(int CharLevel) {
+    public int damageCalc(final int CharLevel) {
 
         return Randomizer.rollD10(CharLevel);
     }
@@ -39,9 +39,8 @@ public class Wildshape extends BaseAbility {
      * @param target the target of the ability.
      * @param charLevel the level of the character using the ability.
      */
-    public int execute(int target, int charLevel) {
+    public int execute(int target, final int charLevel) {
         target = getTargets();
-        int damage = damageCalc(charLevel);
-        return damage;
+        return damageCalc(charLevel);
     }
 }

@@ -42,7 +42,7 @@ public abstract class Enemies {
      * @param armor specifies the armor of the enemy
      * @param bossTier specifies the tier of the boss, 1 for mini-boss, 2 for boss
      */
-    public Enemies(String type, int health, int damage, int armor, int bossTier) {
+    public Enemies(final String type, final int health, final int damage, final int armor, final int bossTier) {
         this.type = type;
         this.health = health;
         this.damage = damage;
@@ -54,7 +54,7 @@ public abstract class Enemies {
      * Method that will set the health of the enemy object
      * @param health int value that will be set to the health of the enemy object
      */
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
@@ -62,7 +62,7 @@ public abstract class Enemies {
      * Method that will set the damage of the enemy object
      * @param damage int value that will be set to the damage of the enemy object
      */
-    public void setDamage(int damage) {
+    public void setDamage(final int damage) {
         this.damage = damage;
     }
 
@@ -70,7 +70,7 @@ public abstract class Enemies {
      * Method that will set the armor of the enemy object
      * @param armor int value that will be set to the armor of the enemy object
      */
-    public void setArmor(int armor) {
+    public void setArmor(final int armor) {
         this.armor = armor;
     }
 
@@ -114,7 +114,7 @@ public abstract class Enemies {
      * Method that will make the enemy object attack
      * @param dmg int value that represents the damage that the enemy object will do
      */
-    public void attack(int dmg) {
+    public void attack(final int dmg) {
         System.out.println(type + " is Attacking");
         damage = dmg;
     }
@@ -131,7 +131,7 @@ public abstract class Enemies {
      * Method that will make the enemy object take damage
      * @param damage int value that represents the damage that the enemy object will take
      */
-    public void takeDamage(int damage) {
+    public void takeDamage(final int damage) {
         health -= damage;
     }
 

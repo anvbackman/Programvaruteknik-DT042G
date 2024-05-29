@@ -17,7 +17,7 @@ public class JsonLoader {
      * Constructor for the JsonLoader class
      * @param path The path to the JSON file
      */
-    public JsonLoader(String path) {
+    public JsonLoader(final String path) {
         // Create a JSONParser and a FileReader
         JSONParser parser = new JSONParser();
         FileReader reader = null;
@@ -51,7 +51,7 @@ public class JsonLoader {
      * @param category The category to get the types from
      * @return A keyset of types
      */
-    public Set<String> getTypes(String category) {
+    public Set<String> getTypes(final String category) {
         JSONObject typeObject = (JSONObject) jsonObject.get(category);
         if (typeObject != null) {
             return typeObject.keySet();
@@ -67,7 +67,7 @@ public class JsonLoader {
      * @param name The name of the gear
      * @return The value of the type
      */
-    public int getValue(String category, String name) {
+    public int getValue(final String category, final String name) {
         JSONObject typeObject = (JSONObject) jsonObject.get(category); // Get the category
         if (typeObject != null) {
             JSONObject itemObject = (JSONObject) typeObject.get(name); // Get the item object
@@ -87,7 +87,7 @@ public class JsonLoader {
      * @param name The name of the gear
      * @return The cost of the type
      */
-    public int getCost(String category, String name) {
+    public int getCost(final String category, final String name) {
         JSONObject typeObject = (JSONObject) jsonObject.get(category); // Get the category
         if (typeObject != null) {
             JSONObject itemObject = (JSONObject) typeObject.get(name); // Get the item object

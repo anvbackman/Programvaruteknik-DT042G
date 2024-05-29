@@ -8,7 +8,7 @@ import support.Randomizer;
  */
 public class Skara extends Enemies {
 
-    public Skara(int bossTier) {
+    public Skara(final int bossTier) {
         super("Skara, The Braille Script", 0, 0, 0, bossTier);
         this.health = Randomizer.rollD10(8);
         this.damage = Randomizer.rollD6(4);
@@ -64,7 +64,7 @@ public class Skara extends Enemies {
      * Method that will take in an int value and set the armor of the Skara object to that value
      * @param armor int value that will be set to the armor of the Skara object
      */
-    public void setArmor(int armor) {
+    public void setArmor(final int armor) {
         this.armor = armor;
 
     }
@@ -109,7 +109,7 @@ public class Skara extends Enemies {
      * Method that will take in an int value and set the damage of the Skara object to that value
      * @param dmg int value that will be set to the damage of the Skara object
      */
-    public void attack(int dmg) {
+    public void attack(final int dmg) {
         System.out.println(type + " is Attacking");
         damage = dmg + Randomizer.rollD6(2);
 

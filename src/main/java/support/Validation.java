@@ -11,7 +11,7 @@ public class Validation {
      * @param input the input to validate.
      * @return the input as an integer, -1 if the input is invalid or empty.
      */
-    public static int validateInput(String input) {
+    public static int validateInput(final String input) {
         int result = -1;
         if (!input.isEmpty()) {
             try {

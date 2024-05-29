@@ -3,12 +3,12 @@ package enemies;
 import support.Randomizer;
 
 /**
- * Boblin class is a subclass of the Enemies class and represents a boss enemy
+ * Boblin class is a subclass of the Enemies class and represents a boss enemy.
  * @author Martin Eriksson
  */
 public class Boblin extends Enemies {
 
-    public Boblin(int bossTier) {
+    public Boblin(final int bossTier) {
         super("Boblin the Goblin", 0, 0, 0, bossTier);
         this.health = Randomizer.rollD10(6);
         this.damage = Randomizer.rollD6(3);
@@ -18,7 +18,7 @@ public class Boblin extends Enemies {
     /**
      * Method that will call the performAbility method from the EnemyAbility interface
      */
-    protected void FellBlast() {
+    protected void fellBlast() {
         System.out.println("Boblin used FellBlase");
         int ogDamage = damage;
         damage += Randomizer.rollD4(2);
@@ -29,7 +29,7 @@ public class Boblin extends Enemies {
 
 
     public void doAbility() {
-        FellBlast();
+        fellBlast();
         System.out.println(type + " used special ability");
     }
 
@@ -38,35 +38,31 @@ public class Boblin extends Enemies {
      */
     public void Death() {
         System.out.println(type + " has died");
-
     }
 
 
     /**
      * Method that will take in an int value and set the health of the Boblin object to that value
-     * @param health int value that will be set to the health of the Boblin object
+     * @param amount int value that will be set to the health of the Boblin object
      */
-    public void setHealth(int health) {
-        this.health = health;
-
+    public void setHealth(final int amount) {
+        this.health = amount;
     }
 
     /**
      * Method that will take in an int value and set the damage of the Boblin object to that value
-     * @param damage int value that will be set to the damage of the Boblin object
+     * @param amount int value that will be set to the damage of the Boblin object
      */
-    public void setDamage(int damage) {
-        this.damage = damage;
-
+    public void setDamage(final int amount) {
+        this.damage = amount;
     }
 
     /**
      * Method that will take in an int value and set the armor of the Boblin object to that value
-     * @param armor int value that will be set to the armor of the Boblin object
+     * @param amount int value that will be set to the armor of the Boblin object
      */
-    public void setArmor(int armor) {
-        this.armor = armor;
-
+    public void setArmor(final int amount) {
+        this.armor = amount;
     }
 
     /**
@@ -75,7 +71,6 @@ public class Boblin extends Enemies {
      */
     public int getHealth() {
         return health;
-
     }
 
     /**
@@ -84,7 +79,6 @@ public class Boblin extends Enemies {
      */
     public int getDamage() {
         return damage;
-
     }
 
     /**
@@ -93,7 +87,6 @@ public class Boblin extends Enemies {
      */
     public int getArmor() {
         return armor;
-
     }
 
     /**
@@ -102,14 +95,13 @@ public class Boblin extends Enemies {
      */
     public String getType() {
         return type;
-
     }
 
     /**
      * Method that will take in an int value and set the damage of the Boblin object to that value
      * @param dmg int value that will be set to the damage of the Boblin object
      */
-    public void attack(int dmg) {
+    public void attack(final int dmg) {
         System.out.println(type + " is Attacking");
         damage = dmg + Randomizer.rollD6(2);
 

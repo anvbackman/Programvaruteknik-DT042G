@@ -1,5 +1,6 @@
 package abilities;
 
+import support.Constants;
 import support.Randomizer;
 
 /**
@@ -12,25 +13,23 @@ public class SacredFlames extends BaseAbility {
      * Constructor for the SacredFlames class.
      */
     public SacredFlames() {
-        super("SacredFlames", 25);
+        super("SacredFlames", Constants.COST_ABILITY_MEDIUM);
     }
 
     /**
-     * Method that calculates the damage of the ability.
-     * @param CharLevel the level of the character using the ability.
+     * Calculates the damage of the ability.
+     * @param charLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    public int damageCalc(int CharLevel) {
-
-        return Randomizer.rollD10(CharLevel);
-
+    public int damageCalc(final int charLevel) {
+        return Randomizer.rollD10(charLevel);
     }
 
     /**
-     * Method that returns the number of targets the ability can hit.
+     * Returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    public int getTargets(){
+    public int getTargets() {
         return 1;
     }
 

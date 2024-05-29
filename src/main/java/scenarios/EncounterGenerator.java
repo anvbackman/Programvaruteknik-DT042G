@@ -23,7 +23,7 @@ public class EncounterGenerator {
      * Constructor for the encounter generator class.
      * @param mission the mission for the encounter generator.
      */
-    public EncounterGenerator(Mission mission, Scanner scanner, Hero hero) {
+    public EncounterGenerator(final Mission mission, final Scanner scanner, final Hero hero) {
         this.mission = mission;
         this.hero = hero;
         this.scanner = scanner;
@@ -31,9 +31,10 @@ public class EncounterGenerator {
 
     /**
      * Generates the encounters for the mission.
+     * @param option type of encounter to generate.
      * @return a list of encounters.
      */
-    public Encounter generateEncounter(String option) {
+    public Encounter generateEncounter(final String option) {
         Encounter encounter;
 
         // Generate encounters based on the options for the current fork

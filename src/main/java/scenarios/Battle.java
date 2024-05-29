@@ -28,11 +28,13 @@ public class Battle implements Encounter {
     private final List<Enemies> enemies;
     private final int bossTier;
 
+    //TODO
+
     /**
      * Constructor for the battle class.
      * @param mission the mission for the battle.
      */
-    public Battle(Mission mission, Hero hero, Scanner scanner, int bossTier) {
+    public Battle(final Mission mission, final Hero hero, final Scanner scanner, final int bossTier) {
         this.mission = mission;
         this.bossTier = bossTier;
         enemies = new ArrayList<>();
@@ -49,7 +51,7 @@ public class Battle implements Encounter {
      * Executes the encounter for the battle.
      * @param encounter the difficulty of the encounter.
      */
-    private void executeEncounter(String encounter){
+    private void executeEncounter(final String encounter){
         switch (encounter) {
             case Constants.DIFFICULTY_EASY -> generateEncountersForMissionEasy();
             case Constants.DIFFICULTY_MEDIUM -> generateEncountersForMissionMedium();
@@ -230,7 +232,7 @@ public class Battle implements Encounter {
 
     /**
      * Getter for the enemies in the battle.
-     * @return the enemies in the battle.
+     * @return a list of enemies in the battle.
      */
     public List<Enemies> getEnemies() {
         return enemies;
