@@ -2,6 +2,7 @@ import gears.Gear;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * This class is used to test the Gear class
@@ -72,5 +73,52 @@ public class TestGear {
     @Test
     public void testGetCost() {
         assertEquals(20, gear.getCost());
+    }
+
+    /**
+     * Test to set the cost of the gear
+     */
+    @Test
+    public void testSetCost() {
+        gear.setCost(30);
+        assertEquals(30, gear.getCost());
+    }
+
+    /**
+     * Test to set the gear category to null
+     */
+    @Test
+    public void testGearNameIsSetToNull() {
+        gear.setName(null);
+        assertNull(gear.getName());
+    }
+
+    /**
+     * Test to set the gear category to an empty string
+     */
+    @Test
+    public void testSetEmptyGearName() {
+        gear.setName("");
+        assertEquals("", gear.getName());
+    }
+
+    /**
+     * Test to set the gear value to zero
+     */
+    @Test
+    public void testSetGearValueToZero() {
+        gear.setValue(0);
+        assertEquals(0, gear.getValue());
+    }
+
+    /**
+     * Test to set the gear value to a negative number
+     * This should be allowed for future implementations
+     * due to having effects that can reduce the value of the gear
+     */
+    @Test
+    public void testSetGearCostSetToNegative() {
+        gear.setValue(-1);
+        assertEquals(-1, gear.getValue());
     }
 }

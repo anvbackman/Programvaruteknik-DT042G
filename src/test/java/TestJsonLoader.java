@@ -61,4 +61,6 @@ public class TestJsonLoader {
     public void testGetCost() {
         assertEquals(10, load.getCost("weapons", "Scrappy Sword"));
     }
+
+
 }

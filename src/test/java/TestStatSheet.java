@@ -51,6 +51,16 @@ public class TestStatSheet {
     }
 
     /**
+     * Tests if setting a negative stat is handled correctly.
+     */
+    @Test
+    public void testSetStatNegative() {
+        int expected = -10;
+        assertTrue(statSheet.setStat("Strength", expected));
+        assertEquals(expected, statSheet.getStat("Strength"));
+    }
+
+    /**
      * Tests if setting an invalid stat is handled correctly.
      */
     @Test
