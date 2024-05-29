@@ -33,15 +33,4 @@ public class SacredFlames extends BaseAbility {
         return 1;
     }
 
-    /**
-     * Method that executes the ability.
-     * @param target the target of the ability.
-     * @param charLevel the level of the character using the ability.
-     */
-    public int execute(int target, int charLevel) {
-        target = getTargets();
-        int damage = damageCalc(charLevel);
-        return damage;
-    }
-
 }
