@@ -12,7 +12,7 @@ import abilities.SneakAttack;
 import abilities.TacticalShot;
 import abilities.WarCry;
 import abilities.WildBolt;
-import abilities.Wildshape;
+import abilities.WildShape;
 import character.Hero;
 import character.StatSheet;
 import support.Constants;
@@ -27,9 +27,16 @@ import java.util.Scanner;
  */
 public class CharacterCreator {
 
+    /** The class choice of the user. */
     private String classChoice;
+
+    /** The stat sheet of the user. */
     private final StatSheet statSheet;
+
+    /** The name of the user. */
     private String name;
+
+    /** The scanner object for user input. */
     private final Scanner scanner;
 
     /**
@@ -93,7 +100,7 @@ public class CharacterCreator {
             case Constants.CLASS_PALADIN -> ability = new Smite();
             case Constants.CLASS_BARD -> ability = new SilverTongue();
             case Constants.CLASS_FIGHTER -> ability = new WarCry();
-            case Constants.CLASS_DRUID -> ability = new Wildshape();
+            case Constants.CLASS_DRUID -> ability = new WildShape();
             case Constants.CLASS_RANGER -> ability = new TacticalShot();
             case Constants.CLASS_ROGUE -> ability = new SneakAttack();
             case Constants.CLASS_WIZARD -> ability = new FireBolt();
@@ -198,9 +205,9 @@ public class CharacterCreator {
         if (input.isEmpty()) { // Checks if the input is empty.
             System.out.printf("%sPlease enter a name.%s\n",
                     Constants.COLOR_RED, Constants.COLOR_RESET);
-        } else if (input.length() > 20) { // Checks if the input is too long.
-            System.out.printf("%sName cannot exceed 20 characters.%s\n",
-                    Constants.COLOR_RED, Constants.COLOR_RESET);
+        } else if (input.length() > Constants.VALUE_NAME_MAX_LENGTH) { // Checks if the input is too long.
+            System.out.printf("%sName cannot exceed %d characters.%s\n",
+                    Constants.COLOR_RED, Constants.VALUE_NAME_MAX_LENGTH, Constants.COLOR_RESET);
         } else if (input.replace(" ", "").isEmpty()) { // Checks if the input only contains spaces.
             System.out.printf("%sName cannot only contain spaces.%s\n",
                     Constants.COLOR_RED, Constants.COLOR_RESET);

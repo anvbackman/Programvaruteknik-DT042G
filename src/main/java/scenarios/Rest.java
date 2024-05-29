@@ -26,7 +26,7 @@ public class Rest implements Encounter {
      * Constructor for the rest class.
      * @param mission the mission for the rest.
      */
-    public Rest(Mission mission, Hero hero, Scanner scanner) {
+    public Rest(final Mission mission, final Hero hero, final Scanner scanner) {
         this.mission = mission;
         this.hero = hero;
         this.scanner = scanner;
@@ -45,7 +45,7 @@ public class Rest implements Encounter {
      *  Executes the encounter for the rest.
      * @param difficulty the difficulty of the encounter, in this case it will still yield the same result, but it might be changed.
      */
-    private void executeEncounter(String difficulty){
+    private void executeEncounter(final String difficulty) {
         switch (difficulty) {
             case Constants.DIFFICULTY_EASY -> generateEncountersForMissionEasy();
             case Constants.DIFFICULTY_MEDIUM -> generateEncountersForMissionMedium();

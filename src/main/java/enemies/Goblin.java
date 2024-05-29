@@ -10,7 +10,7 @@ import support.Randomizer;
  * since Enemies is abstract this will use the template pattern
  * @author Martin Roos Eriksson
  */
-public class Goblin extends Enemies{
+public class Goblin extends Enemies {
 
     private boolean UsedPoison = false;
 
@@ -20,7 +20,7 @@ public class Goblin extends Enemies{
      * Goblin constructor that takes in an EnemyAbility object
      *
      */
-    public Goblin(int bossTier){
+    public Goblin(final int bossTier) {
         super("Goblin", 0, 0, 0, bossTier); // Initialize with default values
 
         if (bossTier >= Constants.VALUE_MINI_BOSS_TIER) {
@@ -65,7 +65,7 @@ public class Goblin extends Enemies{
      * Method that will take in an int value and subtract it from the health of the Goblin object
      * @param damage int value that will be subtracted from the health of the Goblin object
      */
-    public void takeDamage(int damage) {
+    public void takeDamage(final int damage) {
         health -= damage;
         if(health <= 0) {
             Death();
@@ -142,7 +142,7 @@ public class Goblin extends Enemies{
      * Method that will take in an int value and set the damage of the Goblin object to that value
      * @param dmg int value that will be set to the damage of the Goblin object
      */
-    public void attack(int dmg) {
+    public void attack(final int dmg) {
         System.out.println(type + " is Attacking");
         damage = damage + Randomizer.rollD4(1);
     }

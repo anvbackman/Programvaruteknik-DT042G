@@ -31,7 +31,7 @@ public class Social implements Encounter {
      * @param hero the hero for the social.
      * @param scanner the input scanner.
      */
-    public Social(Mission mission, Hero hero, Scanner scanner) {
+    public Social(final Mission mission, final Hero hero, final Scanner scanner) {
         this.mission = mission;
         this.hero = hero;
         this.scanner = scanner;

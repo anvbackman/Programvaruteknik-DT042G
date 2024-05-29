@@ -11,12 +11,10 @@ import support.Randomizer;
  */
 public class Kobold extends Enemies {
 
-    private Boolean isMiniBoss;
-
     /**
      * Kobold constructor that takes in an EnemyAbility object
      */
-    public Kobold(int bossTier) {
+    public Kobold(final int bossTier) {
         super("Kobold", 0, 0, 0, bossTier); // Initialize with default values
 
         if (bossTier >= Constants.VALUE_MINI_BOSS_TIER) {
@@ -68,7 +66,7 @@ public class Kobold extends Enemies {
      * Method that will take in an int value and set the health of the Kobold object to that value
      * @param health int value that will be set to the health of the Kobold object
      */
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
 
     }
@@ -77,7 +75,7 @@ public class Kobold extends Enemies {
      * Method that will take in an int value and set the damage of the Kobold object to that value
      * @param damage int value that will be set to the damage of the Kobold object
      */
-    public void setDamage(int damage) {
+    public void setDamage(final int damage) {
         this.damage = damage;
 
     }
@@ -86,7 +84,7 @@ public class Kobold extends Enemies {
      * Method that will take in an int value and set the armor of the Kobold object to that value
      * @param armor int value that will be set to the armor of the Kobold object
      */
-    public void setArmor(int armor) {
+    public void setArmor(final int armor) {
         this.armor = armor;
 
     }
@@ -131,10 +129,9 @@ public class Kobold extends Enemies {
      * Method that will take in an int value and set the damage of the Kobold object to that value
      * @param dmg int value that will be set to the damage of the Kobold object
      */
-    public void attack(int dmg) {
+    public void attack(final int dmg) {
         System.out.println(type + " is Attacking");
         damage = dmg + Randomizer.rollD4(1);
-
     }
 
 }

@@ -18,36 +18,65 @@ import java.util.Scanner;
  */
 public class Hero {
 
+    /** The name of the character. */
     private final String name;
+
+    /** The stat sheet of the character. */
     private final StatSheet stats;
+
+    /** The character class of the character. */
     private final String characterClass;
+
+    /** The currently equipped armor of the character. */
     private Armor equippedArmor;
+
+    /** The currently equipped weapon of the character. */
     private Weapons equippedWeapon;
+
+    /** The consumables the character has. */
     private final List<Consumables> consumables;
+
+    /** The gold the character has. */
     private int gold;
+
+    /** The health of the character. */
     private int health;
+
+    /** The maximum health of the character. */
     private int maxHealth;
+
+    /** The mana pool of the character. */
     private int manaPool;
+
+    /** The maximum mana of the character. */
     private int maxMana;
 
+    /** The ability of the character. */
     private BaseAbility ability;
 
     /**
      * Constructor for a character.
      * @param statSheet the stat sheet for the character.
-     * @param name the name of the character.
+     * @param heroName the name of the character.
+     * @param heroClass the class of the character.
      */
-    public Hero(final StatSheet statSheet, final String name, final String characterClass) {
-        this.name = name;
+    public Hero(
+            final StatSheet statSheet,
+            final String heroName,
+            final String heroClass
+    ) {
+        this.name = heroName;
         this.stats = statSheet;
-        this.characterClass = characterClass;
+        this.characterClass = heroClass;
         this.gold = Constants.VALUE_CHARACTER_STARTING_GOLD;
         this.getMaxHealth();
         this.health = maxHealth;
         this.getMaxMana();
         this.manaPool = maxMana;
-        this.equippedWeapon = new Weapons(Constants.PLAYER_STARTING_WEAPON, 1, 0);
-        this.equippedArmor = new Armor(Constants.PLAYER_STARTING_ARMOR, 1, 0);
+        this.equippedWeapon = new Weapons(
+                Constants.PLAYER_STARTING_WEAPON, 1, 0);
+        this.equippedArmor = new Armor(
+                Constants.PLAYER_STARTING_ARMOR, 1, 0);
         this.consumables = new ArrayList<>();
     }
 
@@ -99,7 +128,8 @@ public class Hero {
      * @return the attack value of the character.
      */
     public int getAttack() {
-        return equippedWeapon.getValue() + stats.getStat(Constants.STAT_STRENGTH);
+        return equippedWeapon.getValue() +
+                stats.getStat(Constants.STAT_STRENGTH);
     }
 
     /**
@@ -115,7 +145,7 @@ public class Hero {
      * @param armor the armor to equip.
      * @return the armor that was previously equipped.
      */
-    public Armor setEquippedArmor(Armor armor) {
+    public Armor setEquippedArmor(final Armor armor) {
         Armor oldArmor = equippedArmor;
         this.equippedArmor = armor;
         return oldArmor;
@@ -134,7 +164,7 @@ public class Hero {
      * @param weapon the weapon to equip.
      * @return the weapon that was previously equipped.
      */
-    public Weapons setEquippedWeapon(Weapons weapon) {
+    public Weapons setEquippedWeapon(final Weapons weapon) {
         Weapons oldWeapon = equippedWeapon;
         this.equippedWeapon = weapon;
         return oldWeapon;
@@ -145,7 +175,7 @@ public class Hero {
      * @param inCombat true if the character is in combat, else false.
      * @return true if the consumable was used, else false.
      */
-    public boolean useConsumable(boolean inCombat) {
+    public boolean useConsumable(final boolean inCombat) {
 
         if (consumables.isEmpty()) {
             Output.printErrorMessage("You have no consumables.");
@@ -176,8 +206,8 @@ public class Hero {
                 default -> {
                     Consumables consumable = consumables.get(input - 1);
                     if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_HEALTH)) {
-                        System.out.println("You used " + consumable.getName() +
-                                " and healed for " + consumable.getValue() + " HP.");
+                        System.out.println("You used " + consumable.getName()
+                                + " and healed for " + consumable.getValue() + " HP.");
                         this.adjustHealth(consumable.getValue());
                     } else if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_MANA)) {
                         System.out.println("You used " + consumable.getName() +
@@ -227,14 +257,14 @@ public class Hero {
 
     /**
      * Modifies the gold-amount of the character.
-     * @param gold the amount of gold to add or subtract.
+     * @param amount the amount of gold to add or subtract.
      * @return true if the gold amount was successfully modified, else false.
      */
-    public boolean addGold(int gold) {
-        if (this.gold + gold < 0) {
+    public boolean addGold(final int amount) {
+        if (this.gold + amount < 0) {
             return false;
         }
-        this.gold += gold;
+        this.gold += amount;
         return true;
     }
 
@@ -257,10 +287,10 @@ public class Hero {
 
     /**
      * Applies healing to the character.
-     * @param healing the amount of healing to apply.
+     * @param amount the amount of healing to apply.
      */
-    public void adjustHealth(int healing) {
-        health += healing;
+    public void adjustHealth(final int amount) {
+        health += amount;
         if (health > maxHealth) {
             health = maxHealth;
         }
@@ -288,7 +318,7 @@ public class Hero {
      *
      * @param mana the amount of mana to add.
      */
-    public void adjustMana(int mana) {
+    public void adjustMana(final int mana) {
         manaPool += mana;
         if (manaPool > maxMana) {
             manaPool = maxMana;
@@ -313,10 +343,10 @@ public class Hero {
 
     /**
      * Sets the ability of the character.
-     * @param ability the ability to assign to the character.
+     * @param heroAbility the ability to assign to the character.
      */
-    public void setAbility(BaseAbility ability) {
-        this.ability = ability;
+    public void setAbility(final BaseAbility heroAbility) {
+        this.ability = heroAbility;
     }
 
     /**
