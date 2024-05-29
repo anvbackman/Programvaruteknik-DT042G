@@ -41,6 +41,7 @@ public final class Constants {
     public final static String CONSUMABLE_TYPE_MANA = "Mana";
 
     // -- Value constants --
+    public final static int VALUE_NAME_MAX_LENGTH = 20;
     public final static int VALUE_BASE_STAT_DICE_ROLLS = 4;
     public final static int VALUE_MAX_STAT_REROLLS = 3;
     public final static int VALUE_MISSION_LENGTH_SHORT = 3;
@@ -65,6 +66,11 @@ public final class Constants {
     public final static List<Integer> VALUES_EXPERIENCE_PER_LEVEL = List.of(
             100, 200, 400, 800
     );
+
+    // -- Ability costs --
+    public final static int COST_ABILITY_LOW = 10;
+    public final static int COST_ABILITY_MEDIUM = 20;
+    public final static int COST_ABILITY_HIGH = 30;
 
     // -- Color codes --
     public final static String COLOR_RED = "\u001B[31m";

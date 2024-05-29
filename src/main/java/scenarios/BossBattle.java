@@ -30,7 +30,7 @@ public class BossBattle implements Encounter {
      * Constructor for the battle class.
      * @param mission the mission for the battle.
      */
-    public BossBattle(Mission mission, Hero hero, Scanner scanner) {
+    public BossBattle(final Mission mission, final Hero hero, final Scanner scanner) {
         this.mission = mission;
         this.hero = hero;
         this.scanner = scanner;
@@ -47,7 +47,7 @@ public class BossBattle implements Encounter {
      * Executes the encounter for the battle.
      * @param encounter the difficulty of the encounter.
      */
-    private void executeEncounter(String encounter){
+    private void executeEncounter(final String encounter) {
         switch (encounter) {
             case Constants.DIFFICULTY_EASY -> generateEncountersForMissionEasy();
             case Constants.DIFFICULTY_MEDIUM -> generateEncountersForMissionMedium();
@@ -82,6 +82,10 @@ public class BossBattle implements Encounter {
 
     }
 
+    /**
+     * Getter for the enemies in the battle.
+     * @return list of enemies in the battle.
+     */
     public List<Enemies> getEnemies() {
         return enemies;
     }

@@ -8,7 +8,7 @@ import support.Randomizer;
  */
 public class Vorkath extends Enemies {
 
-    public Vorkath(int bossTier) {
+    public Vorkath(final int bossTier) {
         super("Vorkath the Soul Devourer", 0, 0, 0, bossTier);
         this.health = Randomizer.rollD10(12);
         this.damage = Randomizer.rollD6(6);
@@ -46,7 +46,7 @@ public class Vorkath extends Enemies {
      * Method that will take in an int value and set the health of the Vorkath object to that value
      * @param health int value that will be set to the health of the Vorkath object
      */
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
 
     }
@@ -55,7 +55,7 @@ public class Vorkath extends Enemies {
      * Method that will take in an int value and set the damage of the Vorkath object to that value
      * @param damage int value that will be set to the damage of the Vorkath object
      */
-    public void setDamage(int damage) {
+    public void setDamage(final int damage) {
         this.damage = damage;
 
     }
@@ -64,7 +64,7 @@ public class Vorkath extends Enemies {
      * Method that will take in an int value and set the armor of the Vorkath object to that value
      * @param armor int value that will be set to the armor of the Vorkath object
      */
-    public void setArmor(int armor) {
+    public void setArmor(final int armor) {
         this.armor = armor;
 
     }

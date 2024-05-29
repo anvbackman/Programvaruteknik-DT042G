@@ -4,21 +4,21 @@ import support.Constants;
 import support.Randomizer;
 
 /**
- * SilverTongue ability for the Bard class, this ability is used to deal damage to a single target.
- * The damage is calculated by rolling a d10 for every level the character has. - will be changed later..
+ * WildShape ability for the Druid class.
+ * The damage is calculated by rolling a d10 for every level.
  * @author Martin Roos Eriksson
  */
-public class SilverTongue extends BaseAbility {
+public class WildShape extends BaseAbility {
 
     /**
-     * Constructor for the SilverTongue class.
+     * Constructor for the WildShape class.
      */
-    public SilverTongue() {
-        super("SilverTongue", Constants.COST_ABILITY_MEDIUM);
+    public WildShape() {
+        super("WildShape", Constants.COST_ABILITY_MEDIUM);
     }
 
     /**
-     * Calculates the damage of the ability.
+     * Method that calculates the damage of the ability.
      * @param charLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
@@ -27,11 +27,10 @@ public class SilverTongue extends BaseAbility {
     }
 
     /**
-     * Returns the number of targets the ability can hit.
+     * Method that returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
     public int getTargets() {
         return 1;
     }
-
 }

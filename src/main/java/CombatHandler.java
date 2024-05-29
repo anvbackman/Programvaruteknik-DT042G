@@ -54,7 +54,7 @@ public class CombatHandler {
      * @param hero the hero object.
      * @param enemies the list of enemies.
      */
-    public CombatHandler(Hero hero, List<Enemies> enemies) {
+    public CombatHandler(final Hero hero, final List<Enemies> enemies) {
         this.hero = hero;
         this.enemies = new ArrayList<>(enemies);
         this.scanner = new Scanner(System.in);
@@ -336,7 +336,7 @@ public class CombatHandler {
      * Removes an enemy from the list of enemies.
      * @param enemy the enemy to remove.
      */
-    private void removeEnemy(Enemies enemy) {
+    private void removeEnemy(final Enemies enemy) {
         hero.getStats().addExperience(enemy.getDamage() * 4);
         enemies.remove(enemy);
     }

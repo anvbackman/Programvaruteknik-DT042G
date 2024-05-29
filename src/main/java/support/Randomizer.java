@@ -19,7 +19,7 @@ public class Randomizer {
      * @param n the number of times to roll the die.
      * @return the sum of the rolls.
      */
-    public static int rollD6(int n) {
+    public static int rollD6(final int n) {
         int result = 0;
         for (int i = 0; i < n; i++) {
             result += (int) (Math.random() * 6) + 1;
@@ -40,7 +40,7 @@ public class Randomizer {
      * @param n the number of times to roll the die.
      * @return the sum of the rolls.
      */
-    public static int rollD10(int n) {
+    public static int rollD10(final int n) {
         int result = 0;
         for (int i = 0; i <= n; i++) {
             result += (int) (Math.random() * 10) + 1;
@@ -61,7 +61,7 @@ public class Randomizer {
      * @param n the number of times to roll the die.
      * @return the sum of the rolls.
      */
-    public static int rollD20(int n) {
+    public static int rollD20(final int n) {
         int result = 0;
         for (int i = 0; i <= n; i++) {
             result += (int) (Math.random() * 20) + 1;
@@ -82,7 +82,7 @@ public class Randomizer {
      * @param n the number of times to roll the die.
      * @return the sum of the rolls.
      */
-    public static int rollD4(int n) {
+    public static int rollD4(final int n) {
         int result = 0;
         for (int i = 0; i < n; i++) {
             result += (int) (Math.random() * 4) + 1;
@@ -103,7 +103,7 @@ public class Randomizer {
      * Discards the lowest roll and returns the sum of the remaining rolls.
      * @return stat base value as integer.
      */
-    public static int rollStat(boolean shouldLog) {
+    public static int rollStat(final boolean shouldLog) {
         int[] rolls = new int[Constants.VALUE_BASE_STAT_DICE_ROLLS];
         int temp;
         for (int i = 0; i < Constants.VALUE_BASE_STAT_DICE_ROLLS ; i++) {

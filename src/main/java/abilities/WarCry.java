@@ -1,10 +1,11 @@
 package abilities;
 
+import support.Constants;
 import support.Randomizer;
 
 /**
- * WarCry ability for the Barbarian class, this ability is used to deal damage to a single target.
- * The damage is calculated by rolling a d10 for every level the character has - will be changed later..'
+ * WarCry ability for the Barbarian class.
+ * The damage is calculated by rolling a d10 for every level.
  * @author Martin Roos Eriksson
  */
 public class WarCry extends BaseAbility {
@@ -13,25 +14,23 @@ public class WarCry extends BaseAbility {
      * Constructor for the WarCry class.
      */
     public WarCry() {
-        super("WarCry", 15);
+        super("WarCry", Constants.COST_ABILITY_LOW);
     }
 
     /**
-     * Method that calculates the damage of the ability.
-     * @param CharLevel the level of the character using the ability.
+     * Calculates the damage of the ability.
+     * @param charLevel the level of the character using the ability.
      * @return the damage dealt by the ability.
      */
-    public int damageCalc(int CharLevel) {
-
-        return Randomizer.rollD10(CharLevel);
-
+    public int damageCalc(final int charLevel) {
+        return Randomizer.rollD10(charLevel);
     }
 
     /**
-     * Method that returns the number of targets the ability can hit.
+     * Returns the number of targets the ability can hit.
      * @return the number of targets the ability can hit.
      */
-    public int getTargets(){
+    public int getTargets() {
         return 1;
     }
 

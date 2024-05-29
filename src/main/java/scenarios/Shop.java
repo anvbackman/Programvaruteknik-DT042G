@@ -33,8 +33,9 @@ public class Shop implements Encounter{
      * Constructor for the shop scenario.
      * @param difficulty the difficulty of the game, affects shop prices.
      * @param scanner the scanner object to handle input.
+     * @param hero the hero object to handle purchases and gold.
      */
-    public Shop(String difficulty, Scanner scanner, Hero hero) {
+    public Shop(final String difficulty, final Scanner scanner, final Hero hero) {
         this.scanner = scanner;
         this.hero = hero;
         priceModifier = Constants.VALUE_SHOP_PRICE_BASE_MODIFIER +

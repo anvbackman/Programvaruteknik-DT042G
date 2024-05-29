@@ -12,11 +12,22 @@ import java.util.HashMap;
  */
 public class StatSheet {
 
+    /** The level of the character. */
     private int level;
+
+    /** The experience of the character. */
     private int experience;
+
+    /** The experience needed to reach the next level. */
     private int nextLevelExperience;
+
+    /** The amount of re-rolls left. */
     private int reRollAmount;
+
+    /** The stats of the character. */
     private final HashMap<String, Integer> stats;
+
+    /** The hero assigned to the stat sheet. */
     private Hero hero;
 
     /**
@@ -93,10 +104,10 @@ public class StatSheet {
 
     /**
      * Sets the hero of the stat sheet.
-     * @param hero the hero to set.
+     * @param character the hero to set.
      */
-    public void setHero(Hero hero) {
-        this.hero = hero;
+    public void setHero(Hero character) {
+        this.hero = character;
     }
 
     /**
@@ -148,11 +159,11 @@ public class StatSheet {
 
     /**
      * Adds experience to the character. Progresses the character to the next level if enough experience is gained.
-     * @param experience the number of experience points to add.
+     * @param amount the number of experience points to add.
      */
-    public void addExperience(int experience) {
-        System.out.printf("Gained %d experience points.\n", experience);
-        this.experience += experience;
+    public void addExperience(final int amount) {
+        System.out.printf("Gained %d experience points.\n", amount);
+        this.experience += amount;
         if (this.experience >= nextLevelExperience) {
             this.experience -= nextLevelExperience;
             levelUp();
@@ -170,9 +181,10 @@ public class StatSheet {
 
     /**
      * Retrieves and sets the next level experience threshold.
+     * @return the next level experience threshold as integer value.
      */
     public int calculateNextLevelExperience() {
         int levelModifier = Math.min(level, Constants.VALUES_EXPERIENCE_PER_LEVEL.size());
-        return nextLevelExperience = Constants.VALUES_EXPERIENCE_PER_LEVEL.get(levelModifier-1);
+        return nextLevelExperience = Constants.VALUES_EXPERIENCE_PER_LEVEL.get(levelModifier - 1);
     }
 }

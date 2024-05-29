@@ -31,7 +31,7 @@ public class Output {
      * Appends Color code green from Constants class.
      * @param message the message to be printed.
      */
-    public static void printPromptHeader(String message) {
+    public static void printPromptHeader(final String message) {
         System.out.printf("\n%s%s%s\n", Constants.COLOR_GREEN, message, Constants.COLOR_RESET);
     }
 
@@ -40,7 +40,7 @@ public class Output {
      * Appends Color code blue from the Constants class.
      * @param message the message to be printed.
      */
-    public static void printSuccessMessage(String message) {
+    public static void printSuccessMessage(final String message) {
         System.out.printf("%s%s%s\n", Constants.COLOR_BLUE, message, Constants.COLOR_RESET);
     }
 
@@ -49,7 +49,7 @@ public class Output {
      * Appends Color code red from the Constants class.
      * @param message the message to be printed.
      */
-    public static void printErrorMessage(String message) {
+    public static void printErrorMessage(final String message) {
         System.out.printf("%s%s%s\n", Constants.COLOR_RED, message, Constants.COLOR_RESET);
     }
 
@@ -59,7 +59,7 @@ public class Output {
      * @param hero the hero in combat.
      * @return the final damage dealt by the hero attack.
      */
-    public static int printHeroAttackCombatLog(Enemies target, Hero hero) {
+    public static int printHeroAttackCombatLog(final Enemies target, final Hero hero) {
         int damage = hero.getAttack();
         int defense = target.getArmor();
         int finalDamage = Math.max(damage - defense, 0);
@@ -84,7 +84,7 @@ public class Output {
      * @param ability the ability used by the hero.
      * @return the final damage dealt by the hero ability.
      */
-    public static int printHeroAbilityCombatLog(Enemies target, Hero hero, BaseAbility ability) {
+    public static int printHeroAbilityCombatLog(final Enemies target, final Hero hero, final BaseAbility ability) {
         int damage = ability.damageCalc(hero.getLevel());
         System.out.printf("You use %s on %s for %d damage (%d-%d HP)\n",
                 ability.getName(),
@@ -103,7 +103,7 @@ public class Output {
      * @param hero the hero in combat
      * @return the final damage dealt by the enemy attack
      */
-    public static int printEnemyAttackCombatLog(Enemies enemy, Hero hero) {
+    public static int printEnemyAttackCombatLog(final Enemies enemy, final Hero hero) {
         int damage = enemy.getDamage();
         int defense = hero.getDefense();
         int finalDamage = Math.max(damage - defense, 0);

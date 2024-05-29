@@ -20,7 +20,7 @@ public class Puzzle implements Encounter {
     /**
      * The overarching mission for the scenario.
      */
-    private Mission mission;
+    private final Mission mission;
     private Hero hero;
     private Scanner scanner;
 
@@ -29,7 +29,7 @@ public class Puzzle implements Encounter {
      *
      * @param mission the mission for the puzzle.
      */
-    public Puzzle(Mission mission, Hero hero, Scanner scanner) {
+    public Puzzle(final Mission mission, final Hero hero, final Scanner scanner) {
         this.mission = mission;
         this.hero = hero;
         this.scanner = scanner;
@@ -47,7 +47,7 @@ public class Puzzle implements Encounter {
      *
      * @param difficulty the difficulty of the encounter.
      */
-    private void executeEncounter(String difficulty) {
+    private void executeEncounter(final String difficulty) {
         switch (difficulty) {
             case Constants.DIFFICULTY_EASY -> generateEncountersForMissionEasy();
             case Constants.DIFFICULTY_MEDIUM -> generateEncountersForMissionMedium();
@@ -386,9 +386,9 @@ public class Puzzle implements Encounter {
 
 
 
-        /**
-         * Generates the encounters for the easy difficulty.
-         */
+    /**
+     * Generates the encounters for the easy difficulty.
+     */
     private void generateEncountersForMissionEasy() {
         int randomEncounter = Randomizer.rollD4();
         switch (randomEncounter) {
