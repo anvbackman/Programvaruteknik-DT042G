@@ -14,19 +14,26 @@ import java.util.List;
  */
 public class Mission {
 
+    /** The current fork in the mission. */
     private int currentFork;
+
+    /** The length of the mission. */
     private final int length;
+
+    /** The difficulty of the mission. */
     private final String difficulty;
+
+    /** The mission map. */
     private HashMap<Integer, List<String>> mission;
 
     /**
      * Constructor for the mission class.
-     * @param difficulty the difficulty of the mission.
+     * @param missionDifficulty the difficulty of the mission.
      * @param missionLength the length of the mission.
      */
-    public Mission(final String difficulty, final int missionLength) {
+    public Mission(final String missionDifficulty, final int missionLength) {
         this.length = Randomizer.rollMissionLength(missionLength);
-        this.difficulty = difficulty;
+        this.difficulty = missionDifficulty;
         this.currentFork = 0;
     }
 
@@ -50,15 +57,15 @@ public class Mission {
     private List<String> generateFork(final int fork) {
         if (fork == 1) {
             return List.of(Constants.MISSION_TYPE_COMBAT);
-        } else if (fork == length){
+        } else if (fork == length) {
             return List.of(Constants.MISSION_TYPE_BOSS);
         } else {
-            List <String> options = new ArrayList<>(Constants.MISSION_TYPES_BASIC);
+            List<String> options = new ArrayList<>(Constants.MISSION_TYPES_BASIC);
             Collections.shuffle(options);
             int forkAmount = Randomizer.rollMissionForkAmount();
 
-            if (forkAmount < Constants.VALUE_MISSION_FORK_AMOUNT_MAX &&
-                    Randomizer.rollD20() <= Constants.VALUE_MINI_BOSS_ENCOUNTER_CHANCE) {
+            if (forkAmount < Constants.VALUE_MISSION_FORK_AMOUNT_MAX
+                    && Randomizer.rollD20() <= Constants.VALUE_MINI_BOSS_ENCOUNTER_CHANCE) {
                 options.add(forkAmount, Constants.MISSION_TYPE_MINI_BOSS);
                 forkAmount++;
             }
@@ -88,7 +95,7 @@ public class Mission {
      */
     public final List<String> getNextFork() {
         currentFork++;
-        List <String> fork = new ArrayList<>();
+        List<String> fork = new ArrayList<>();
         if (currentFork <= length) {
             fork = mission.get(currentFork);
         }
@@ -106,7 +113,7 @@ public class Mission {
                 System.out.print(Constants.COLOR_GRAY);
 
                 System.out.printf("\nFork " + key + ": ");
-                value.forEach(type -> System.out.printf("[%s] ",type));
+                value.forEach(type -> System.out.printf("[%s] ", type));
 
                 System.out.print(Constants.COLOR_RESET);
                 return;

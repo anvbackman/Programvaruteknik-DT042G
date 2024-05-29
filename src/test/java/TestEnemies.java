@@ -3,6 +3,7 @@ import enemies.Goblin;
 import enemies.Kobold;
 import enemies.Zombie;
 import org.junit.Test;
+import support.Constants;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;

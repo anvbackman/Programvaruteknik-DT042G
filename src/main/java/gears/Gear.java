@@ -12,11 +12,13 @@ public class Gear {
     private int cost;
 
     /**
-     * Constructor for Gear
+     * Constructor for the Gear class
      * @param name the type of gear
      * @param gearCategory the category of gear
+     * @param value the value of gear
+     * @param cost the cost of gear
      */
-    public Gear(String name, String gearCategory, int value, int cost) {
+    public Gear(final String name, final String gearCategory, final int value, final int cost) {
         this.name = name;
         this.gearCategory = gearCategory;
         this.value = value;
@@ -51,7 +53,7 @@ public class Gear {
      * Method to set the type of gear
      * @param name the type of gear
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -59,7 +61,7 @@ public class Gear {
      * Method to set the value of gear
      * @param value the value of gear
      */
-    public void setValue(int value) {
+    public void setValue(final int value) {
         this.value = value;
     }
 
@@ -75,7 +77,7 @@ public class Gear {
      * Method to set the cost of gear
      * @param cost the cost of gear
      */
-    public void setCost(int cost) {
+    public void setCost(final int cost) {
         this.cost = cost;
     }
 }

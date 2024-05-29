@@ -1,3 +1,4 @@
+import character.Hero;
 import character.StatSheet;
 import org.junit.jupiter.api.Test;
 import support.Constants;
@@ -74,5 +75,27 @@ public class TestStatSheet {
     @Test
     public void testLevelUpThreshold() {
         assertEquals(Constants.VALUES_EXPERIENCE_PER_LEVEL.get(0), statSheet.calculateNextLevelExperience());
+    }
+
+    /**
+     * Tests if the level up threshold correctly remains constant after leveling up beyond set values.
+     */
+    @Test
+    public void testLevelUpThresholdExcess() {
+        int excess;
+        int expected;
+        StatSheet testingSheet = new StatSheet();
+        statSheet.setHero(new Hero(statSheet, "TestHero", "TestClass"));
+        testingSheet.setHero(new Hero(testingSheet, "TestHero", "TestClass"));
+        for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size() + 1; i++) {
+            statSheet.levelUp();
+        }
+        excess = statSheet.calculateNextLevelExperience();
+        for (int i = 0; i < Constants.VALUES_EXPERIENCE_PER_LEVEL.size(); i++) {
+            testingSheet.levelUp();
+        }
+        expected = testingSheet.calculateNextLevelExperience();
+
+        assertEquals(expected, excess);
     }
 }

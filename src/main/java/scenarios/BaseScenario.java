@@ -27,10 +27,10 @@ public abstract class BaseScenario {
 
     /**
      * Constructor for the base scenario class.
-     * @param mission the mission for the scenario.
+     * @param assignedMission the mission for the scenario.
      */
-    public BaseScenario(Mission mission) {
-        this.mission = mission;
+    public BaseScenario(final Mission assignedMission) {
+        this.mission = assignedMission;
         encounters = generateEncounters();
     }
 
@@ -61,7 +61,7 @@ public abstract class BaseScenario {
      * Sets the mission for the scenario.
      * @param mission the mission for the scenario.
      */
-    public void setMission(Mission mission) {
+    public void setMission(final Mission mission) {
         this.mission = mission;
     }
 

@@ -14,13 +14,10 @@ public class Zombie extends Enemies {
     int deathcount = 0; //int to keep track of how many times the zombie has died
     boolean willRevive = false; //boolean to check if the zombie will revive
 
-    private Boolean isMiniBoss;
-
-
     /**
      * Zombie constructor that takes in an EnemyAbility object
      */
-    public Zombie(int bossTier) {
+    public Zombie(final int bossTier) {
         super("Zombie", 0, 0, 0, bossTier); // Initialize with default values
 
         if (bossTier >= Constants.VALUE_MINI_BOSS_TIER) {
@@ -108,7 +105,7 @@ public class Zombie extends Enemies {
      * Method that will take in an int value and set the health of the Zombie object to that value
      * @param health int value that will be set to the health of the Zombie object
      */
-    public void setHealth(int health) {
+    public void setHealth(final int health) {
         this.health = health;
     }
 
@@ -116,7 +113,7 @@ public class Zombie extends Enemies {
      * Method that will take in an int value and set the damage of the Zombie object to that value
      * @param damage int value that will be set to the damage of the enemy object
      */
-    public void setDamage(int damage) {
+    public void setDamage(final int damage) {
         this.damage = damage;
     }
 
@@ -124,7 +121,7 @@ public class Zombie extends Enemies {
      * Method that will take in an int value and set the armor of the Zombie object to that value
      * @param armor int value that will be set to the armor of the enemy object
      */
-    public void setArmor(int armor) {
+    public void setArmor(final int armor) {
         this.armor = armor;
 
     }
@@ -169,7 +166,7 @@ public class Zombie extends Enemies {
      * Method that will take in an int value and set the damage of the Zombie object to that value
      * @param dmg int value that represents the damage that the enemy object will do
      */
-    public void attack(int dmg) {
+    public void attack(final int dmg) {
         System.out.println(type + " is Attacking");
         damage = dmg;
 
