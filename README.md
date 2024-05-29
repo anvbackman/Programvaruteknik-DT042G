@@ -120,15 +120,15 @@ and the characters health and mana. To accomplish this we will make use of mostl
 some notable methods which will need further explanation. For example the showInventory method which will print out the 
 gear that is currently equipped by the character and also the amount of gold. Since the amount of consumables a character
 can have is plenty, we iterate over a list of consumables to showcase these.
-We [CharacterCreator.java](src%2Fmain%2Fjava%2Fcreator%2FCharacterCreator.java)then need to be able to use these consumables which will take an input regarding which consumable to use and get the 
+We then need to be able to use these consumables which will take an input regarding which consumable to use and get the 
 consumable that matches the input. We then use the consumable by passing it to the adjustHealth/Mana 
 methods and remove it from the list of consumables. 
 ```
 Consumables consumable = consumables.get(input - 1);
-                    if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_HEALTH)) {
-                        System.out.println("You used " + consumable.getName() +
-                                " and healed for " + consumable.getValue() + " HP.");
-                        this.adjustHealth(consumable.getValue());
+if (consumable.getName().contains(Constants.CONSUMABLE_TYPE_HEALTH)) {
+    System.out.println("You used " + consumable.getName() +
+                       " and healed for " + consumable.getValue() + " HP.");
+    this.adjustHealth(consumable.getValue());                      
 ```
 The adjustHealth and Mana methods simply adds the new value to the 
 old value as long as the character is not already at full health/mana. Adding gold to the user utilizes a similar method to
@@ -168,7 +168,7 @@ After defeating the enemies, the player receives gold and experience using deter
 
 The GameEngine class is used to handle the game, traversing through the different scenarios and encounters, as well as handling the player's inventory and gold.
 
-```
+
 
  
 

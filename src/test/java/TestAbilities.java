@@ -3,11 +3,7 @@ import abilities.Brutalize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Test class for the abilities in the game.
@@ -32,7 +28,6 @@ public class TestAbilities {
     @Test
     public void testAbilityName() {
         assertEquals("Brutalize", ability.getName());
-        assertNotEquals("EldritchCrush", ability.getName());
     }
 
     /**
@@ -43,7 +38,6 @@ public class TestAbilities {
     public void testAbilityExecute() {
         int damage = ability.execute(1, 1);
         assertTrue("Damage should be between 1 and 10", damage > 0 && damage <= 10);
-        assertFalse("Damage should be between 1 and 10", damage < 1 || damage > 10);
     }
 
     /**
@@ -53,7 +47,6 @@ public class TestAbilities {
     @Test
     public void testAbilityCost() {
         assertEquals(10, ability.getCost());
-        assertNotEquals(5, ability.getCost());
     }
 
     /**
@@ -63,7 +56,6 @@ public class TestAbilities {
     @Test
     public void testTarget() {
         assertEquals(1, ability.getTargets());
-        assertNotEquals(2, ability.getTargets());
     }
 
     /**

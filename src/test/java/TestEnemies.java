@@ -4,8 +4,10 @@ import enemies.Kobold;
 import enemies.Zombie;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Test class for the Enemies package
@@ -75,7 +77,7 @@ public class TestEnemies {
         // Test death
         Enemies enemy = new Kobold(0);
         enemy.takeDamage(150); // Assuming this leads to death
-        // Add assertions to verify the outcome of death
+        assertTrue(enemy.isDead());
     }
 
     /**
@@ -111,5 +113,23 @@ public class TestEnemies {
         assertEquals("Kobold", enemy.getType());
     }
 
+    /**
+     * Test that the enemy is not null
+     * This test will create an enemy object and check if it is not null
+     */
+    @Test
+    public void testEnemyNotNull() {
+        Enemies enemy = new Zombie(0);
+        assertNotNull(enemy);
+    }
 
+    /**
+     * Tests that the boss tier is correct
+     */
+    @Test
+    public void testIfBoss() {
+        Enemies enemy = new Goblin(1);
+        assertEquals(1, enemy.getBossTier());
+        assertNotEquals(0, enemy.getBossTier());
+    }
 }
