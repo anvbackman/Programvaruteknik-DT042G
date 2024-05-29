@@ -7,13 +7,10 @@ Lenovo Ideapad 5, Windows 10, IntelliJ IDEA, Java, Git 2.37.3, Google Chrome, Bi
 The main purpose of this project is to together with a group implement an application in Java utilizing the knowledge
 gained in the course's learning objectives and by the use of a specific workflow. In order for the project to be seen
 as successful, the following goals need to be met:
-- The application should be implemented in accordance to Test Driven Development (TDD) principles.
-- The application should be implemented using Maven.
-- The application should be implemented in accordance to the workflow specified in Trello.
-- The application should be implemented utilizing a branch for each feature in correlation to the workflow.
-- The application should be ran using user input via the console.
 
 ## Concrete Goals
+* The application should be implemented utilizing a branch for each feature in correlation to the workflow.
+* The application should be implemented in accordance to the workflow specified in Trello.
 * Design and implement a text-based dungeon crawler game in Java. The game should be modular and have a focus on modularity, allowing for easy cooperation, implementation of new features, maintenance and classes
 * Implement a combat system where the player can fight enemies and bosses
 * Implement a character creation system where the player can create a character with different classes, stats and abilities
@@ -142,7 +139,7 @@ and the characters health and mana. To accomplish this we will make use of mostl
 some notable methods which will need further explanation. For example the showInventory method which will print out the 
 gear that is currently equipped by the character and also the amount of gold. Since the amount of consumables a character
 can have is plenty, we iterate over a list of consumables to showcase these.
-We [CharacterCreator.java](src%2Fmain%2Fjava%2Fcreator%2FCharacterCreator.java)then need to be able to use these consumables which will take an input regarding which consumable to use and get the 
+We then need to be able to use these consumables which will take an input regarding which consumable to use and get the 
 consumable that matches the input. We then use the consumable by passing it to the adjustHealth/Mana 
 methods and remove it from the list of consumables. 
 ```
