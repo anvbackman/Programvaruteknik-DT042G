@@ -190,17 +190,6 @@ After defeating the enemies, the player receives gold and experience using deter
 
 The GameEngine class is used to handle the game, traversing through the different scenarios and encounters, as well as handling the player's inventory and gold.
 
-<<<<<<< HEAD
-
-
- 
-
-
-
-
-
-=======
->>>>>>> 8b3c43572e37af1c19402e539058b7235e27e939
 ## Discussion
 The project is finished and all the goals have been met. The application is implemented in accordance to Test Driven Development (TDD) principles, using Maven.
 
