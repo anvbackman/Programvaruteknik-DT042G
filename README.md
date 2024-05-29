@@ -9,15 +9,31 @@ gained in the course's learning objectives and by the use of a specific workflow
 as successful, the following goals need to be met:
 - The application should be implemented in accordance to Test Driven Development (TDD) principles.
 - The application should be implemented using Maven.
-- The application should be implemented in accordance to the workflow specified in Trello  ??????????????????
+- The application should be implemented in accordance to the workflow specified in Trello.
 - The application should be implemented utilizing a branch for each feature in correlation to the workflow.
 - The application should be ran using user input via the console.
 
+## Concrete Goals
+* Design and implement a text-based dungeon crawler game in Java. The game should be modular and have a focus on modularity, allowing for easy cooperation, implementation of new features, maintenance and classes
+* Implement a combat system where the player can fight enemies and bosses
+* Implement a character creation system where the player can create a character with different classes, stats and abilities
+* Implement a mission system where the player can choose different missions with different difficulties and lengths
+* Implement a gear system where the player can buy gear from a shop
+* Implement a scenario system where the player can encounter different scenarios during the mission
+* Implement a supporting system where the player can use consumables, reroll stats and get information about the gear
+* Implement a system where the player can interact with the game through the terminal (CLI interface)
+* Ensure that the application is implemented in accordance to Test Driven Development (TDD) principles.
+* Ensure that the application is implemented using Maven.
+
 ## Procedures
-
 ### Deciding on the Project
+The project was decided after a brainstorming session where the key points of what the project construction should be.
+The main point was a focus on modularity and keeping classes as independent whenever possible.
+By focusing on modularity the project could easily be worked on with minimal interference from other group members, and the project could keep on going without having to wait for a method or class to be finished by another group memeber.
+The idea of creating a dungeon crawler type of game was implemented since it would be easy to create different classes for the different parts of the game, such as the characters, enemies, abilities, scenarios and gear.
+The only real dependency between the classes would be the GameEngine class, which would be the main class for the game, and would handle the game loop and the different parts of the game.
+In other words each class and package is a building block, and the game engine is the glue that holds it all together.
 
-### Project Proposal
 
 ### Enemies
 The Enemies package contains the different classes for the enemies and their abilities, which are used for the combat system.
@@ -29,6 +45,12 @@ This base class provides the basic structure for the enemies and their abilities
 The enemies are then implemented by extending the Enemy class and their ability is a part of their implementation, but vary depending on the enemy type.
 The current enemies are Goblins, Kobolds, Zombies as well as additional bosses of each type.
 The bosses are unique entities and has some additional stat bonuses, abilities and a unique ability.
+
+every type of enemy has a type, health, damage, armor and their bosstier (in case of minibosses)
+every type of enemy has their stats for health, damage and armor randomized using a set amount of a certain dice to determine their stats.
+the methods to display an enemy who has died, declaring them dead and taking damage is done through methods (takeDamage, isDead, Death)
+
+Since each enemy should be able to do their ability it is handled through doAbility() which is implemented in the subclasses.
 
 ### Scenarios
 Similar to the enemies package, scenarios follows the template design model, the class "BaseScenario" is the base class for the scenarios.
@@ -168,17 +190,63 @@ After defeating the enemies, the player receives gold and experience using deter
 
 The GameEngine class is used to handle the game, traversing through the different scenarios and encounters, as well as handling the player's inventory and gold.
 
-```
-
- 
-
-
-
-
-
 ## Discussion
-### 
+The project is finished and all the goals have been met. The application is implemented in accordance to Test Driven Development (TDD) principles, using Maven.
+
+* Design and implement a text-based dungeon crawler game in Java. The game should be modular and have a focus on modularity, allowing for easy cooperation, implementation of new features, maintenance and classes
+This goal is met through the modular design of the game.
+The game is implemented in a modular way, where whenever possible each class has its own responsibility, and the classes are independent of each other.
+Besides being an efficient way to cooperate, this also allows for future expansions in this project where new classes can be added without having to make major changes to the existing code.
+
+* Implement a combat system where the player can fight enemies and bosses
+This goal is met through the CombatHandler class, where the player can fight enemies and bosses.
+Enemies and bosses are created using the methods and classes within the "Enemies" package, and the combat system is handled through the CombatHandler class.
+The combatHandler is one of the classes with dependencies to other classes, since it needs to interact with the enemies and the player.
+It inherits the methods from the enemies and Hero, creating a interactable combat interface during a battle encounter.
+
+* Implement a character creation system where the player can create a character with different classes, stats and abilities
+This goal is met through the CharacterCreator class, where the player can create a character with different classes, stats and abilities.
+The CharacterCreator class is used to create a character, where the user can choose the name, class and stats for the character.
+The ability is connected to the Class chosen by the player, and the character is then created with the selected stats, class and ability.
+
+* Implement a mission system where the player can choose different missions with different difficulties and lengths
+This goal is met through the MissionCreator class, where the player can choose different missions with different difficulties and lengths by interacting with the "Scenarios" class.
+These classes together creates the mission for the player and sets the path from start to end, where the path has different scenarios and encounters which can be chosen by the player at each fork in the road.
+
+* Implement a gear system where the player can buy gear from a shop
+This goal is met through the GearHandler class, as well the Shop class within "Scenarios" where the player can buy gear from a shop.
+The GearHandler class is used to handle the gear, and the player can buy gear from the shop using the gold they have earned from missions.
+The gear is stored in a JSON file, and the GearHandler class is used to retrieve the gear from the JSON file and display it in the shop.
+
+
+* Implement a scenario system where the player can encounter different scenarios during the mission
+This goal is met through the Scenario class, where the player can encounter different scenarios during the mission.
+The encounters which can be triggered are Social, Puzzle, Battle, Rest, MiniBoss and Boss encounters, these encounters are generated by the MissionCreator class and the Scenario class.
+The player can encounter different scenarios during the mission, where the player can interact with the NPC, solve puzzles, battle enemies and bosses, rest and encounter mini-bosses.
+
+* Implement a supporting system where the player can use consumables, reroll stats and get information about the gear
+This goal is met through the Character class, where the player can use consumables, reroll stats and get information about the gear.
+
+* Implement a system where the player can interact with the game through the terminal (CLI interface)
+This goal is accomplished through the Main classes (GameEngine and CombatHandler), where the player can interact with the game through the terminal.
+This game is run on a command line interface, where the player can interact with the game through the terminal.
+
+* Ensure that the application is implemented in accordance to Test Driven Development (TDD) principles.
+Throughout the project, the TDD principles have been followed, where the tests have been written during the implementation of the classes.
+
+* Ensure that the application is implemented using Maven.
+The application is implemented using Maven, where the dependencies are managed through the pom.xml file.
 
 ### Alternative Approaches
+Whilst the project is finished and all the goals have been met, there are some alternative approaches that could have been taken.
+Instead of using a CLI, the project could have been constructed as a GUI application instead, this could be done by instead following a MVC pattern, where the GameEngine and validations could have certain implementations in the controller, and the view could be the GUI.
+
+This game could be designed to more follow the D&D rules, or go further away from them, the intial plan was close adherence to the ruleset of D&D5E, but due to certain implementations of rules and actions. 
+We instead designed a hybrid system, where the ruleset of character and classes are similar to D&D5E, but the combat system is custom made.
+
+The game could have been designed to be more balanced, the current implementation is focused on creating a working game, and the balance of the game is not a priority.
+The game is fully functional, but the balance is not perfect, but due to the modular design of the game, balancing the game can be implemented in the future.
 
 ## Personal Reflections
+We all feel that working together on this project has been a great experience, and we have learned a lot from each other, and how to work together without interfering with each other's work, and avoiding conflicts between commits.
+Most of the previous courses have had very little cooperation between the students, and this project has been a great experience in how to work together on a project, from initial idea phase to bulding the project, to testing and debugging the project.
