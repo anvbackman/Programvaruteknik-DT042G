@@ -12,7 +12,7 @@ import abilities.SneakAttack;
 import abilities.TacticalShot;
 import abilities.WarCry;
 import abilities.WildBolt;
-import abilities.WildShape;
+import abilities.Wildshape;
 import character.Hero;
 import character.StatSheet;
 import support.Constants;
@@ -100,7 +100,7 @@ public class CharacterCreator {
             case Constants.CLASS_PALADIN -> ability = new Smite();
             case Constants.CLASS_BARD -> ability = new SilverTongue();
             case Constants.CLASS_FIGHTER -> ability = new WarCry();
-            case Constants.CLASS_DRUID -> ability = new WildShape();
+            case Constants.CLASS_DRUID -> ability = new Wildshape();
             case Constants.CLASS_RANGER -> ability = new TacticalShot();
             case Constants.CLASS_ROGUE -> ability = new SneakAttack();
             case Constants.CLASS_WIZARD -> ability = new FireBolt();
