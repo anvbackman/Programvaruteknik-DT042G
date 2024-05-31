@@ -8,6 +8,10 @@ The main purpose of this project is to together with a group implement an applic
 gained in the course's learning objectives and by the use of a specific workflow. In order for the project to be seen
 as successful, the following goals need to be met:
 
+This project is a game, a text-based dungeon crawler game, where the player can create a character, choose different missions, fight enemies and bosses, buy gear from a shop, and encounter different scenarios during the mission.
+The game is implemented in Java, and the game is run on a command line interface, where the player can interact with the game through the terminal.
+
+
 ## Concrete Goals
 * The application should be implemented utilizing a branch for each feature in correlation to the workflow.
 * The application should be implemented in accordance to the workflow specified in Trello.
@@ -247,3 +251,10 @@ The game is fully functional, but the balance is not perfect, but due to the mod
 ## Personal Reflections
 We all feel that working together on this project has been a great experience, and we have learned a lot from each other, and how to work together without interfering with each other's work, and avoiding conflicts between commits.
 Most of the previous courses have had very little cooperation between the students, and this project has been a great experience in how to work together on a project, from initial idea phase to bulding the project, to testing and debugging the project.
+
+
+### Instructions
+The game is run through the Main class, where the user can choose to create a character, and then choose a mission length and difficulty.
+The user can then traverse through the different scenarios and encounters, and the game is played through the terminal.
+The user can choose to attack, use an ability, use a consumable or escape during the combat scenarios.
+
