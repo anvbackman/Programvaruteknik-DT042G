@@ -6,7 +6,7 @@ import support.Randomizer;
 /**
  * WildShape ability for the Druid class.
  * The damage is calculated by rolling a d10 for every level.
- * @author Martin Roos Eriksson
+ * @author Martin Roos Eriksson.
  */
 public class WildShape extends BaseAbility {
 
